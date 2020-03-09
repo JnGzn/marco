@@ -61,12 +61,10 @@ public final class USUARIO_005fReserva_jsp extends org.apache.jasper.runtime.Htt
       out.write("    <body>\n");
       out.write("        <h1>Hello World!</h1>\n");
       out.write("        ");
- String id = (String) request.getParameter("reservar");
-            if (id != null) {
+   String id = (String) request.getParameter("reservar");
                 ActividadDAO actiDAO = new ActividadDAO();
-                ActividadVO actiVO = new ActividadVO();
-                actiVO
-                        = actiDAO.ListarDatos(id);
+                ActividadVO actiVO = actiDAO.ListarDatos(id);
+            
         
       out.write("\n");
       out.write("        <table>\n");
@@ -76,12 +74,10 @@ public final class USUARIO_005fReserva_jsp extends org.apache.jasper.runtime.Htt
       out.write("                <th>descripcion</th>\n");
       out.write("                <th>precio</th>\n");
       out.write("            </tr>\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
       out.write("            <tr>\n");
+      out.write("                <td>  <input type=\"hidden\" value=\"");
+      out.print(actiVO.getId());
+      out.write("\" name=\"actividad\">    </td>\n");
       out.write("                <td>      </td>\n");
       out.write("                <td>        ");
       out.print(   actiVO.getTitulo());
@@ -97,23 +93,22 @@ public final class USUARIO_005fReserva_jsp extends org.apache.jasper.runtime.Htt
       out.write("            </tr>\n");
       out.write("        </table>\n");
       out.write("        ");
-}
+
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             HttpSession sesion = request.getSession();
             String idUsuario = (String) sesion.getAttribute("id");
             UsuarioDAO usuDAO = new UsuarioDAO();
             UsuarioVO usuVO = UsuarioDAO.listarDatos(idUsuario);
-            
 
 
         
       out.write("\n");
       out.write("\n");
-      out.write("\n");
+      out.write("        <h3>datos del comprador</h3>\n");
       out.write("        <form action=\"Actividad\" method=\"post\">\n");
       out.write("\n");
       out.write("            <label>boletos</label>\n");
-      out.write("            <input type=\"number\" name=\"ctxCupos\"><br>\n");
+      out.write("            <input type=\"number\" name=\"ctxCupos\" id=\"ctxCupos\"><br>\n");
       out.write("\n");
       out.write("            <label>nombre</label>\n");
       out.write("            <input type=\"text\" name=\"ctxNombres\" value=\"");
@@ -126,7 +121,7 @@ public final class USUARIO_005fReserva_jsp extends org.apache.jasper.runtime.Htt
       out.write("\"><br>\n");
       out.write("\n");
       out.write("            <label>No. documento</label>\n");
-      out.write("            <input type=\"number\" name=\"ctxNombres\" value=\"");
+      out.write("            <input type=\"number\" name=\"ctxDocumento\" value=\"");
       out.print(usuVO.getDocumento());
       out.write("\"><br>\n");
       out.write("\n");
@@ -134,24 +129,63 @@ public final class USUARIO_005fReserva_jsp extends org.apache.jasper.runtime.Htt
       out.write("            <input type=\"text\" name=\"ctxCorreo\" value=\"");
       out.print(usuVO.getCorreo());
       out.write("\"><br>\n");
-      out.write("\n");
-      out.write("\n");
+      out.write("            \n");
+      out.write("            <input type=\"hidden\" name=\"ctxPrecioTotal\" id=\"ctxPrecioTotal\" value=\"");
+      out.print( actiVO.getPrecio());
+      out.write("\"><br>\n");
       out.write("            <input type=\"hidden\" name=\"ctxIdUsuario\" value=\"");
       out.print(idUsuario);
       out.write("\"><br>\n");
-      out.write("\t       <input type=\"hidden\" name=\"ctxIdActividad\" value=\"");
+      out.write("            <input type=\"hidden\" name=\"ctxIdActividad\" value=\"");
       out.print(id);
       out.write("\"><br>\n");
       out.write("\n");
-      out.write("           <label>calificar</label>\n");
+      out.write("\n");
+      out.write("            <br>\n");
+      out.write("\n");
+      out.write("            <label>calificar</label>\n");
+      out.write("\n");
       out.write("            <input type=\"number\" name=\"ctxCalificacion\" value=\"");
 //calificacion
       out.write("\"><br>\n");
       out.write("\n");
-      out.write("\n");
+      out.write("            <label>precio : <button onclick=\"CalcularPrecio()\">calcular</button></label>\n");
+      out.write("            <label id=\"resultado\"></label>\n");
+      out.write("            <input type=\"hidden\" name=\"accion\" value=\"2\">\n");
+      out.write("            <input type=\"submit\" value=\"enviar\">\n");
       out.write("        </form>\n");
+      out.write("            \n");
+      out.write("             ");
+if (request.getAttribute("exito") != null) {
       out.write("\n");
-      out.write("    </body>\n");
+      out.write("        ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${exito}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\n");
+      out.write("        ");
+} else {
+      out.write("\n");
+      out.write("\n");
+      out.write("        ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${error}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\n");
+      out.write("        ");
+}
+      out.write("\n");
+      out.write("\n");
+      out.write("    <script type=\"text/javascript\">\n");
+      out.write("\n");
+      out.write("        function CalcularPrecio()\n");
+      out.write("        {\n");
+      out.write("            \n");
+      out.write("            var precio = document.getElementById(\"ctxPrecioTotal\").value;\n");
+      out.write("            var cantidad = document.getElementById(\"ctxCupos\").value;\n");
+      out.write("            \n");
+      out.write("            \n");
+      out.write("           document.getElementById('resultado').innerHTML = \n");
+      out.write("            precio * cantidad;\n");
+      out.write("        }\n");
+      out.write("    </script>\n");
+      out.write("     </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){

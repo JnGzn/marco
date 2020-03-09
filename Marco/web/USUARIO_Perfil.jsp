@@ -70,6 +70,7 @@
 
               
             </form>
+            <a href="USUARIO_ListarActividades.jsp">Listar actividades</a>
             <form action="CerrarSesion" method="post">
                 <input type="submit" value="cerrar sesion">
             </form>

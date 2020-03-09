@@ -24,6 +24,15 @@ public class ActividadVO {
     private String idEmpresa;
     private String lugar;
     private String categoria;
+    private String descuento;
+
+    public String getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(String descuento) {
+        this.descuento = descuento;
+    }
 
     public ActividadVO() {
     }
@@ -38,7 +47,7 @@ public class ActividadVO {
     
     
     
-    public ActividadVO(String titulo, String descripcion, String fecha, String hora, String duracion, String cupos, String precio, String estado, String idEmpresa, String lugar, String categoria) {
+    public ActividadVO(String titulo, String descripcion, String fecha, String hora, String duracion, String cupos, String precio, String estado, String idEmpresa, String lugar, String categoria, String descuento) {
        
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -51,6 +60,7 @@ public class ActividadVO {
         this.idEmpresa = idEmpresa;
         this.lugar = lugar;
         this.categoria = categoria;
+        this.descuento = descuento;
     }
 
     public String getId() {

@@ -38,10 +38,8 @@ public class ActividadControl extends HttpServlet {
         PrintWriter out = response.getWriter();
         /* TODO output your page here. You may use following sample code. */
 
-        String id = request.getParameter("reservar");
-       
+            String id = request.getParameter("reservar");
             String accion = request.getParameter("accion");
-
             String titulo = request.getParameter("titulo");
             String descripcion = request.getParameter("descripcion");
             String fecha = request.getParameter("fecha");
@@ -49,19 +47,18 @@ public class ActividadControl extends HttpServlet {
             String duracion = request.getParameter("duracion");
             String cupos = request.getParameter("cupos");
             String precio = request.getParameter("precio");
-
             String estado = request.getParameter("estado");;
-
             String lugar = request.getParameter("lugar");;
             String categoria = request.getParameter("categoria");;
+            String descuento = request.getParameter("descuento");;
 
             HttpSession sesio = request.getSession();
-
             String idEmpresa = (String) sesio.getAttribute("nit");
+            String idUser = (String) sesio.getAttribute("id");
 
             ActividadVO actiVO = new ActividadVO(titulo, descripcion,
                     fecha, hora, duracion, cupos, precio, estado,
-                    idEmpresa, lugar, categoria);
+                    idEmpresa, lugar, categoria, descuento);
 
             ActividadDAO actiDAO = new ActividadDAO(actiVO);
             switch (accion) {
@@ -74,7 +71,27 @@ public class ActividadControl extends HttpServlet {
                     }
                     request.getRequestDispatcher("EMPRESA_AgregarActividad.jsp").forward(request, response);
 
-                    break;
+                break;
+                case "enviar":
+                    int cantRes = Integer.parseInt(request.getParameter("ctxCupos"));
+                    String nomComprador = request.getParameter("ctxNombres");
+                    String apellidoComprador = request.getParameter("ctxApellidos");
+                    String docComprador = request.getParameter("ctxDocumento");
+                    String email = request.getParameter("ctxCorreo");
+                    String calificacion = request.getParameter("ctxCalificacion");
+                    String activ = request.getParameter("acti");
+                  
+                    actiVO = actiDAO.ListarDatos(activ); 
+                     if (actiDAO.realizaReserva(actiVO, nomComprador, apellidoComprador,
+                             email, docComprador, cantRes, idUser, calificacion)) {
+                        request.setAttribute("exito", "se registrò correctamente");
+
+                    } else {
+                        request.setAttribute("error", "NO SE PUDO :(");
+                    }
+                    request.getRequestDispatcher("USUARIO_Reserva.jsp?reservar="+activ).forward(request, response);
+
+                break;
 
             }
         
