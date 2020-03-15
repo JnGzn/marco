@@ -33,21 +33,22 @@ public class CerrarSesion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession sesion = request.getSession();
+        sesion.invalidate();
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Cache-Control", "no-store");
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Pragma", "no-cache");
+
+        sesion.removeValue("id");
+        sesion.removeAttribute("id");
         
-            HttpSession sesion = request.getSession();
-            sesion.invalidate();
-             request.getRequestDispatcher("index.jsp").forward(request, response);
-      response.setHeader("Cache-Control", "no-cache");
+        sesion.removeValue("nit");
+        sesion.removeAttribute("nit");
 
 
-response.setHeader("Cache-Control", "no-store");
-
-response.setDateHeader("Expires", 0);
-
-response.setHeader("Pragma", "no-cache");
-
-   
-           
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

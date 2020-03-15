@@ -1,5 +1,6 @@
 
 $(function () {
+    
 
     $("#formLogin").validate({
         rules: {
@@ -85,6 +86,70 @@ $(function () {
                     $("#error").text("error 525");
                 }else if (res == "CORREO ya existe") {
                     $("#pass").val("");
+                }else{
+                    $("#error").text("registro exitoso"); 
+                    
+                }
+            })
+        }
+    })
+    
+    
+    
+    
+    $("#formReserva").validate({
+        rules: {
+            ctxCupos:{
+                required: true,
+                min: 1,
+                number: true
+            },
+            ctxNombres:{
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            ctxApellidos:{
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            ctxDocumento:{
+                required: true,
+                minlength: 3,
+                maxlength: 20,
+                number: true
+            },
+            ctxCorreo: {
+                required: {depends: function () {
+                        $(this).val($.trim($(this).val()));
+                        return true;
+                    }},
+                minlength: 3,
+                email: true,
+                maxlength: 20
+            },
+            ctxCalificacion: {
+                required: true,
+                min: 1,
+                max: 5,
+                number: true
+            }
+           
+        },
+        messages: {
+
+            
+        },
+        submitHandler: function (form) {
+            const data = $("#formReserva").serialize();
+           
+                console.log("weasd");
+            $.post("Actividad", data, (res, est, que) => {
+                if (res == "false") {
+                    
+                    $("#error").text("hubo un error *_*");
+                
                 }else{
                     $("#error").text("registro exitoso"); 
                     

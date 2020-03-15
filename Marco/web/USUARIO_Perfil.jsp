@@ -14,13 +14,16 @@
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             HttpSession sesion = request.getSession();
-            if (sesion==null|!request.isRequestedSessionIdValid()) {
-                session.invalidate();
-
-                request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);              
-            }
-
-            String id = (String) sesion.getAttribute("id");
+            Object sesionn = sesion.getAttribute("id");
+            
+            if (sesionn == null) {
+               %>
+               <a href="USUARIO_IniciarSesion.jsp">inicia seison</a>
+                <%
+            }else {
+                
+                String id = (String) sesion.getAttribute("id");
+            
 
             UsuarioVO usuarioVo = usuarioDAO.listarDatos(id);
 
@@ -60,7 +63,7 @@
                             <p>dirección:</p>
                             <input type="text" name="direccion" value="<%= usuarioVo.getDireccion()%>">
                         </td>  
-                  
+
                     </tr>
                 </table>
 
@@ -68,7 +71,7 @@
                 <input type="hidden" name="accion" value="3">
                 <input type="submit" value="actualizar"> 
 
-              
+
             </form>
             <a href="USUARIO_ListarActividades.jsp">Listar actividades</a>
             <form action="CerrarSesion" method="post">
@@ -80,7 +83,7 @@
         <%} else {%>
 
         ${error}
-        <%}%>
+        <%}}%>
 
     </body>
 </html>

@@ -84,12 +84,12 @@ public class ActividadControl extends HttpServlet {
                     actiVO = actiDAO.ListarDatos(activ); 
                      if (actiDAO.realizaReserva(actiVO, nomComprador, apellidoComprador,
                              email, docComprador, cantRes, idUser, calificacion)) {
-                        request.setAttribute("exito", "se registrò correctamente");
+                        response.getWriter().print("true");
 
                     } else {
-                        request.setAttribute("error", "NO SE PUDO :(");
+                        response.getWriter().print("false");
                     }
-                    request.getRequestDispatcher("USUARIO_Reserva.jsp?reservar="+activ).forward(request, response);
+//                    request.getRequestDispatcher("USUARIO_Reserva.jsp?reservar="+activ).forward(request, response);
 
                 break;
 
