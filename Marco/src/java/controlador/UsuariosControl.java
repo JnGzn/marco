@@ -42,22 +42,17 @@ public class UsuariosControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+
         HttpSession sesion = request.getSession();
         int accion;
         String codCliente = null;
         String a = request.getParameter("accion");
-      
 
         String nombres = request.getParameter("nombres");
         String apellidos = request.getParameter("apellidos");
         String fecha = request.getParameter("fechaNacimiento");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaNacimiento = new java.util.Date(0);
-      
-       
-        
 
         try {
             fechaNacimiento = sdf.parse(fecha);
@@ -78,40 +73,39 @@ public class UsuariosControl extends HttpServlet {
         switch (accion) {
 
             case 1:
+                
                 if (usuarioDAO.validaUsuario(correo)) {
-                    request.setAttribute("exito", "CORREO ya existe");
-                } else if (usuarioDAO.insertar()) {
-                    request.setAttribute("exito", "Registro exitoso");
+                    response.getWriter().print("CORREO ya existe");
                 } else {
-                    request.setAttribute("error", "Error al registrar");
+                    if (usuarioDAO.insertar()) {
+
+                        response.getWriter().print("Registro exitoso");
+                    }else {
+                    response.getWriter().print("false");
+                    }
                 }
-                request.getRequestDispatcher("USUARIO_Registro.jsp").forward(request, response);
+                
+//                request.getRequestDispatcher("USUARIO_Registro.jsp").forward(request, response);
                 break;
             case 2:
 
                 if (usuarioDAO.iniciarSesion(correo, pass) != null) {
-                     
-                  
+
                     id = usuarioDAO.iniciarSesion(correo, pass);
                     sesion = request.getSession(true);
                     //sesion.invalidate();
                     sesion.setAttribute("id", id);
                     request.getRequestDispatcher("USUARIO_Perfil.jsp").forward(request, response);
                 } else {
-                    request.setAttribute("error", "Error usuario y o contrasena incorrecta");
-                    
+//                    request.setAttribute("error", "Error usuario y o contrasena incorrecta");
                     response.getWriter().print("false");
-                    
-                    
                 }
-
                 break;
             case 3:
 
-            id = (String) sesion.getAttribute("id");
+                id = (String) sesion.getAttribute("id");
                 if (usuarioDAO.actualizar(id)) {
-                    
-                   
+
                     request.setAttribute("exito", "cambios realizados");
                 } else {
                     request.setAttribute("error", "no se pundo realizar los cambios");

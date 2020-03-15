@@ -93,17 +93,18 @@
                                     </div>
                                     <div class="group">
                                         <label  class="label"> Correo </label> 
-                                        <input type="email" class="input" data-type="email" placeholder="Ingrese su correo" name="correo"> 
+                                        <input type="email" class="input" data-type="email" placeholder="Ingrese su correo" name="confirmaCorreo" id="confirmaCorreo"> 
                                     </div>
                                     <div class="group">
                                         <label  class="label"> Confirmar Correo </label> 
-                                        <input type="email" class="input" data-type="email" placeholder="Confirme su correo" name="confirmaCorreo"> 
+                                        <input type="email" class="input" data-type="email" placeholder="Confirme su correo" name="correo"> 
                                     </div>
                                     <div class="group"> 
                                         <label for="pass" class="label">Contraseña</label>
                                         <input id="pass" type="password" class="input" data-type="password" placeholder="Contraseña" name="pass"> 
                                     </div>
                                     <input type="hidden" name="accion" value="1">
+                                    <p class="col-8 mx-auto text-danger" id="error"></p>
                                     <div class="group"> <input type="submit" class="button" value="Registrarse"> </div>
 
                                     <div class="foot"> <label for="tab-1">Ya eres Miembro?</label> </div>

@@ -69,13 +69,13 @@ public class UsuarioDAO extends Conexion implements ICrud {
             pstm.setString(4, correo);
             pstm.setString(5, pass);
             pstm.executeUpdate();
-            operacion = true;
             conn = cerrarConexion();
+            return true;
 
-        } catch (SQLException | NumberFormatException e) {
+        } catch (Exception e) {
             System.out.print("Error al insertar cliente " + e.toString());
         }
-        return operacion;
+        return false;
     }
 
     public boolean actualizar(String id) {
@@ -218,7 +218,7 @@ public class UsuarioDAO extends Conexion implements ICrud {
 
         try {
             Connection conn = openConStatic();
-            PreparedStatement pstm = conn.prepareStatement("SELECT * FROM usuario WHERE correoUsuario= ?");
+            PreparedStatement pstm = conn.prepareStatement("SELECT * FROM USUARIO WHERE correoUsuario= ?");
             pstm.setString(1, correo);
             ResultSet rs = pstm.executeQuery();
 
