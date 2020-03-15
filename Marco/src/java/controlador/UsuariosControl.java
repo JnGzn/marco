@@ -99,7 +99,10 @@ public class UsuariosControl extends HttpServlet {
                     request.getRequestDispatcher("USUARIO_Perfil.jsp").forward(request, response);
                 } else {
                     request.setAttribute("error", "Error usuario y o contrasena incorrecta");
-                    request.getRequestDispatcher("USUARIO_IniciarSesion.jsp").forward(request, response);
+                    
+                    response.getWriter().print("false");
+                    
+                    
                 }
 
                 break;
