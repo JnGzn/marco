@@ -7,9 +7,12 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 //import java.sql.Date;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +25,7 @@ import modelo.dao.UsuarioDAO;
 ///import modelo.dao.ProductosDAO;
 import modelo.vo.CategoriaVO;
 import modelo.vo.UsuarioVO;
+import utility.Encripcion;
 //import modelo.vo.ProductosVO;
 
 /**
@@ -63,6 +67,11 @@ public class UsuariosControl extends HttpServlet {
         //Date fechaNacimiento = request.getDateHeader("fechanacimiento")
         String correo = request.getParameter("confirmaCorreo");
         String pass = request.getParameter("pass");
+        try {
+            pass = Encripcion.sha256(pass);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuariosControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String cel = request.getParameter("celular");
         String direccion = request.getParameter("direccion");
         String docuemento = request.getParameter("documento");

@@ -5,14 +5,19 @@
  */
 package controlador;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import modelo.dao.ActividadDAO;
 import modelo.vo.ActividadVO;
 
@@ -21,6 +26,7 @@ import modelo.vo.ActividadVO;
  * @author jngzn
  */
 @WebServlet(name = "ActividadControl", urlPatterns = {"/Actividad"})
+@MultipartConfig
 public class ActividadControl extends HttpServlet {
 
     /**
@@ -63,6 +69,21 @@ public class ActividadControl extends HttpServlet {
             ActividadDAO actiDAO = new ActividadDAO(actiVO);
             switch (accion) {
                 case "1":
+                    String file = request.getParameter("name");
+                    System.out.println("file "+ file);
+                    Part arc = request.getPart("imagen");
+                    InputStream is = arc.getInputStream();
+                    String ruta = "/home/jngzn/Escritorio/8-12/Marco/web/imagenes/"+file;
+                    File f = new File(ruta);
+                    
+                    FileOutputStream ous = new FileOutputStream(f);
+                    int dato = is.read();
+                    while (dato != -1) {                        
+                        ous.write(dato);
+                        dato = is.read();
+                    }
+                    ous.close();
+                    is.close();
                     if (actiDAO.AgregarActividad()) {
                         request.setAttribute("exito", "se registrò correctamente");
 

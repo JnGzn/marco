@@ -21,7 +21,12 @@
             // CategoriaDAO categoriaDAO = new CategoriaDAO();
             LugarDAO lugarDAO = new LugarDAO();
         %>
-        <form action="Actividad" method="post">
+        <form name="form" action="Actividad" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="name" name="name" value="">
+            <input name="imagen" id="imagen" type="file" />
+            <img id="imgSalida" width="50%" height="50%" src="" />
+<!--             <iframe name="ifarame"></iframe>-->
+             
             <input type="text" name="titulo" placeholder="titulo">
             <input type="text" name="descripcion" placeholder="descripcion">
             <input type="date" name="fecha" placeholder="fecha">
@@ -41,7 +46,7 @@
 
             </select>
 
-
+                
             <select name="categoria">
                 <option>CATEGORIA</option>
                 
@@ -72,6 +77,9 @@
             ${error}
             <%}%>
         </form>
+        <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
         <a href="EMPRESA_Perfil.jsp">VOLVER</a>
+        
+       <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
     </body>
 </html>

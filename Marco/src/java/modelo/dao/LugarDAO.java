@@ -69,6 +69,13 @@ public class LugarDAO extends Conexion implements ICrud {
 
         } catch (Exception e) {
             System.out.println("error!" + e.toString());
+        }finally{
+            try {
+                if(conexion!=null) conexion.close();
+                if(puente!=null) puente.close();
+                if(mensajero!=null) mensajero.close();
+            } catch (Exception e) {
+            }
         }
         return operacion;
     }
@@ -82,6 +89,13 @@ public class LugarDAO extends Conexion implements ICrud {
             operacion = true;
         } catch (Exception e) {
             System.out.println("error!" + e.toString());
+        }finally{
+            try {
+                if(conexion!=null) conexion.close();
+                if(puente!=null) puente.close();
+                if(mensajero!=null) mensajero.close();
+            } catch (Exception e) {
+            }
         }
         return operacion;
     }
@@ -128,6 +142,12 @@ public class LugarDAO extends Conexion implements ICrud {
                 arrEmpVO.add(LugarVO);
             }
 
+            
+           
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+         
             return arrEmpVO;
 
         } catch (Exception e) {

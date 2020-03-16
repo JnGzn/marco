@@ -74,6 +74,13 @@ public class UsuarioDAO extends Conexion implements ICrud {
 
         } catch (Exception e) {
             System.out.print("Error al insertar cliente " + e.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            } catch (Exception e) {
+            }
         }
         return false;
     }
@@ -98,6 +105,13 @@ public class UsuarioDAO extends Conexion implements ICrud {
 
         } catch (SQLException | NumberFormatException e) {
             System.out.print("Error al actualizar " + e.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            } catch (Exception e) {
+            }
         }
         return operacion;
     }
@@ -128,6 +142,13 @@ public class UsuarioDAO extends Conexion implements ICrud {
 
         } catch (Exception e) {
             System.out.println("Error :" + e.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            } catch (Exception e) {
+            }
         }
         return idUsuario;
     }
@@ -155,6 +176,10 @@ public class UsuarioDAO extends Conexion implements ICrud {
                 arrClienteVO.add(UsuarioVO);
             }
 
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+          
             return UsuarioVO;
 
         } catch (Exception e) {
@@ -185,6 +210,13 @@ public class UsuarioDAO extends Conexion implements ICrud {
                 arrClienteVO.add(UsuarioVO);
             }
 
+            
+            
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            
+        
             return arrClienteVO;
 
         } catch (Exception e) {
@@ -208,6 +240,13 @@ public class UsuarioDAO extends Conexion implements ICrud {
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            } catch (Exception e) {
+            }
         }
         return idUsuario;
     }
@@ -227,7 +266,13 @@ public class UsuarioDAO extends Conexion implements ICrud {
             } else {
                 opr = false;
             }
-
+            
+            
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            
+        
         } catch (Exception e) {
             System.out.println("Error al validar cliente " + e.toString());
         }

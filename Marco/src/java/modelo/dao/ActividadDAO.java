@@ -89,7 +89,14 @@ public class ActividadDAO extends Conexion {
             operacion = true;
 
         } catch (Exception e) {
-            System.out.println("ERROR al agreagar actividad \n " + e.toString());
+            System.err.println("ERROR al agreagar actividad \n " + e.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(ts!=null) ts.close();
+            } catch (Exception e) {
+            }
         }
         return operacion;
     }
@@ -128,6 +135,11 @@ public class ActividadDAO extends Conexion {
                 arrEmpVO.add(actVO);
             }
 
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+           
+        
             return arrEmpVO;
 
         } catch (Exception e) {
@@ -136,19 +148,28 @@ public class ActividadDAO extends Conexion {
 
         return null;
     }
-    public boolean  actualizarCupos(int cant){
+    public boolean  actualizarCupos(String id, int cant){
         try {
-            pstm = conn.prepareStatement("UPDATE ACTIVIDAD SET cuposActividad=?");
+            pstm = conn.prepareStatement("UPDATE ACTIVIDAD SET cuposActividad=? where idActividad=?");
             pstm.setInt(1, cant);
+            pstm.setString(2, id);
             pstm.executeUpdate();
             return true;
         } catch (Exception e) {
+            System.err.println(e.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(ts!=null) ts.close();
+            } catch (Exception e) {
+            }
         }
         return false;
     }
     public boolean realizaReserva(ActividadVO actividad, String nom,String apll, String email,
             String doc, int cant, String user, String cal){
-        try{
+        try{String idActiv = actividad.getId();
                 pstm = conn.prepareStatement("INSERT INTO RESERVA("
                     + "nombreComprador, apellidoComprador,documentoComprador,"
                         + "correoComprador, calificacion, fk_usuario, fk_actividad,"
@@ -160,18 +181,34 @@ public class ActividadDAO extends Conexion {
             pstm.setString(4, email);
             pstm.setString(5, cal);
             pstm.setString(6, user);
-            pstm.setString(7, actividad.getId());
-            System.out.println("111 "+ actividad.getId());
+            pstm.setString(7, idActiv);
             pstm.setInt(8, cant);
             pstm.setDouble(9, cant*3);
             pstm.executeUpdate();
-            cant = Integer.parseInt(actividad.getId())-cant;
-            if (this.actualizarCupos(cant)) {
+            pstm.close();
+           pstm = conn.prepareStatement("select cuposActividad from ACTIVIDAD where idActividad = ?");
+            
+            pstm.setString(1, idActiv);
+            ts = pstm.executeQuery();
+            if (ts.next()) {
+                cant = Integer.parseInt(ts.getString(1))-cant;
+            if (this.actualizarCupos(idActiv,cant)) {
                 return true;
             }
+                
+            }
+            
+            
         }catch(Exception error)
         {
             System.out.println("error "+ error.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(ts!=null) ts.close();
+            } catch (Exception e) {
+            }
         }
         return false;
     }
@@ -209,6 +246,12 @@ public class ActividadDAO extends Conexion {
                 actVO.setCategoria(rs.getString(14));
             }
 
+            
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            
+        
             return actVO;
 
         } catch (Exception e) {

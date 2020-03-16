@@ -62,6 +62,10 @@ public class CategoriaDAO extends Conexion implements ICrud {
                 arrEmpVO.add(empresaVO);
             }
 
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+           
             return arrEmpVO;
 
         } catch (Exception e) {
@@ -88,6 +92,13 @@ public class CategoriaDAO extends Conexion implements ICrud {
 //"INSERT INTO `MARCO`.`CATEGORIA` (`idCategoria`, `tipoCategoria`) VALUES ('1', '00');"
         } catch (SQLException | NumberFormatException e) {
             System.out.print("Error al insertar cliente " + e.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(ts!=null) ts.close();
+            } catch (Exception e) {
+            }
         }
         return operacion;
     }

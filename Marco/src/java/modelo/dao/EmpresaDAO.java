@@ -59,6 +59,13 @@ public class EmpresaDAO extends Conexion implements ICrud {
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            } catch (Exception e) {
+            }
         }
         return idUsuario;
     }
@@ -80,6 +87,13 @@ public class EmpresaDAO extends Conexion implements ICrud {
             conn = cerrarConexion();
         } catch (SQLException e) {
             System.out.println("error! La empresa NO se Registro" + e.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            } catch (Exception e) {
+            }
         }
         return operacion;
     }
@@ -99,6 +113,13 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
         } catch (SQLException | NumberFormatException e) {
             System.out.print("Error al actualizar " + e.toString());
+        }finally{
+            try {
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            } catch (Exception e) {
+            }
         }
         return operacion;
     }
@@ -125,7 +146,11 @@ public class EmpresaDAO extends Conexion implements ICrud {
                 opr = false;
             }
 
-            conn.close();
+           
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+        
         } catch (Exception e) {
             System.out.println("error!" + e.toString());
         }
@@ -152,6 +177,11 @@ public class EmpresaDAO extends Conexion implements ICrud {
                 //arrEmpVO.add(empresaVO);
             }
 
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+            
+        
             return empresaVO;
 
         } catch (Exception e) {
@@ -180,6 +210,12 @@ public class EmpresaDAO extends Conexion implements ICrud {
                 arrEmpVO.add(empresaVO);
             }
 
+            
+            
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+         
             return arrEmpVO;
 
         } catch (Exception e) {
