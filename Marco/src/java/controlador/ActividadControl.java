@@ -44,88 +44,91 @@ public class ActividadControl extends HttpServlet {
         PrintWriter out = response.getWriter();
         /* TODO output your page here. You may use following sample code. */
 
-            String id = request.getParameter("reservar");
-            String accion = request.getParameter("accion");
-            String titulo = request.getParameter("titulo");
-            String descripcion = request.getParameter("descripcion");
-            String fecha = request.getParameter("fecha");
-            String hora = request.getParameter("hora");
-            String duracion = request.getParameter("duracion");
-            String cupos = request.getParameter("cupos");
-            String precio = request.getParameter("precio");
-            String estado = request.getParameter("estado");;
-            String lugar = request.getParameter("lugar");;
-            String categoria = request.getParameter("categoria");;
-            String descuento = request.getParameter("descuento");;
+        String id = request.getParameter("reservar");
+        String accion = request.getParameter("accion");
+        String titulo = request.getParameter("titulo");
+        String descripcion = request.getParameter("descripcion");
+        String fecha = request.getParameter("fecha");
+        String hora = request.getParameter("hora");
+        String duracion = request.getParameter("duracion");
+        String cupos = request.getParameter("cupos");
+        String precio = request.getParameter("precio");
+        String estado = request.getParameter("estado");;
+        String lugar = request.getParameter("lugar");;
+        String categoria = request.getParameter("categoria");;
+        String descuento = request.getParameter("descuento");;
 
-            HttpSession sesio = request.getSession();
-            String idEmpresa = (String) sesio.getAttribute("nit");
-            String idUser = (String) sesio.getAttribute("id");
+        HttpSession sesio = request.getSession();
+        String idEmpresa = (String) sesio.getAttribute("nit");
+        String idUser = (String) sesio.getAttribute("id");
 
-            ActividadVO actiVO = new ActividadVO(titulo, descripcion,
-                    fecha, hora, duracion, cupos, precio, estado,
-                    idEmpresa, lugar, categoria, descuento);
+        ActividadVO actiVO = new ActividadVO(titulo, descripcion,
+                fecha, hora, duracion, cupos, precio, estado,
+                idEmpresa, lugar, categoria, descuento);
 
-            ActividadDAO actiDAO = new ActividadDAO(actiVO);
-            switch (accion) {
-                case "1":
-                    String[] images = new String[5];
+        ActividadDAO actiDAO = new ActividadDAO(actiVO);
+        switch (accion) {
+            case "1":
+                String[] images = new String[5];
+                try {
                     for (int i = 0; i < images.length; i++) {
                         images[i] = "";
-                        String file = request.getParameter("name"+(i+1));
-                        Part arc = request.getPart("imagen"+(i+1));
-                        System.out.println("name"+ (i+1)+" "+file );
+                        String file = request.getParameter("name" + (i + 1));
+                        Part arc = request.getPart("imagen" + (i + 1));
+                        System.out.println("name" + (i + 1) + " " + file);
                         InputStream is = arc.getInputStream();
-                        images[i] = "/home/jngzn/Escritorio/8-12/Marco/web/imagenes/-"+idEmpresa+"_"+titulo+"_"+file;
+                        
+                        images[i] = "/home/jngzn/Escritorio/8-12/Marco/web/imagenes/" + idEmpresa + "_" + titulo + "_" + file;
                         File f = new File(images[i]);
                         FileOutputStream ous = new FileOutputStream(f);
                         int dato = is.read();
-                        while (dato != -1) {                        
+                        while (dato != -1) {
                             ous.write(dato);
                             dato = is.read();
                         }
-                        if (i==3) {
+                        if (i == 3) {
                             ous.close();
                             is.close();
                             break;
                         }
                     }
-                    if (actiDAO.AgregarActividad(images)) {
-                        request.setAttribute("exito", "se registrò correctamente");
+                } catch (Exception e) {
+                    System.err.println(e.toString());
+                    response.getWriter().print("imagentrue");
+                }
 
-                    } else {
-                        request.setAttribute("error", "NO SE PUDO :(");
-                    }
-                    request.getRequestDispatcher("EMPRESA_AgregarActividad.jsp").forward(request, response);
+                if (actiDAO.AgregarActividad(images)) {
+                    response.getWriter().print("true");
+
+                } else {
+                    response.getWriter().print("false");
+                }
+//                request.getRequestDispatcher("EMPRESA_AgregarActividad.jsp").forward(request, response);
 
                 break;
-                case "enviar":
-                    int cantRes = Integer.parseInt(request.getParameter("ctxCupos"));
-                    String nomComprador = request.getParameter("ctxNombres");
-                    String apellidoComprador = request.getParameter("ctxApellidos");
-                    String docComprador = request.getParameter("ctxDocumento");
-                    String email = request.getParameter("ctxCorreo");
-                    String calificacion = request.getParameter("ctxCalificacion");
-                    String activ = request.getParameter("acti");
-                  
-                    actiVO = actiDAO.ListarDatos(activ); 
-                     if (actiDAO.realizaReserva(actiVO, nomComprador, apellidoComprador,
-                             email, docComprador, cantRes, idUser, calificacion)) {
-                        response.getWriter().print("true");
+            case "enviar":
+                int cantRes = Integer.parseInt(request.getParameter("ctxCupos"));
+                String nomComprador = request.getParameter("ctxNombres");
+                String apellidoComprador = request.getParameter("ctxApellidos");
+                String docComprador = request.getParameter("ctxDocumento");
+                String email = request.getParameter("ctxCorreo");
+                String calificacion = request.getParameter("ctxCalificacion");
+                String activ = request.getParameter("acti");
 
-                    } else {
-                        response.getWriter().print("false");
-                    }
+                actiVO = actiDAO.ListarDatos(activ);
+                if (actiDAO.realizaReserva(actiVO, nomComprador, apellidoComprador,
+                        email, docComprador, cantRes, idUser, calificacion)) {
+                    response.getWriter().print("true");
+
+                } else {
+                    response.getWriter().print("false");
+                }
 //                    request.getRequestDispatcher("USUARIO_Reserva.jsp?reservar="+activ).forward(request, response);
 
                 break;
 
-            }
-        
-        
-          
-              
-       
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,4 +1,4 @@
-alert("holas")
+
 //function cargar(){
 //    const file = document.getElementById("imagen").files[0];
 //   
