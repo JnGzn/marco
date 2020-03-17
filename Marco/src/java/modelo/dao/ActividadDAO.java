@@ -61,14 +61,16 @@ public class ActividadDAO extends Conexion {
         categoria = actividad.getCategoria();
     }
 
-    public boolean AgregarActividad() {
+    public boolean AgregarActividad(String[] images) {
         try {
 
             pstm = conn.prepareStatement("INSERT INTO ACTIVIDAD"
                     + "(tituloActividad,fechaActividad,horaActividad,duracionActividad,"
                     + "cuposActividad,precioActividad,fk_empresa,EMPRESA_nit,"
-                    + "fk_lugar,estadoActividad,fk_categoria,descripcion, descuento)"
-                    + " value(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "fk_lugar,estadoActividad,fk_categoria,descripcion, descuento,"
+                    + "img1,img2,img3,img4,img5)"
+                    + " value(?,?,?,?,?,?,?,?,?,?,?,?,?"
+                    + ",?,?,?,?,?)");
 
             pstm.setString(1, titulo);
             pstm.setString(2, fecha);
@@ -83,7 +85,9 @@ public class ActividadDAO extends Conexion {
             pstm.setString(11, categoria);
             pstm.setString(12, descripcion);
             pstm.setString(13, descuento);
-            
+            for (int i = 0; i < images.length; i++) {
+                pstm.setString((i+14), images[i]);
+            }
             
             pstm.executeUpdate();
             operacion = true;

@@ -7,6 +7,9 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.dao.EmpresaDAO;
 import modelo.vo.EmpresaVO;
+import utility.Encripcion;
 
 /**
  *
@@ -45,7 +49,12 @@ public class EmpresaControl extends HttpServlet {
         String idEmpresa = request.getParameter("idEmp");
         String nit = request.getParameter("nit");
         String pass = request.getParameter("pass");
-
+        try {
+            pass = Encripcion.sha256(pass);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(EmpresaControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         String razonSocial = request.getParameter("nombre");
         String correoEmpresa = request.getParameter("correo");
 

@@ -69,22 +69,28 @@ public class ActividadControl extends HttpServlet {
             ActividadDAO actiDAO = new ActividadDAO(actiVO);
             switch (accion) {
                 case "1":
-                    String file = request.getParameter("name");
-                    System.out.println("file "+ file);
-                    Part arc = request.getPart("imagen");
-                    InputStream is = arc.getInputStream();
-                    String ruta = "/home/jngzn/Escritorio/8-12/Marco/web/imagenes/"+file;
-                    File f = new File(ruta);
-                    
-                    FileOutputStream ous = new FileOutputStream(f);
-                    int dato = is.read();
-                    while (dato != -1) {                        
-                        ous.write(dato);
-                        dato = is.read();
+                    String[] images = new String[5];
+                    for (int i = 0; i < images.length; i++) {
+                        images[i] = "";
+                        String file = request.getParameter("name"+(i+1));
+                        Part arc = request.getPart("imagen"+(i+1));
+                        System.out.println("name"+ (i+1)+" "+file );
+                        InputStream is = arc.getInputStream();
+                        images[i] = "/home/jngzn/Escritorio/8-12/Marco/web/imagenes/-"+idEmpresa+"_"+titulo+"_"+file;
+                        File f = new File(images[i]);
+                        FileOutputStream ous = new FileOutputStream(f);
+                        int dato = is.read();
+                        while (dato != -1) {                        
+                            ous.write(dato);
+                            dato = is.read();
+                        }
+                        if (i==3) {
+                            ous.close();
+                            is.close();
+                            break;
+                        }
                     }
-                    ous.close();
-                    is.close();
-                    if (actiDAO.AgregarActividad()) {
+                    if (actiDAO.AgregarActividad(images)) {
                         request.setAttribute("exito", "se registrò correctamente");
 
                     } else {

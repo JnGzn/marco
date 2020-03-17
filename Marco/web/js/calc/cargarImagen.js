@@ -9,35 +9,45 @@ alert("holas")
 //}
 
 
-$(window).load(function(){
+$(window).load(function () {
 
- $(function() {
-  $('#imagen').change(function(e) {
-      addImage(e); 
-     });
+    $(function () {
 
-     function addImage(e){
-      var file = e.target.files[0],
-      imageType = /image.*/;
-      const c = file.name;
-      $("#name").val(c);
-      console.log("name ",c)
-    
-      if (!file.type.match(imageType))
-       return;
-  
-      var reader = new FileReader();
-  
-      reader.onload = function(e){
-         var result=e.target.result;
-         console.log(result)
-        $('#imgSalida').attr("src",result);
-      }
-       
-      reader.readAsDataURL(file);
-     }
+        $('#imagen1').change(function (e) {
+            addImage(e,1);
+        });
+
+        $('#imagen2').change(function (e) {
+            addImage(e,2);
+        });
+
+        $('#imagen3').change(function (e) {
+            addImage(e,3);
+        });
+
+        $('#imagen4').change(function (e) {
+            addImage(e,4);
+        });
+            
+             function addImage(e, index) {
+            var file = e.target.files[0],
+                    imageType = /image.*/;
+            const c = file.name;
+            $("#name"+index).val(c);
+            console.log(c)
+            if (!file.type.match(imageType))
+                return;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var result = e.target.result;
+                $('#imgSalida'+index).attr("src", result);
+            }
+            reader.readAsDataURL(file);
+        }
+            
+        
     });
-  });
+});
 
 
 

@@ -14,6 +14,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="icon" href="img/favicon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/flaticon.css">
+        <link rel="stylesheet" href="css/themify-icons.css">
+        <link rel="stylesheet" href="css/slick.css">
+        <link rel="stylesheet" href="css/nice-select.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="css/all.css">
     </head>
     <body>
         <h1>Hello World!</h1>
@@ -22,9 +33,42 @@
             LugarDAO lugarDAO = new LugarDAO();
         %>
         <form name="form" action="Actividad" method="post" enctype="multipart/form-data">
-            <input type="hidden" id="name" name="name" value="">
-            <input name="imagen" id="imagen" type="file" />
-            <img id="imgSalida" width="50%" height="50%" src="" />
+            <div class="row">
+                <div class="col-3 mx-auto">
+                    
+                    <input name="imagen1" width="10px" height="10%" id="imagen1" type="file" />
+                </div>
+                <div class="col-3 mx-auto">
+                    <img id="imgSalida1" src="" />
+                </div>
+                <div class="col-3 mx-auto">
+                    <input name="imagen2" id="imagen2" type="file" />
+                </div>
+                <div class="col-3 mx-auto">
+                    <img id="imgSalida2" src="" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 mx-auto">
+                    <input name="imagen3" id="imagen3" type="file" />
+                </div>
+                <div class="col-3 mx-auto">
+                    <img id="imgSalida3" src="" />
+                </div>
+                <div class="col-3 mx-auto">
+                    <input name="imagen4" id="imagen4" type="file" />
+                </div>
+                <div class="col-3 mx-auto">
+                    <img id="imgSalida4" src="" />
+                </div>
+            </div>
+            
+            <input type="text" id="name1" name="name1" value="">
+            <input type="text" id="name2" name="name2" value="">
+            <input type="text" id="name3" name="name3" value="">
+            <input type="text" id="name4" name="name4" value="">
+            
+            
 <!--             <iframe name="ifarame"></iframe>-->
              
             <input type="text" name="titulo" placeholder="titulo">
