@@ -63,10 +63,10 @@
                 </div>
             </div>
             
-            <input type="text" id="name1" name="name1" value="">
-            <input type="text" id="name2" name="name2" value="">
-            <input type="text" id="name3" name="name3" value="">
-            <input type="text" id="name4" name="name4" value="">
+            <input type="hidden" id="name1" name="name1" value="">
+            <input type="hidden" id="name2" name="name2" value="">
+            <input type="hidden" id="name3" name="name3" value="">
+            <input type="hidden" id="name4" name="name4" value="">
             
             
 <!--             <iframe name="ifarame"></iframe>-->
