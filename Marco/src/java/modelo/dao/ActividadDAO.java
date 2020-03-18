@@ -119,7 +119,7 @@ public class ActividadDAO extends Conexion {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                actVO = new ActividadVO();
+                actVO = new ActividadVO(rs.getString(15),rs.getString(16),rs.getString(17), rs.getString(18));
                 
                 actVO.setId(rs.getString(1));
                 actVO.setTitulo(rs.getString(2));

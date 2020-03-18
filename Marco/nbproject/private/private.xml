@@ -5,10 +5,7 @@
         <group>
             <file>file:/home/jngzn/Escritorio/8-12/Marco/src/java/controlador/ActividadControl.java</file>
             <file>file:/home/jngzn/Escritorio/8-12/Marco/web/EMPRESA_AgregarActividad.jsp</file>
-            <file>file:/home/jngzn/Escritorio/8-12/Marco/web/USUARIO_IniciarSesion.jsp</file>
-            <file>file:/home/jngzn/Escritorio/8-12/Marco/web/js/calc/cargarImagen.js</file>
-            <file>file:/home/jngzn/Escritorio/8-12/Marco/web/EMPRESA_IniciarSesion.jsp</file>
-            <file>file:/home/jngzn/Escritorio/8-12/Marco/src/java/modelo/dao/ActividadDAO.java</file>
+            <file>file:/home/jngzn/Escritorio/8-12/Marco/web/js/validaciones/empresa.js</file>
         </group>
     </open-files>
 </project-private>
