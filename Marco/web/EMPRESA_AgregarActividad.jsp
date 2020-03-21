@@ -1,294 +1,461 @@
-<%-- 
-    Document   : EMPRESA_AgregarActividad
-    Created on : 13-nov-2019, 22:46:05
-    Author     : jngzn
---%>
+    <%-- 
+        Document   : EMPRESA_AgregarActividad
+        Created on : 13-nov-2019, 22:46:05
+        Author     : jngzn
+    --%>
 
-<%@page import="modelo.vo.EmpresaVO"%>
-<%@page import="modelo.dao.UsuarioDAO"%>
-<%@page import="modelo.dao.EmpresaDAO"%>
-<%@page import="modelo.vo.LugarVO"%>
-<%@page import="modelo.vo.CategoriaVO"%>
-<%@page import="modelo.dao.LugarDAO"%>
-<%@page import="modelo.dao.CategoriaDAO"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="es">
+    <%@page import="modelo.vo.EmpresaVO"%>
+    <%@page import="modelo.dao.UsuarioDAO"%>
+    <%@page import="modelo.dao.EmpresaDAO"%>
+    <%@page import="modelo.vo.LugarVO"%>
+    <%@page import="modelo.vo.CategoriaVO"%>
+    <%@page import="modelo.dao.LugarDAO"%>
+    <%@page import="modelo.dao.CategoriaDAO"%>
+    <%@page contentType="text/html" pageEncoding="UTF-8"%>
+    <!DOCTYPE html>
+    <html lang="es">
 
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Marco</title>
-        <link rel="StyleSheet" href="css/in.css">
+        <head>
+            <!-- Required meta tags -->
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <title>Marco</title>
+            <link rel="StyleSheet" href="css/in.css">
 
-        <link rel="icon" href="img/favicon.png">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!-- animate CSS -->
-        <link rel="stylesheet" href="css/animate.css">
-        <!-- owl carousel CSS -->
-        <link rel="stylesheet" href="css/owl.carousel.min.css">
-        <!-- font awesome CSS -->
-        <link rel="stylesheet" href="css/all.css">
-        <!-- flaticon CSS -->
-        <link rel="stylesheet" href="css/flaticon.css">
-        <link rel="stylesheet" href="css/themify-icons.css">
-        <link rel="stylesheet" href="css/nice-select.css">
-        <!-- font awesome CSS -->
-        <link rel="stylesheet" href="css/magnific-popup.css">
-        <!-- swiper CSS -->
-        <link rel="stylesheet" href="css/slick.css">
-        <!-- style CSS -->
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
-<!--
+            <link rel="icon" href="img/favicon.png">
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="css/bootstrap.min.css">
+            <!-- animate CSS -->
+            <link rel="stylesheet" href="css/animate.css">
+            <!-- owl carousel CSS -->
+            <link rel="stylesheet" href="css/owl.carousel.min.css">
+            <!-- font awesome CSS -->
+            <link rel="stylesheet" href="css/all.css">
+            <!-- flaticon CSS -->
+            <link rel="stylesheet" href="css/flaticon.css">
+            <link rel="stylesheet" href="css/themify-icons.css">
+            <link rel="stylesheet" href="css/nice-select.css">
+            <!-- font awesome CSS -->
+            <link rel="stylesheet" href="css/magnific-popup.css">
+            <link rel="stylesheet" href="css/swiper.min.css">
 
-    <header class="main_menu home_menu upperHead pb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html">
-                            <img src="img/logo.png" height="70px" alt="logo">
-                        </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="menu_icon"><i class="fas fa-bars"></i></span>
-                    </button>
-                    
-                    <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.html">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Nosotros.html">Nosotros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Actividades.html">Actividades</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Galeria.html">Galería</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contáctenos</a>
-                            </li>
-                        </ul>
+            <!-- swiper CSS -->
+            <link rel="stylesheet" href="css/slick.css">
+            <!-- style CSS -->
+            <link rel="stylesheet" href="css/style.css">
+
+        </head>
+        <body>
+
+
+
+    <!-- Large modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+    <!--
+
+        <header class="main_menu home_menu upperHead pb-3">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="img/logo.png" height="70px" alt="logo">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                        </button>
+                        
+                        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.html">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="Nosotros.html">Nosotros</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="Actividades.html">Actividades</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="Galeria.html">Galería</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.html">Contáctenos</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar Sesión</a> 
+                    -->
+                        <!--                        <a class="btn_1 d-none d-lg-block border border-primary" data-toggle="modal"
+                            data-target="#exampleModalScrollable">Iniciar Sesión</a>-->
+                            <!--
+                        </nav>
                     </div>
-                    <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar Sesión</a> 
-                -->
-                    <!--                        <a class="btn_1 d-none d-lg-block border border-primary" data-toggle="modal"
-                        data-target="#exampleModalScrollable">Iniciar Sesión</a>-->
-                        <!--
-                    </nav>
                 </div>
             </div>
-        </div>
-    </header>
--->
+        </header>
+    -->
 
 
-<br><br><br>
+    <br><br><br>
 
+            
+
+            <div class="">
+                <%
+
+                    EmpresaDAO empDAO = new EmpresaDAO();
+                    HttpSession sesion = request.getSession();
+                    Object sesionn = sesion.getAttribute("nit");
+
+                    if (sesionn == null) {
+                %>
+                <a href="USUARIO_IniciarSesion.jsp">inicia seison</a>
+                <%
+                } else {
+
+                    String idEmp = (String) sesion.getAttribute("nit");
+
+                    EmpresaVO empVO = empDAO.ListarDatos(idEmp);
+
+                %>
+
+
+                <%            // CategoriaDAO categoriaDAO = new CategoriaDAO();
+                    LugarDAO lugarDAO = new LugarDAO();
+                %>
+
+                <br><br><br>
+                <img src="<%=  empVO.getLogo() %>">
+                <form name="form" action="Actividad" method="post" enctype="multipart/form-data" id="formCrearReserva">
+                    
+                    
+                    <div class="card border-left-success shadow col-md-10">
+                        <div class="card-body col-md-10 mx-auto">
+                            <br>    
+                            <div class="row">
+                                <div class="col mr-2 col-auto mx-auto" >
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1 h3 mx-">Registra tu actividad</div>
+                                </div>
+                            </div>
+                            <br><br>
+
+                            
+
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="text-input">Titulo</label>
+                                <div class="col-md-9">
+                                <input  class="form-control" type="text" id="titulo" name="titulo" placeholder="titulo...">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="text-input">Titulo</label>
+                                <div class="col-md-9">
+                                <textarea  class="form-control" rows="5" type="text" name="descripcion" placeholder="descripcion" id="descripcion"></textarea>
+                                </div>
+                            </div>
+
+
+                        
+                        </div>
+                    </div>
+                    
+                    <div class="card border-left-success shadow col-md-10">
+                        <div class="card-body col-md-10 mx-auto">
+                            <div class="row">
+
+                            
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success  mb-1 h5">Escoge las mejores fotos</div>
+                                </div>
+                            </div>
+                        
+    <br><br>
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                    <input class="btn" name="imagen1"  id="imagen1" type="file" />
+                                </div>
+                                <div class="col-md-4">
+                                <img id="imgSalida1" width="100%" height="140" src="" />
+
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <input class="btn" name="imagen2"  id="imagen2" type="file" />
+                                </div>
+                                <div class="col-md-4">
+                                <img id="imgSalida2" width="100%" height="140" src="" />
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-md-2 ">
+                                    <input class="btn" name="imagen3"  id="imagen3" type="file" >
+                                </div>
+                                <div class="col-md-4">
+                                <img id="imgSalida3" width="100%" height="140" src="" />
+
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <input class="btn" name="imagen4"  id="imagen4" type="file" />
+                                </div>
+                                <div class="col-md-4">
+                                <img id="imgSalida4" width="100%" height="140" src="" />
+
+                                </div>
+                            </div>
+
+                        
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="card border-left-success shadow col-md-10">
+                        <div class="card-body col-md-10 mx-auto">
+                            <div class="row">
+
+                            
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success  mb-1 h5">Detalles</div>
+                                </div>
+                            </div>
+    <br><br>
+                            
+
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label" for="text-input">Fecha</label>
+                                <div class="col-md-4">
+                                <input  class="form-control date" type="date" name="fecha" placeholder="fecha" id="fecha" >
+                                </div>
+                                <label class="col-md-2 col-form-label" for="text-input"> Hora</label>
+
+                                <div class="col-md-4">
+                                    <input  class="form-control time" type="time" name="hora" placeholder="hora" id="hora">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label" for="text-input">Duracion</label>
+                                <div class="col-md-4">
+                                <input  class="form-control" type="number" name="duracion" placeholder="duracion", id="duracion">
+                                </div>
+                                <label class="col-md-2 col-form-label" for="text-input">Cupos</label>
+
+                                <div class="col-md-4">
+                                    <input  class="form-control" type="number" name="cupos" placeholder="cupos" id="cupos">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label" for="text-input">Lugar</label>
+                                <div class="col-md-4">
+                                    <select  class="form-control" name="lugar" id="lugar">
+                                        <option>LUGAR</option>
+                                        <% for (LugarVO lugarVO : lugarDAO.ListarDatos(idEmp)) {
+                                                if (lugarVO != null) {
+                                        %>
+                                        <option value="<%= lugarVO.getIdLugar()%>"><%= lugarVO.getDireccionLugar()%></option>
+                                        <%}
+                                    }%>
+                                    
+                                    <option 
+                                    type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" 
+                                    data-whatever="@mdo">                              
+                                    agrega otro
+                                    </option>
+
+                                    </select>
+
+                                </div>
+                                <label class="col-md-2 col-form-label" for="text-input">Categoria</label>
+                                
+                                <div class="col-md-4">
+                                    <select class="form-control" name="categoria" id="categoria">
+                                        <option>CATEGORIA</option>
+                                        <% for (CategoriaVO categoriaVO : CategoriaDAO.ListarDatos(idEmp)) {
+                                                if (categoriaVO != null) {
+                                        %>
+                                        <option value="<%= categoriaVO.getIdCategoria()%>"><%= categoriaVO.getNomCategoria()%></option>
+                                        <%}
+                                    }%>
+
+                                    <option 
+                                    type="button" class="btn btn-primary" data-toggle="modal"
+  data-target="#registrolugar" data-whatever="@mdo"
+                                    
+                                    
+                                    >                              
+                                    agrega otro
+                                    </option>
+                                    
+                                    </select>
+                                    <!-- 
+
+                                        <input  class="form-control" type="text" id="titulo" name="titulo" placeholder="titulo...">
+                                    -->
+                                </div>
+                            </div>
+                            
+
+                            <div class="form-group row ">
+                                <label class="col-md-2 col-form-label" for="text-input">Precio</label>
+                                <div class="col-md-4">
+                                <input  class="form-control" type="number" name="precio" placeholder="precio" id="precio">
+                                </div>
+                                
+                            </div>
+                            <div class="form-group row ">
+                                <div class="col-md-4">
+                                    <input type="hidden" value="1" name="accion">
+                                    <input class="btn btn-primary" type="submit" value="crear y publicar">
+                                </div>
+                                <div class="col-md-8">
+
+                                    <p class="col-8 mx-auto text-danger" id="error">mensage: Bien o mal :(</p>
+                                </div>
+                            </div>
+                            
+                            <a href="EMPRESA_Perfil.jsp">VOLVER</a>
+                            
+                        </div>
+                    </div>
+
+
+
+                        
+                        
+                    
+
+                    <!--
+                                        
+                                        
+                                        
+                                        
+                                    </div>-->
+
+                    <input type="hidden" id="name1" name="name1" value="">
+                    <input type="hidden" id="name2" name="name2" value="">
+                    <input type="hidden" id="name3" name="name3" value="">
+                    <input type="hidden" id="name4" name="name4" value=""> 
+
+                    <input type="hidden" id="estado" name="estado" value="activo">
+
+
+
+                    <!--             <iframe name="ifarame"></iframe>-->
+
+                
+                    
+
+                    
+
+                
+
+                    
+                </form>
+                
+            </div>
+<!--modal categoria-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">agregar otro lugar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">nombre lugar:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        
+                        </div>
+                        <div class="modal-footer">
+                            <a  href="EMPRESA_AgregarActividad.jsp" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
+                            <input class="btn btn-primary" type="submit" value="Guardar">
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
         
 
-        <div class="">
-            <%
-
-                EmpresaDAO empDAO = new EmpresaDAO();
-                HttpSession sesion = request.getSession();
-                Object sesionn = sesion.getAttribute("nit");
-
-                if (sesionn == null) {
-            %>
-            <a href="USUARIO_IniciarSesion.jsp">inicia seison</a>
-            <%
-            } else {
-
-                String idEmp = (String) sesion.getAttribute("nit");
-
-                EmpresaVO empVO = empDAO.ListarDatos(idEmp);
-
-            %>
-
-
-            <%            // CategoriaDAO categoriaDAO = new CategoriaDAO();
-                LugarDAO lugarDAO = new LugarDAO();
-            %>
-
-            <br><br><br>
-            <img src="<%=  empVO.getLogo() %>">
-            <form name="form" action="Actividad" method="post" enctype="multipart/form-data" id="formCrearReserva">
-                
-                
-                <div class="card border-left-success shadow col-md-10">
-                    <div class="card-body col-md-10 mx-auto">
-                        <div class="row">
-
-                        
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <p>Titulo:</p>  
-                            <input class="col-10 mx-auto" type="text" id="titulo" name="titulo" placeholder="titulo">
-                            <p>Descripcion:</p>
-                            <textarea class="col-10  mx-auto" rows="5" type="text" name="descripcion" placeholder="descripcion" id="descripcion">
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card border-left-success shadow col-md-10">
-                    <div class="card-body col-md-10 mx-auto">
-                        <div class="row">
-
-                        
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <table class="table-bordered col-8 mx-auto">
-                                <tbody>
-                                    <tr >
-                                        <td class="col-4 mx-auto">
-                                            <div class="center">
-                                                <input name="imagen1" width="10px" height="10%" id="imagen1" type="file" />
-                                            </div>
-                                        </td>
-                                        <td class="col-4 mx-auto">
-                                            <div class="center">
-                                                <input name="imagen2" id="imagen2" type="file" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-4 mx-auto">
-                                            <div class="">
-                                                <img id="imgSalida1" src="" />
-                                            </div>
-                                        </td>
-                                        <td class="col-4 mx-auto">
-                                            <div class="">
-                                                <img id="imgSalida2" src="" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="">
-                                                <input name="imagen3" id="imagen3" type="file" />
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="">
-                                                <input name="imagen4" id="imagen4" type="file" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="">
-                                                <img id="imgSalida3" src="" />
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="">
-                                                <img id="imgSalida4" src="" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
 
 
 
-<div class="file-field">
-    <div class="btn btn-primary btn-sm float-left">
-        <span>Seleciona el archivo</span>
-        <input class="hidden" type="file" spellcheck="false">
-    </div>
-    <div class="file-path-wrapper">
-        <input class="file-path validate" type="text" placeholder="upload image">
-    </div>
-</div>
 
 
-                    <input type="date" name="fecha" placeholder="fecha" id="fecha">
-                    <input type="time" name="hora" placeholder="hora" id="hora">
-                    <input type="number" name="duracion" placeholder="duracion", id="duracion">
-                    <input type="number" name="cupos" placeholder="cupos" id="cupos">
-                    <input type="number" name="precio" placeholder="precio" id="precio">
-                    
-                
 
-                <!--
-                                     
-                                     
-                                    
-                                     
-                                 </div>-->
+<!--modal lugar-->
 
-                <input type="hidden" id="name1" name="name1" value="">
-                <input type="hidden" id="name2" name="name2" value="">
-                <input type="hidden" id="name3" name="name3" value="">
-                <input type="hidden" id="name4" name="name4" value="">
-
-
-                <!--             <iframe name="ifarame"></iframe>-->
-
-               
-                <select name="lugar" id="lugar">
-                    <option>LUGAR</option>
-                    <% for (LugarVO lugarVO : lugarDAO.ListarDatos(idEmp)) {
-                            if (lugarVO != null) {
-                    %>
-                    <option value="<%= lugarVO.getIdLugar()%>"><%= lugarVO.getDireccionLugar()%></option>
-                    <%}
-                }%>
-                </select>
-
-                <select name="categoria" id="categoria">
-                    <option>CATEGORIA</option>
-                    <% for (CategoriaVO categoriaVO : CategoriaDAO.ListarDatos(idEmp)) {
-                            if (categoriaVO != null) {
-                    %>
-                    <option value="<%= categoriaVO.getIdCategoria()%>"><%= categoriaVO.getNomCategoria()%></option>
-                    <%}
-                }%>
-                </select>
-
-                <select name="estado" estado="estado">  
-                    <option>ESTADO</option>
-                    <option value="activo">activo</option>
-                    <option value="publico">publico</option>
-                    <option value="creado">creado</option>
-                    <option value="cancelado">cancelado</option>
-                </select>
-
-                <input type="hidden" value="1" name="accion">
-                <input type="submit" value="crear y publicar">
-            </form>
-            <p class="col-8 mx-auto text-danger" id="error"></p>
+<div class="modal fade" id="registrolugar" tabindex="-1" role="dialog" 
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <a href="EMPRESA_Perfil.jsp">VOLVER</a>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Recipient:</label>
+              <input type="text" class="form-control" id="recipient-name">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Send message</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+        
+            
+            <script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
+            <script type="text/javascript" src="js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="js/popper.min.js"></script>
 
-        <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
-        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
-        <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
-        <script src="js/validaciones/empresa.js" type="text/javascript"></script>
-        body id="page-top">
-        <% }%>
-    </body>
-</html>
+            <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+            <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+            <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
+            <script src="js/validaciones/empresa.js" type="text/javascript"></script>
+        
+            <% }%>
+        </body>
+    </html>
