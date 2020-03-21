@@ -13,11 +13,15 @@
     </head>
     <body>
         <h1>agregar EMPRESA</h1>
-        <form method="post" action="Empresas">
+        <form method="post" action="Empresas" enctype="multipart/form-data" >
             <table>
                  <tr>
                     <td>Nit:</td>
-                    <td><input type="text" name="nit"></td>
+                    <td><input type="text" name="nit"> <input type="hidden" name="nomLogo" id="name1" value=""> </td>
+                </tr>
+                <tr>
+                    <td>logo</td>
+                    <td><input type="file" name="imagen" id="imagenLogo"></td>
                 </tr>
                 <tr>
                     <td>Razón Social: </td>
@@ -51,6 +55,8 @@
         
         ${error}
         <%}%>
-
+ <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+        <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
     </body>
 </html>

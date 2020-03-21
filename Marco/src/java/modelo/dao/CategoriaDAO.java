@@ -38,7 +38,8 @@ public class CategoriaDAO extends Conexion implements ICrud {
         nombreCategoria = clientesVO.getNomCategoria();
 
     }
-
+    
+    
     public static ArrayList<CategoriaVO> ListarDatos() {
 
         ArrayList<CategoriaVO> arrEmpVO = new ArrayList<>();
@@ -51,6 +52,44 @@ public class CategoriaDAO extends Conexion implements ICrud {
                     + "FROM CATEGORIA INNER JOIN EMPRESA "
                     + "ON CATEGORIA.EMPRESA_nit=EMPRESA.nit "
                     + "order by idCategoria");
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                empresaVO = new CategoriaVO(rs.getString(1), rs.getString(2),
+                        rs.getString(3));
+
+                arrEmpVO.add(empresaVO);
+            }
+
+                if(conn!=null) conn.close();
+                if(pstm!=null) pstm.close();
+                if(rs!=null) rs.close();
+           
+            return arrEmpVO;
+
+        } catch (Exception e) {
+            System.out.println("Error  " + e.toString());
+        }
+
+        return null;
+    }
+
+    public static ArrayList<CategoriaVO> ListarDatos(String nit) {
+
+        ArrayList<CategoriaVO> arrEmpVO = new ArrayList<>();
+        CategoriaVO empresaVO = null;
+ 
+        try {
+            Connection conn = openConStatic();
+            PreparedStatement pstm = conn.prepareStatement("SELECT "
+                    + "idCategoria,tipoCategoria,razonSociAL "
+                    + "FROM CATEGORIA INNER JOIN EMPRESA "
+                    + "ON CATEGORIA.EMPRESA_nit=EMPRESA.nit "
+                    + "where CATEGORIA.EMPRESA_nit = ? "
+                    + "order by idCategoria ");
+            pstm.setString(1, nit);
 
             ResultSet rs = pstm.executeQuery();
 

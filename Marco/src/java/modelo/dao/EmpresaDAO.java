@@ -70,17 +70,18 @@ public class EmpresaDAO extends Conexion implements ICrud {
         return idUsuario;
     }
 
-    @Override
-    public boolean insertar() {
+   
+    public boolean insertar(String logo) {
         try {
 
-            pstm = conn.prepareStatement("INSERT into EMPRESA(nit,razonSocial,correoEmpresa,ROL_idRol,estado,pass)"
-                    + " values(?,?,?,2,'activo',?)");
+            pstm = conn.prepareStatement("INSERT into EMPRESA(nit,razonSocial,correoEmpresa,ROL_idRol,estado,pass,logo)"
+                    + " values(?,?,?,2,'activo',?,?)");
 
             pstm.setString(1, nit);
             pstm.setString(2, razonSocial);
             pstm.setString(3, correoEmpresa);
             pstm.setString(4, pass);
+            pstm.setString(5, logo);
 
             pstm.executeUpdate();
             operacion = true;
@@ -164,7 +165,7 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
         try {
             Connection conn = openConStatic();
-            PreparedStatement pstm = conn.prepareStatement("SELECT nit,razonSocial,correoEmpresa FROM EMPRESA WHERE nit = ?");
+            PreparedStatement pstm = conn.prepareStatement("SELECT nit,razonSocial,correoEmpresa,logo FROM EMPRESA WHERE nit = ?");
             pstm.setString(1, nit);
 
             ResultSet rs = pstm.executeQuery();
@@ -173,7 +174,7 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
                 empresaVO = new EmpresaVO(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(1));
-
+                empresaVO.setLogo(rs.getString(4));
                 //arrEmpVO.add(empresaVO);
             }
 
@@ -197,7 +198,7 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
         try {
             Connection conn = openConStatic();
-            PreparedStatement pstm = conn.prepareStatement("SELECT nit,razonSocial,correoEmpresa FROM EMPRESA");
+            PreparedStatement pstm = conn.prepareStatement("SELECT nit,razonSocial,correoEmpresa,logo FROM EMPRESA");
            
 
             ResultSet rs = pstm.executeQuery();
@@ -206,7 +207,7 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
                 empresaVO = new EmpresaVO(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(1));
-
+                empresaVO.setLogo(rs.getString(4));
                 arrEmpVO.add(empresaVO);
             }
 
@@ -226,6 +227,11 @@ public class EmpresaDAO extends Conexion implements ICrud {
     }
     @Override
     public boolean actualizar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean insertar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

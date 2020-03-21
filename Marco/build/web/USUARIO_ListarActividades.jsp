@@ -308,7 +308,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 for (ActividadVO actVo : actDAO.ListarDatos()) {%>
 
             <tr>
-                <td>      </td>
+                <td>      <img src="<%=   actVo.getImage1()%>" width="70" height="50"> </td>
                 <td>        <%=   actVo.getTitulo()%></td>
                 <td>        <%= actVo.getDescripcion()%></td>
                 <td> <%=  actVo.getPrecio()%> </td>

@@ -70,6 +70,7 @@ public class ActividadControl extends HttpServlet {
         switch (accion) {
             case "1":
                 String[] images = new String[5];
+                String base = "/home/jngzn/Escritorio/8-12/Marco/web/";
                 try {
                     for (int i = 0; i < images.length; i++) {
                         images[i] = "";
@@ -78,8 +79,8 @@ public class ActividadControl extends HttpServlet {
                         System.out.println("name" + (i + 1) + " " + file);
                         InputStream is = arc.getInputStream();
                         
-                        images[i] = "/home/jngzn/Escritorio/8-12/Marco/web/imagenes/" + idEmpresa + "_" + titulo + "_" + file;
-                        File f = new File(images[i]);
+                        images[i] = "imagenes/" + idEmpresa + "_" + titulo + "_" + file;
+                        File f = new File(base+images[i]);
                         FileOutputStream ous = new FileOutputStream(f);
                         int dato = is.read();
                         while (dato != -1) {

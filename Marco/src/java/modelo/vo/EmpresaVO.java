@@ -20,6 +20,7 @@ public class EmpresaVO {
     private String razonSocial;
     private String correoEmpresa;
     private String pass;
+    private String logo;
 
     public EmpresaVO(String nit, String razonSocial, String correoEmpresa,String pass) {
         this.nit = nit;
@@ -28,6 +29,15 @@ public class EmpresaVO {
         this.pass = pass;
     }
 
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    
     public String getIdEmpresa() {
         return idEmpresa;
     }

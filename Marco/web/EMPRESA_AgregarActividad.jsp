@@ -4,107 +4,283 @@
     Author     : jngzn
 --%>
 
+<%@page import="modelo.vo.EmpresaVO"%>
+<%@page import="modelo.dao.UsuarioDAO"%>
+<%@page import="modelo.dao.EmpresaDAO"%>
 <%@page import="modelo.vo.LugarVO"%>
 <%@page import="modelo.vo.CategoriaVO"%>
 <%@page import="modelo.dao.LugarDAO"%>
 <%@page import="modelo.dao.CategoriaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="icon" href="img/favicon.png">
+<html lang="es">
 
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Marco</title>
+        <link rel="StyleSheet" href="css/in.css">
+
+        <link rel="icon" href="img/favicon.png">
+        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- animate CSS -->
         <link rel="stylesheet" href="css/animate.css">
+        <!-- owl carousel CSS -->
         <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <!-- font awesome CSS -->
+        <link rel="stylesheet" href="css/all.css">
+        <!-- flaticon CSS -->
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/themify-icons.css">
-        <link rel="stylesheet" href="css/slick.css">
         <link rel="stylesheet" href="css/nice-select.css">
+        <!-- font awesome CSS -->
         <link rel="stylesheet" href="css/magnific-popup.css">
-        <link rel="stylesheet" href="css/all.css">
+        <!-- swiper CSS -->
+        <link rel="stylesheet" href="css/slick.css">
+        <!-- style CSS -->
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <%
-            // CategoriaDAO categoriaDAO = new CategoriaDAO();
-            LugarDAO lugarDAO = new LugarDAO();
-        %>
-        <form name="form" action="Actividad" method="post" enctype="multipart/form-data" id="formCrearReserva">
-            <div class="row">
-                <div class="col-3 mx-auto">
+<!--
 
-                    <input name="imagen1" width="10px" height="10%" id="imagen1" type="file" />
-                </div>
-                <div class="col-3 mx-auto">
-                    <img id="imgSalida1" src="" />
-                </div>
-                <div class="col-3 mx-auto">
-                    <input name="imagen2" id="imagen2" type="file" />
-                </div>
-                <div class="col-3 mx-auto">
-                    <img id="imgSalida2" src="" />
+    <header class="main_menu home_menu upperHead pb-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="img/logo.png" height="70px" alt="logo">
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Nosotros.html">Nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Actividades.html">Actividades</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Galeria.html">Galería</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Contáctenos</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar Sesión</a> 
+                -->
+                    <!--                        <a class="btn_1 d-none d-lg-block border border-primary" data-toggle="modal"
+                        data-target="#exampleModalScrollable">Iniciar Sesión</a>-->
+                        <!--
+                    </nav>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-3 mx-auto">
-                    <input name="imagen3" id="imagen3" type="file" />
+        </div>
+    </header>
+-->
+
+
+<br><br><br>
+
+        
+
+        <div class="">
+            <%
+
+                EmpresaDAO empDAO = new EmpresaDAO();
+                HttpSession sesion = request.getSession();
+                Object sesionn = sesion.getAttribute("nit");
+
+                if (sesionn == null) {
+            %>
+            <a href="USUARIO_IniciarSesion.jsp">inicia seison</a>
+            <%
+            } else {
+
+                String idEmp = (String) sesion.getAttribute("nit");
+
+                EmpresaVO empVO = empDAO.ListarDatos(idEmp);
+
+            %>
+
+
+            <%            // CategoriaDAO categoriaDAO = new CategoriaDAO();
+                LugarDAO lugarDAO = new LugarDAO();
+            %>
+
+            <br><br><br>
+            <img src="<%=  empVO.getLogo() %>">
+            <form name="form" action="Actividad" method="post" enctype="multipart/form-data" id="formCrearReserva">
+                
+                
+                <div class="card border-left-success shadow col-md-10">
+                    <div class="card-body col-md-10 mx-auto">
+                        <div class="row">
+
+                        
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p>Titulo:</p>  
+                            <input class="col-10 mx-auto" type="text" id="titulo" name="titulo" placeholder="titulo">
+                            <p>Descripcion:</p>
+                            <textarea class="col-10  mx-auto" rows="5" type="text" name="descripcion" placeholder="descripcion" id="descripcion">
+                            </textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-3 mx-auto">
-                    <img id="imgSalida3" src="" />
+                
+                <div class="card border-left-success shadow col-md-10">
+                    <div class="card-body col-md-10 mx-auto">
+                        <div class="row">
+
+                        
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table class="table-bordered col-8 mx-auto">
+                                <tbody>
+                                    <tr >
+                                        <td class="col-4 mx-auto">
+                                            <div class="center">
+                                                <input name="imagen1" width="10px" height="10%" id="imagen1" type="file" />
+                                            </div>
+                                        </td>
+                                        <td class="col-4 mx-auto">
+                                            <div class="center">
+                                                <input name="imagen2" id="imagen2" type="file" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-4 mx-auto">
+                                            <div class="">
+                                                <img id="imgSalida1" src="" />
+                                            </div>
+                                        </td>
+                                        <td class="col-4 mx-auto">
+                                            <div class="">
+                                                <img id="imgSalida2" src="" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="">
+                                                <input name="imagen3" id="imagen3" type="file" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="">
+                                                <input name="imagen4" id="imagen4" type="file" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="">
+                                                <img id="imgSalida3" src="" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="">
+                                                <img id="imgSalida4" src="" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-3 mx-auto">
-                    <input name="imagen4" id="imagen4" type="file" />
-                </div>
-                <div class="col-3 mx-auto">
-                    <img id="imgSalida4" src="" />
-                </div>
-            </div>
-
-            <input type="hidden" id="name1" name="name1" value="">
-            <input type="hidden" id="name2" name="name2" value="">
-            <input type="hidden" id="name3" name="name3" value="">
-            <input type="hidden" id="name4" name="name4" value="">
 
 
-            <!--             <iframe name="ifarame"></iframe>-->
 
-            <input type="text" id="titulo" name="titulo" placeholder="titulo">
-            <input type="text" name="descripcion" placeholder="descripcion" id="descripcion">
-            <input type="date" name="fecha" placeholder="fecha" id="fecha">
-            <input type="time" name="hora" placeholder="hora" id="hora">
-            <input type="number" name="duracion" placeholder="duracion", id="duracion">
-            <input type="number" name="cupos" placeholder="cupos" id="cupos">
-            <input type="number" name="precio" placeholder="precio" id="precio">
-            <select name="lugar" id="lugar">
-                <option>LUGAR</option>
-                <% for (LugarVO lugarVO : lugarDAO.ListarDatos()) {%>
-                <option value="<%= lugarVO.getIdLugar()%>"><%= lugarVO.getDireccionLugar()%></option>
-                <%} %>
-            </select>
+<div class="file-field">
+    <div class="btn btn-primary btn-sm float-left">
+        <span>Seleciona el archivo</span>
+        <input class="hidden" type="file" spellcheck="false">
+    </div>
+    <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="upload image">
+    </div>
+</div>
 
-            <select name="categoria" id="categoria">
-                <option>CATEGORIA</option>
-                <% for (CategoriaVO categoriaVO : CategoriaDAO.ListarDatos()) {%>
-                <option value="<%= categoriaVO.getIdCategoria()%>"><%= categoriaVO.getNomCategoria()%></option>
-                <%}%>
-            </select>
 
-            <select name="estado" estado="estado"> 
-                <option>ESTADO</option>
-                <option value="activo">activo</option>
-                <option value="publico">publico</option>
-                <option value="creado">creado</option>
-                <option value="cancelado">cancelado</option>
-            </select>
-            
-            <input type="hidden" value="1" name="accion">
-            <input type="submit" value="crear y publicar">
-        </form>
-        <p class="col-8 mx-auto text-danger" id="error"></p>
+                    <input type="date" name="fecha" placeholder="fecha" id="fecha">
+                    <input type="time" name="hora" placeholder="hora" id="hora">
+                    <input type="number" name="duracion" placeholder="duracion", id="duracion">
+                    <input type="number" name="cupos" placeholder="cupos" id="cupos">
+                    <input type="number" name="precio" placeholder="precio" id="precio">
+                    
+                
 
+                <!--
+                                     
+                                     
+                                    
+                                     
+                                 </div>-->
+
+                <input type="hidden" id="name1" name="name1" value="">
+                <input type="hidden" id="name2" name="name2" value="">
+                <input type="hidden" id="name3" name="name3" value="">
+                <input type="hidden" id="name4" name="name4" value="">
+
+
+                <!--             <iframe name="ifarame"></iframe>-->
+
+               
+                <select name="lugar" id="lugar">
+                    <option>LUGAR</option>
+                    <% for (LugarVO lugarVO : lugarDAO.ListarDatos(idEmp)) {
+                            if (lugarVO != null) {
+                    %>
+                    <option value="<%= lugarVO.getIdLugar()%>"><%= lugarVO.getDireccionLugar()%></option>
+                    <%}
+                }%>
+                </select>
+
+                <select name="categoria" id="categoria">
+                    <option>CATEGORIA</option>
+                    <% for (CategoriaVO categoriaVO : CategoriaDAO.ListarDatos(idEmp)) {
+                            if (categoriaVO != null) {
+                    %>
+                    <option value="<%= categoriaVO.getIdCategoria()%>"><%= categoriaVO.getNomCategoria()%></option>
+                    <%}
+                }%>
+                </select>
+
+                <select name="estado" estado="estado">  
+                    <option>ESTADO</option>
+                    <option value="activo">activo</option>
+                    <option value="publico">publico</option>
+                    <option value="creado">creado</option>
+                    <option value="cancelado">cancelado</option>
+                </select>
+
+                <input type="hidden" value="1" name="accion">
+                <input type="submit" value="crear y publicar">
+            </form>
+            <p class="col-8 mx-auto text-danger" id="error"></p>
+        </div>
         <a href="EMPRESA_Perfil.jsp">VOLVER</a>
 
 
@@ -112,5 +288,7 @@
         <script type="text/javascript" src="js/jquery.validate.min.js"></script>
         <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
         <script src="js/validaciones/empresa.js" type="text/javascript"></script>
+        body id="page-top">
+        <% }%>
     </body>
 </html>

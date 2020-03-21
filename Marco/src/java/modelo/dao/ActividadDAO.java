@@ -86,19 +86,25 @@ public class ActividadDAO extends Conexion {
             pstm.setString(12, descripcion);
             pstm.setString(13, descuento);
             for (int i = 0; i < images.length; i++) {
-                pstm.setString((i+14), images[i]);
+                pstm.setString((i + 14), images[i]);
             }
-            
+
             pstm.executeUpdate();
             operacion = true;
 
         } catch (Exception e) {
             System.err.println("ERROR al agreagar actividad \n " + e.toString());
-        }finally{
+        } finally {
             try {
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(ts!=null) ts.close();
+                if (conn != null) {
+                    conn.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (ts != null) {
+                    ts.close();
+                }
             } catch (Exception e) {
             }
         }
@@ -119,8 +125,8 @@ public class ActividadDAO extends Conexion {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                actVO = new ActividadVO(rs.getString(15),rs.getString(16),rs.getString(17), rs.getString(18));
-                
+                actVO = new ActividadVO(rs.getString(15), rs.getString(16), rs.getString(17), rs.getString(18));
+
                 actVO.setId(rs.getString(1));
                 actVO.setTitulo(rs.getString(2));
                 actVO.setFecha(rs.getString(3));
@@ -128,22 +134,32 @@ public class ActividadDAO extends Conexion {
                 actVO.setDuracion(rs.getString(5));
                 actVO.setCupos(rs.getString(6));
                 actVO.setPrecio(rs.getString(7));
-                
-                 actVO.setEstado(rs.getString(9));
-                 actVO.setDescripcion(rs.getString(10));
+
+                actVO.setEstado(rs.getString(9));
+                actVO.setDescripcion(rs.getString(10));
                 actVO.setDescuento(rs.getString(11));
                 actVO.setIdEmpresa(rs.getString(12));
                 actVO.setLugar(rs.getString(13));
                 actVO.setCategoria(rs.getString(14));
+                
+                actVO.setImage1(rs.getString(15));
+                actVO.setImage2(rs.getString(16));
+                actVO.setImage3(rs.getString(17));
+                actVO.setImage4(rs.getString(18));
 
                 arrEmpVO.add(actVO);
             }
 
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(rs!=null) rs.close();
-           
-        
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+
             return arrEmpVO;
 
         } catch (Exception e) {
@@ -152,7 +168,8 @@ public class ActividadDAO extends Conexion {
 
         return null;
     }
-    public boolean  actualizarCupos(String id, int cant){
+
+    public boolean actualizarCupos(String id, int cant) {
         try {
             pstm = conn.prepareStatement("UPDATE ACTIVIDAD SET cuposActividad=? where idActividad=?");
             pstm.setInt(1, cant);
@@ -161,23 +178,31 @@ public class ActividadDAO extends Conexion {
             return true;
         } catch (Exception e) {
             System.err.println(e.toString());
-        }finally{
+        } finally {
             try {
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(ts!=null) ts.close();
+                if (conn != null) {
+                    conn.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (ts != null) {
+                    ts.close();
+                }
             } catch (Exception e) {
             }
         }
         return false;
     }
-    public boolean realizaReserva(ActividadVO actividad, String nom,String apll, String email,
-            String doc, int cant, String user, String cal){
-        try{String idActiv = actividad.getId();
-                pstm = conn.prepareStatement("INSERT INTO RESERVA("
+
+    public boolean realizaReserva(ActividadVO actividad, String nom, String apll, String email,
+            String doc, int cant, String user, String cal) {
+        try {
+            String idActiv = actividad.getId();
+            pstm = conn.prepareStatement("INSERT INTO RESERVA("
                     + "nombreComprador, apellidoComprador,documentoComprador,"
-                        + "correoComprador, calificacion, fk_usuario, fk_actividad,"
-                        + "cantidadReservas, precioTotal)"
+                    + "correoComprador, calificacion, fk_usuario, fk_actividad,"
+                    + "cantidadReservas, precioTotal)"
                     + " value(?,?,?,?,?,?,?,?,?)");
             pstm.setString(1, nom);
             pstm.setString(2, apll);
@@ -187,42 +212,46 @@ public class ActividadDAO extends Conexion {
             pstm.setString(6, user);
             pstm.setString(7, idActiv);
             pstm.setInt(8, cant);
-            pstm.setDouble(9, cant*3);
+            pstm.setDouble(9, cant * 3);
             pstm.executeUpdate();
             pstm.close();
-           pstm = conn.prepareStatement("select cuposActividad from ACTIVIDAD where idActividad = ?");
-            
+            pstm = conn.prepareStatement("select cuposActividad from ACTIVIDAD where idActividad = ?");
+
             pstm.setString(1, idActiv);
             ts = pstm.executeQuery();
             if (ts.next()) {
-                cant = Integer.parseInt(ts.getString(1))-cant;
-            if (this.actualizarCupos(idActiv,cant)) {
-                return true;
+                cant = Integer.parseInt(ts.getString(1)) - cant;
+                if (this.actualizarCupos(idActiv, cant)) {
+                    return true;
+                }
+
             }
-                
-            }
-            
-            
-        }catch(Exception error)
-        {
-            System.out.println("error "+ error.toString());
-        }finally{
+
+        } catch (Exception error) {
+            System.out.println("error " + error.toString());
+        } finally {
             try {
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(ts!=null) ts.close();
+                if (conn != null) {
+                    conn.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (ts != null) {
+                    ts.close();
+                }
             } catch (Exception e) {
             }
         }
         return false;
     }
-    
+
     public static ActividadVO ListarDatos(String id) {
 
         ActividadVO actVO = new ActividadVO();
 
         try {
-   
+
             Connection conn = openConStatic();
             PreparedStatement pstm = conn.prepareStatement("SELECT "
                     + "*"
@@ -241,21 +270,30 @@ public class ActividadDAO extends Conexion {
                 actVO.setDuracion(rs.getString(5));
                 actVO.setCupos(rs.getString(6));
                 actVO.setPrecio(rs.getString(7));
-                
-                 actVO.setEstado(rs.getString(9));
-                 actVO.setDescripcion(rs.getString(10));
+
+                actVO.setEstado(rs.getString(9));
+                actVO.setDescripcion(rs.getString(10));
                 actVO.setDescuento(rs.getString(11));
                 actVO.setIdEmpresa(rs.getString(12));
                 actVO.setLugar(rs.getString(13));
                 actVO.setCategoria(rs.getString(14));
+                
+                actVO.setImage1(rs.getString(15));
+                actVO.setImage2(rs.getString(16));
+                actVO.setImage3(rs.getString(17));
+                actVO.setImage4(rs.getString(18));
             }
 
-            
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(rs!=null) rs.close();
-            
-        
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+
             return actVO;
 
         } catch (Exception e) {
@@ -265,4 +303,103 @@ public class ActividadDAO extends Conexion {
         return null;
     }
 
+    public static ArrayList<ActividadVO> ListarDatosNit(String id) {
+        ArrayList<ActividadVO> array = new ArrayList<>();
+        ActividadVO actVO = new ActividadVO();
+
+        try {
+
+            Connection conn = openConStatic();
+            PreparedStatement pstm = conn.prepareStatement("SELECT "
+                    + "idActividad"
+                    + " FROM ACTIVIDAD where fk_empresa = ? " );
+            pstm.setString(1, id);
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                actVO = new ActividadVO();
+
+                actVO.setId(rs.getString(1));
+
+                
+                array.add(actVO);
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+
+            return array;
+
+        } catch (Exception e) {
+            System.out.println("Error  " + e.toString());
+        }
+
+        return null;
+    }
+    public static ArrayList<ActividadVO> ListarDatosID(String id) {
+        ArrayList<ActividadVO> array = new ArrayList<>();
+        ActividadVO actVO = new ActividadVO();
+
+        try {
+
+            Connection conn = openConStatic();
+            PreparedStatement pstm = conn.prepareStatement("SELECT "
+                    + "*"
+                    + " FROM ACTIVIDAD where idActividad = ? " );
+            pstm.setString(1, id);
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                actVO = new ActividadVO();
+
+                actVO.setId(rs.getString(1));
+                actVO.setTitulo(rs.getString(2));
+                actVO.setFecha(rs.getString(3));
+                actVO.setHora(rs.getString(4));
+                actVO.setDuracion(rs.getString(5));
+                actVO.setCupos(rs.getString(6));
+                actVO.setPrecio(rs.getString(7));
+
+                actVO.setEstado(rs.getString(9));
+                actVO.setDescripcion(rs.getString(10));
+                actVO.setDescuento(rs.getString(11));
+                actVO.setIdEmpresa(rs.getString(12));
+                actVO.setLugar(rs.getString(13));
+                actVO.setCategoria(rs.getString(14));
+
+                actVO.setImage1(rs.getString(15));
+                actVO.setImage2(rs.getString(16));
+                actVO.setImage3(rs.getString(17));
+                actVO.setImage4(rs.getString(18));
+                
+                array.add(actVO);
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+
+            return array;
+
+        } catch (Exception e) {
+            System.out.println("Error  " + e.toString());
+        }
+
+        return null;
+    }
 }

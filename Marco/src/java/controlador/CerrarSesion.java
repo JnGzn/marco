@@ -35,20 +35,25 @@ public class CerrarSesion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession sesion = request.getSession();
+
+        try {
+            if (sesion.getAttribute("id") != null) {
+                sesion.removeAttribute("id");
+            }
+
+            if (sesion.getAttribute("nit") != null) {
+                sesion.removeAttribute("nit");
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
         sesion.invalidate();
         request.getRequestDispatcher("index.jsp").forward(request, response);
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Cache-Control", "no-store");
         response.setDateHeader("Expires", 0);
         response.setHeader("Pragma", "no-cache");
-
-        sesion.removeValue("id");
-        sesion.removeAttribute("id");
-        
-        sesion.removeValue("nit");
-        sesion.removeAttribute("nit");
-
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

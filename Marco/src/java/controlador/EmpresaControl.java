@@ -5,17 +5,22 @@
  */
 package controlador;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import modelo.dao.EmpresaDAO;
 import modelo.vo.EmpresaVO;
 import utility.Encripcion;
@@ -25,6 +30,7 @@ import utility.Encripcion;
  * @author APRENDIZ
  */
 @WebServlet(name = "NewServlet", urlPatterns = {"/Empresas"})
+@MultipartConfig
 public class EmpresaControl extends HttpServlet {
 
     /**
@@ -41,11 +47,10 @@ public class EmpresaControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-         int accion = Integer.parseInt(request.getParameter("accion"));
-        
-        
+        int accion = Integer.parseInt(request.getParameter("accion"));
+
         HttpSession sesio = request.getSession();
-       
+
         String idEmpresa = request.getParameter("idEmp");
         String nit = request.getParameter("nit");
         String pass = request.getParameter("pass");
@@ -54,7 +59,7 @@ public class EmpresaControl extends HttpServlet {
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(EmpresaControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String razonSocial = request.getParameter("nombre");
         String correoEmpresa = request.getParameter("correo");
 
@@ -64,9 +69,25 @@ public class EmpresaControl extends HttpServlet {
         switch (accion) {
 
             case 1:
+                String file = request.getParameter("nomLogo");
+                Part arc = request.getPart("imagen");
+
+                InputStream is = arc.getInputStream();
+
+                String base = "/home/jngzn/Escritorio/8-12/Marco/web/";
+                String ruta= "imagenes/logo-" + nit + "-" + file;;
+                File f = new File(base+ruta);
+                FileOutputStream ous = new FileOutputStream(f);
+                int dato = is.read();
+                while (dato != -1) {
+                    ous.write(dato);
+                    dato = is.read();
+                }
+                ous.close();
+                is.close();
                 if (empDAO.validaEmpresa(nit)) {
                     request.setAttribute("error", "EMPRESA ya existe");
-                } else if (empDAO.insertar()) {
+                } else if (empDAO.insertar(ruta)) {
                     request.setAttribute("error", "Registro exitoso");
                 } else {
                     request.setAttribute("error", "Registro errado");
@@ -92,8 +113,7 @@ public class EmpresaControl extends HttpServlet {
                 break;
             case 3:
                 nit = (String) sesio.getAttribute("nit");
-                
-                
+
                 if (empDAO.Actualizar(nit)) {
                     request.setAttribute("exito", "actualizado");
                 } else {

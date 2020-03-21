@@ -45,7 +45,9 @@ $(window).load(function () {
             reader.readAsDataURL(file);
         }
             
-        
+        $('#imagenLogo').change(function (e) {
+            addImage(e,1);
+        });
     });
 });
 

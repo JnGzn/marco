@@ -18,8 +18,11 @@ body {
   padding: 0;
   margin: 0;
   font-size: 14px;
+  
 }
-
+.upperHead{
+  background-color: #ffcc00;
+}
 /* line 9, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_common.scss */
 .message_submit_form:focus {
   outline: none;
@@ -2454,6 +2457,7 @@ ul {
 /**************** banner part css start ****************/
 /* line 2, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_banner.scss */
 .banner_part {
+  margin-top: 80px;
   position: relative;
   background-image: url(../img/banner_bg.jpg);
   background-repeat: no-repeat;
@@ -2533,7 +2537,9 @@ ul {
   background-size: contain;
   z-index: -1;
 }
-
+.p-tamano{
+  font-size: smaller;  
+}
 @media (max-width: 576px) {
   /* line 40, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_banner.scss */
   .banner_part .banner_text h1 {
