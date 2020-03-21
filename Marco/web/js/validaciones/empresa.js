@@ -89,10 +89,12 @@ $(function () {
                 cache: false,
                 processData: false,
                 success: function (result) {
-                    if (result) {
-                        console.log(result)
-                    } else {
-                       console.log(result)
+                    if (result == "true") {
+                        $("#errorActiv").text("registrado correctamente")
+                    } else if(result == "imagentrue"){
+                       $("#errorActiv").text("se publico pero no cargaron las imagenes")
+                    }else{
+                        $("#errorActiv").text("hubo un fallo *-*")
                     }
                 }
             });
