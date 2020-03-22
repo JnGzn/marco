@@ -2467,6 +2467,15 @@ ul {
   background-color: #ffcc00;
 }
 
+.banner_part2 {
+  margin-top: 80px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 1050px;
+}
+
 @media (max-width: 991px) {
   /* line 2, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_banner.scss */
   .banner_part {

@@ -71,41 +71,96 @@
 
 
         <h3>datos del comprador</h3>
-        <form action="Actividad" method="post" id="formReserva">
-            <input type="hidden" value="<%=id%>" name="acti">
-            <label>boletos</label>
-            <input type="number" name="ctxCupos" id="ctxCupos" value="1"><br>
+       
+<!--  reserva-->
+    <div class="my-5 card border-left-success shadow col-md-12">
+        <div class="card-body col-md-10 mx-auto">
+            <div class="row">
+                
+                
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success  mb-1 h5">Detalles</div>
+                </div>
+            </div>
+            <br><br>
+            
+            <form action="Actividad" method="post" id="formReserva">
+                
+                <input type="hidden" value="<%=id%>" name="acti">
+             
 
-            <label>nombre</label>
-            <input type="text" name="ctxNombres" value="<%=usuVO.getNombres()%>"><br>
-
-            <label>apellidos</label>
-            <input type="text" name="ctxApellidos" value="<%=usuVO.getApellidos()%>"><br>
-
-            <label>No. documento</label>
-            <input type="number" name="ctxDocumento" value="<%=usuVO.getDocumento()%>"><br>
-
-            <label>correo</label>
-            <input type="text" name="ctxCorreo" value="<%=usuVO.getCorreo()%>"><br>
-
-            <input type="hidden" name="ctxPrecioTotal" id="ctxPrecioTotal" value="<%= actiVO.getPrecio()%>"><br>
-            <input type="hidden" name="ctxIdUsuario" value="<%=idUsuario%>"><br>
-            <input type="hidden" name="ctxIdActividad" value="<%=id%>"><br>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="text-input">boletos</label>
+                    <div class="col-md-4">
+                        <input  class="form-control date" type="text" name="ctxCupos" id="ctxCupos" value="1" >
+                    </div>
+                    <label class="col-md-2 col-form-label" for="text-input">Precio a pagar:</label>
+                    <div class="col-md-4">
+              
+                        <input type="hidden" id="precioUnidad" value="<=% actiVO.getPrecio() %=>">
+                        <input  class="form-control date" id="resultado" type="text" id="ctxCupos" value="54312" disabled >
+                    </div>
+                </div>
 
 
-            <br>
 
-            <label>calificar</label>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="text-input">Nombres</label>
+                <div class="col-md-4">
+                    <input  class="form-control date" type="text" name="ctxNombres" value="<%=usuVO.getNombres()%>" >
+                </div>
+                <label class="col-md-2 col-form-label" for="text-input"> Apellidos</label>
+                
+                <div class="col-md-4">
+                    <input  class="form-control time" type="text" name="ctxApellidos" value="<%=usuVO.getApellidos()%>">
+                </div>
+            </div>
+              
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="text-input">No. Documento</label>
+                <div class="col-md-4">
+                    <input  class="form-control date" type="text" name="ctxDocumento" value="<%=usuVO.getDocumento()%>" >
+                </div>
+                <label class="col-md-2 col-form-label" for="text-input">Correo</label>
+                
+                <div class="col-md-4">
+                    <input  class="form-control time" type="email" name="ctxCorreo" value="<%=usuVO.getCorreo()%>">
+                </div>
+            </div>
+    
+               
+    
+                <input type="hidden" name="ctxPrecioTotal" id="ctxPrecioTotal" value="<%= actiVO.getPrecio()%>"><br>
+                <input type="hidden" name="ctxIdUsuario" value="<%=idUsuario%>"><br>
+                <input type="hidden" name="ctxIdActividad" value="<%=id%>"><br>
+    
+    
+                <br>
+    
 
-            <input type="number" name="ctxCalificacion" value="<%//calificacion%>"><br>
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="text-input">Calificar</label>
+                    <div class="col-md-4">
+                        <input  class="form-control date" type="text" name="ctxCalificacion" value="" >
+                    </div>
+                   
+                </div>
+
+               
+    
+                
+                <br>
+                <input class="btn btn-primary" type="submit" name="accion"value="enviar">
+                <p class="col-8 mx-auto text-danger" id="error"></p>
+            </form>
+            <button  class="btn" id="calcular">calcular</button>
 
             
-            <br>
-            <input type="submit" name="accion"value="enviar">
-            <p class="col-8 mx-auto text-danger" id="error"></p>
-            <label>precio <small id="resultado">0</small> </label>
-        </form>
-             <button  class="btn" id="calcular">calcular</button>
+        </div>
+        
+    </div>
+    <!-- fin reserva-->
 
         <%}}%>
         <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
