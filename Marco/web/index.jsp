@@ -119,7 +119,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    <a href="#" class="search_btn">Buscar</a>
+                                    <a href="USUARIO_ListarActividades.jsp" class="search_btn">Buscar</a>
                                 </div>
                             </div>
                         </form>

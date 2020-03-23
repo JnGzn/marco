@@ -52,19 +52,19 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Inicio</a>
+                                    <a class="nav-link" href="index.jsp">Inicio</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="Nosotros.html">Nosotros</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="Actividades.html">Actividades</a>
+                                    <a class="nav-link" href="USUARIO_ListarActividades.jsp">Actividades</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="Galeria.html">Galeria</a>
+                                    <a class="nav-link" href="Galeria.html">Galería</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contactenos</a>
+                                    <a class="nav-link" href="contact.html">Contáctenos</a>
                                 </li>
                             </ul>
                         </div>
