@@ -312,7 +312,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 <td>        <%=   actVo.getTitulo()%></td>
                 <td>        <%= actVo.getDescripcion()%></td>
                 <td> <%=  actVo.getPrecio()%> </td>
-                <td> <a href="USUARIO_Reserva.jsp?reservar=<%=  actVo.getId()%>" >reservar</a></td>
+                <td> <a href="USUARIO_VerActividad.jsp?actividad=<%=  actVo.getId()%>" >Ver mas</a></td>
 
             </tr>
             <%}%>

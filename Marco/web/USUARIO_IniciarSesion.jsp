@@ -26,7 +26,7 @@
 
 
 
-
+        <a class="btn btn-danger" href="EMPRESA_IniciarSesion.jsp">Soy empresa</a>
         <!---------------------------------------------------->
 
         <div class="container">
@@ -106,7 +106,7 @@
                                     <input type="hidden" name="accion" value="1">
                                     <p class="col-8 mx-auto text-danger" id="error"></p>
                                     <div class="group"> <input type="submit" class="button" value="Registrarse"> </div>
-
+                                </form>
                                     <div class="foot"> <label for="tab-1">Ya eres Miembro?</label> </div>
                                     <div class="hr"></div>
                             </div>

@@ -60,7 +60,7 @@ public class UsuarioDAO extends Conexion implements ICrud {
 
             pstm = conn.prepareStatement("INSERT INTO USUARIO(nombres,"
                     + "apellidos,fechaNacimiento,correoUsuario,"
-                    + "contraseñaUsuario,ROL_idRol) VALUES(?,?,date(?),?,?,1)");
+                    + "contraseñaUsuario,ROL_idRol,estado) VALUES(?,?,date(?),?,?,1,'activo')");
 
             pstm.setString(1, nombres);
             pstm.setString(2, apellidos);
@@ -134,7 +134,7 @@ public class UsuarioDAO extends Conexion implements ICrud {
         idUsuario = null;
         try {
             conn = openConexion();
-            pstm = conn.prepareStatement("selct idUsuario from usuario");
+            pstm = conn.prepareStatement("selct idUsuario,ROL_idRol from usuario");
             rs = pstm.executeQuery();
             if (operacion) {
                 idUsuario = rs.getString(1);
@@ -226,17 +226,40 @@ public class UsuarioDAO extends Conexion implements ICrud {
         return null;
     }
 
+    
+    public  String privilegios(String id){
+        String rol = "1";
+        try {
+            conn = openConexion();
+            pstm = conn.prepareStatement("SELECT ROL_idRol FROM "
+                    + "USUARIO WHERE idUsuario = ?");
+            pstm.setString(1, id);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                rol= rs.getString(1);
+            }
+            if(conn!= null) conn.close();
+            if(pstm!= null) pstm.close();
+            if(rs!= null) rs.close();
+        } catch (Exception e) {
+            System.err.println("error: "+e.toString());
+        }
+        return rol;
+    }
+    
+    
+    
     public String iniciarSesion(String correo, String pass) {
         try {
             idUsuario = null;
             Connection conn = openConexion();
             PreparedStatement pstm = conn.prepareStatement("SELECT idUsuario FROM "
-                    + "USUARIO WHERE correoUsuario= ? AND contraseñaUsuario = ?");
+                    + "USUARIO WHERE correoUsuario= ? AND contraseñaUsuario = ? AND estado='activo'");
             pstm.setString(1, correo);
             pstm.setString(2, pass);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                idUsuario = rs.getString(1);
+                idUsuario = rs.getString(1) ;
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());

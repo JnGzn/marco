@@ -24,6 +24,8 @@ public class ActividadVO {
     private String idEmpresa;
     private String lugar;
     private String categoria;
+    private String zona;
+    private String direccion;
     private String descuento;
 
     private String image1;
@@ -68,6 +70,24 @@ public class ActividadVO {
         this.descuento = descuento;
     }
 
+    public String getZona() {
+        return zona;
+    }
+
+    public void setZona(String zona) {
+        this.zona = zona;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    
+    
     
     public String getImage1() {
         return image1;

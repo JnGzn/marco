@@ -1,6 +1,7 @@
+const url = sessionStorage.getItem("url")
 
 $(function () {
-    
+
 
     $("#formLogin").validate({
         rules: {
@@ -29,9 +30,20 @@ $(function () {
                 if (res == "false") {
                     $("#pass").val("");
                     $("#err").text("usuario o contraseña erroneo");
-                }else
+                } else
                 {
-                    $(location).attr('href', "USUARIO_Perfil.jsp")
+                    if (url != null) {
+                        $(location).attr('href', url)
+
+                    } else {
+                        if (res == "admin") {
+
+                            $(location).attr('href', "ADMIN_index.jsp")
+                        } else {
+                            $(location).attr('href', "USUARIO_Perfil.jsp")
+
+                        }
+                    }
                 }
             })
         }
@@ -40,17 +52,17 @@ $(function () {
 
     $("#formSign").validate({
         rules: {
-            nombres:{
+            nombres: {
                 required: true,
                 minlength: 3,
                 maxlength: 20
             },
-            apellidos:{
+            apellidos: {
                 required: true,
                 minlength: 3,
                 maxlength: 20
             },
-            fechaNacimiento:{
+            fechaNacimiento: {
                 required: true,
                 minlength: 3,
                 maxlength: 20
@@ -75,46 +87,47 @@ $(function () {
         },
         messages: {
 
-            
         },
         submitHandler: function (form) {
             const data = $("#formSign").serialize();
-           
+
             $.post("Usuario", data, (res, est, que) => {
                 if (res == "false") {
                     $("#pass").val("");
                     $("#error").text("error 525");
-                }else if (res == "CORREO ya existe") {
+                } else if (res == "CORREO ya existe") {
                     $("#pass").val("");
-                }else{
-                    $("#error").text("registro exitoso"); 
-                    
+                } else {
+
+                    $("#error").text("registro exitoso");
+
+
                 }
             })
         }
     })
-    
-    
-    
-    
+
+
+
+
     $("#formReserva").validate({
         rules: {
-            ctxCupos:{
+            ctxCupos: {
                 required: true,
                 min: 1,
                 number: true
             },
-            ctxNombres:{
+            ctxNombres: {
                 required: true,
                 minlength: 3,
                 maxlength: 20
             },
-            ctxApellidos:{
+            ctxApellidos: {
                 required: true,
                 minlength: 3,
                 maxlength: 20
             },
-            ctxDocumento:{
+            ctxDocumento: {
                 required: true,
                 minlength: 3,
                 maxlength: 20,
@@ -135,24 +148,23 @@ $(function () {
                 max: 5,
                 number: true
             }
-           
+
         },
         messages: {
 
-            
         },
         submitHandler: function (form) {
             const data = $("#formReserva").serialize();
-           
-                console.log("weasd");
+
+            console.log("weasd");
             $.post("Actividad", data, (res, est, que) => {
                 if (res == "false") {
-                    
+
                     $("#error").text("hubo un error *_*");
-                
-                }else{
-                    $("#error").text("registro exitoso"); 
-                    
+
+                } else {
+                    $("#error").text("registro exitoso");
+
                 }
             })
         }

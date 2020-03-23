@@ -57,24 +57,22 @@ public class LugarControlador extends HttpServlet {
 
                 if (sitioDAO.AgregarRegistro(nit)) {
 
-                    request.setAttribute("exito", "El Lugar Fue Registrado Correctamente!");
+                response.getWriter().print("true");
                 } else {
-                    request.setAttribute("error", "El Lugar NO Fue Registrado Correctamente!");
+                    
+                    response.getWriter().print("false");
                 }
-                request.getRequestDispatcher("EMPRESA_RegistrarLugar.jsp").forward(request, response);
                 break;
 
             case 2: //Actualizar registro
 
                 if (sitioDAO.ActualizarRegistro()) {
 
-                    request.setAttribute("exito", "El Lugar Fue Actualizado Correctamente!");
+                 response.getWriter().print("true");
                 } else {
-                    request.setAttribute("error", "El Lugar NO Fue Actualizado Correctamente!");
+                    
+                    response.getWriter().print("false");
                 }
-                request.getRequestDispatcher("EMPRESA_RegistrarLugar.jsp").forward(request, response);
-                break;
-
         }
     }
 

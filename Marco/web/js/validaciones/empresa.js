@@ -4,7 +4,6 @@ $(function () {
 
     $("#formCrearReserva").validate({
         rules: {
-
             titulo: {
                 required: true,
                 minlength: 3,
@@ -62,27 +61,10 @@ $(function () {
             const data = $("#formCrearReserva").serialize();
 
 
-//            $.post("Actividad", data, (res, est, que) => {
-//
-//                if (res == "imagen") {
-//                    $("#error").text("actividad creanda <br> no se pudo cargan image");
-//                }
-//                if (res == "false") {
-//
-//                    $("#error").text("hubo un error *_*");
-//
-//                } else {
-//                    $("#error").text("registro exitoso");
-////                    $("#formCrearReserva").clearFields();
-//
-//                }
-//            })
-
-
 
             var formData = new FormData(document.getElementById("formCrearReserva"));
             $.ajax({
-                url:"Actividad",
+                url: "Actividad",
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -91,9 +73,9 @@ $(function () {
                 success: function (result) {
                     if (result == "true") {
                         $("#errorActiv").text("registrado correctamente")
-                    } else if(result == "imagentrue"){
-                       $("#errorActiv").text("se publico pero no cargaron las imagenes")
-                    }else{
+                    } else if (result == "imagentrue") {
+                        $("#errorActiv").text("se publico pero no cargaron las imagenes")
+                    } else {
                         $("#errorActiv").text("hubo un fallo *-*")
                     }
                 }
@@ -103,4 +85,76 @@ $(function () {
         }
     })
 
+
+
+    $("#formCategora").validate({
+        rules: {
+
+            nombres: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+        },
+        messages: {
+
+        },
+        submitHandler: function (form) {
+            const data = $("#formCategora").serialize();
+
+            $.post("Categoria", data, (res, est, que) => {
+                console.log("llega")
+                if (res == "false") {
+
+                    $("#errorCat").text("error *-*");
+
+                } else {
+
+                    $("#errorCat").text("registro exitoso");
+
+
+                }
+            })
+        }
+    })
+
+
+
+    $("#formLugar").validate({
+        rules: {
+            txtAddress: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            }, txtZone: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            }, txtQuantity: {
+                required: true,
+                number: true
+            },
+
+        },
+        messages: {
+
+        },
+        submitHandler: function (form) {
+            const data = $("#formLugar").serialize();
+
+            $.post("Lugar", data, (res, est, que) => {
+                console.log(res)
+                if (res == "false") {
+
+                    $("#errLugar").text("error *-*");
+
+                } else {
+
+                    $("#errLugar").text("registro exitosos");
+
+
+                }
+            })
+        }
+    })
 });

@@ -58,14 +58,17 @@ public class CategoriaControl extends HttpServlet {
 
             case 3:
                 if (clientesDAO.insertarCategoria(nit)) {
-                    request.setAttribute("exito", "Registro exitoso");
+                   
+                    response.getWriter().print("true");
                 } else {
-                    request.setAttribute("error", "Error al registrar");
+                    
+                    response.getWriter().print("false");
                 }
+
 
                 break;
         }
-        request.getRequestDispatcher("EMPRESA_AgregarCategoria.jsp").forward(request, response);
+      
 
     }
 }

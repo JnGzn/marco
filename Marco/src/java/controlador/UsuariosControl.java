@@ -81,7 +81,7 @@ public class UsuariosControl extends HttpServlet {
         String id = "0";
         switch (accion) {
 
-            case 1:
+            case 1: //registro
                 
                 if (usuarioDAO.validaUsuario(correo)) {
                     response.getWriter().print("CORREO ya existe");
@@ -96,7 +96,7 @@ public class UsuariosControl extends HttpServlet {
                 
 //                request.getRequestDispatcher("USUARIO_Registro.jsp").forward(request, response);
                 break;
-            case 2:
+            case 2: //inicio sesion
 
                 if (usuarioDAO.iniciarSesion(correo, pass) != null) {
 
@@ -104,9 +104,20 @@ public class UsuariosControl extends HttpServlet {
                     sesion = request.getSession(true);
                     //sesion.invalidate();
                     sesion.setAttribute("id", id);
-                    request.getRequestDispatcher("USUARIO_Perfil.jsp").forward(request, response);
+                    String privilegios = usuarioDAO.privilegios(id);
+                    if (privilegios.equals("1")) {
+                        
+                        request.getRequestDispatcher("USUARIO_Perfil.jsp").forward(request, response);
+                    }
+                    if(privilegios.equals("5")){
+                        response.getWriter().print("admin");   
+                               sesion = request.getSession(true);
+                    sesion.setAttribute("admin", privilegios);
+                        //request.getRequestDispatcher("ADMIN_index.jsp").forward(request, response);
+                    }
                 } else {
 //                    request.setAttribute("error", "Error usuario y o contrasena incorrecta");
+             
                     response.getWriter().print("false");
                 }
                 break;
@@ -121,7 +132,6 @@ public class UsuariosControl extends HttpServlet {
                 }
                 request.getRequestDispatcher("USUARIO_PerfilUsuario.jsp").forward(request, response);
                 break;
-
         }
 
     }

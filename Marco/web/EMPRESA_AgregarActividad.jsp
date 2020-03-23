@@ -67,22 +67,22 @@
 
 
 
-      
-    
-            <header class="main_menu home_menu upperHead pb-3">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-12">
-                            <nav class="navbar navbar-expand-lg navbar-light">
-                                <a class="navbar-brand" href="index.html">
-                                    <img src="img/logo.png" height="70px" alt="logo">
-                                </a>
-                                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+
+
+        <header class="main_menu home_menu upperHead pb-3">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="img/logo.png" height="70px" alt="logo">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="menu_icon"><i class="fas fa-bars"></i></span>
                             </button>
-                            
+
                             <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
@@ -103,16 +103,16 @@
                                 </ul>
                             </div>
                             <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar Sesión</a> 
-        
-        <!--                        <a class="btn_1 d-none d-lg-block border border-primary" data-toggle="modal"
-            data-target="#exampleModalScrollable">Iniciar Sesión</a>-->
-        
-    </nav>
-</div>
-</div>
-</div>
-</header>
-      
+
+                            <!--                        <a class="btn_1 d-none d-lg-block border border-primary" data-toggle="modal"
+                                data-target="#exampleModalScrollable">Iniciar Sesión</a>-->
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
 
 
         <br><br><br>
@@ -144,8 +144,8 @@
             %>
 
             <br>
-            
-            
+
+
             <div class=" row col-8 mx-auto">
                 <div class="col-3">
                     <img src="<%=  empVO.getLogo()%>" >
@@ -402,12 +402,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="Categoria" method="post">
+                        <form action="Categoria" method="post" id="formCategora">
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">nombre categoria</label>
-                                <input type="text" name="nombres"class="form-control" id="recipient-name">
+                                <input type="text" name="nombres"class="form-control" id="ctxNombre">
                             </div>
-
+                            <p id="errorCat" class="text-danger" ></p>
                     </div>
                     <div class="modal-footer">
                         <a  href="EMPRESA_AgregarActividad.jsp" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
@@ -434,30 +434,30 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">New Zona</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="Lugar">
+                        <form method="post" action="Lugar" id="formLugar">
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Direccion:</label>
-                                <input class="form-control" id="recipient-name" type="text" name="txtAddress">
+                                <input class="form-control" id="ctxDirecion" type="text" name="txtAddress">
                             </div>
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Zona:</label>
-                                <input class="form-control" id="recipient-name" type="text"name="txtZone">
+                                <input class="form-control" id="ctxZona" type="text"name="txtZone">
                             </div>
 
 
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Aforo</label>
-                                <input class="form-control" id="recipient-name"  type="number" name="txtQuantity">
+                                <input class="form-control" id="recipient-name" id="ctxAforo" type="number" name="txtQuantity">
                             </div>
-
+                            <p class="text-danger col-auto mx-auto" id="errLugar"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

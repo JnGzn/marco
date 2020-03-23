@@ -283,7 +283,22 @@ public class ActividadDAO extends Conexion {
                 actVO.setImage3(rs.getString(17));
                 actVO.setImage4(rs.getString(18));
             }
+            String query = 
+                    "SELECT  cat.tipoCategoria, lug.direccionLugar, lug.zonaLugar " +
+                    "FROM ACTIVIDAD as act " +
+                    "INNER JOIN CATEGORIA as cat on act.fk_categoria = cat.idCategoria " +
+                    "INNER JOIN LUGAR as lug on act.fk_lugar = lug.idLugar " +
+                    "WHERE idActividad=?";
+            pstm = conn.prepareStatement(query);
+            pstm.setString(1, id);
 
+             rs = pstm.executeQuery(); 
+             if (rs.next()) {
+             actVO.setCategoria(rs.getString(1));
+             actVO.setDireccion(rs.getString(2));
+             actVO.setZona(rs.getString(3));
+                
+            }
             if (conn != null) {
                 conn.close();
             }

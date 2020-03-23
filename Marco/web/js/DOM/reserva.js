@@ -1,6 +1,17 @@
+const act =  sessionStorage.getItem("actividad")
+
 function reservar() {
-    const container = document.getElementById("container");
-    const card = document.createElement("div");
-    card.setAttribute('class','card border-left-success mx-4 shadow col-md-8')
-    container.appendChild(card)
+    
+    const actividad = document.getElementById("actividad").value
+ sessionStorage.setItem('actividad', actividad);
+    
+    location=("USUARIO_Reserva.jsp?res="+act)
 }
+function iniciar() {
+    const url = location;
+    
+   
+    sessionStorage.setItem('url', url);
+    location="USUARIO_IniciarSesion.jsp"
+}
+

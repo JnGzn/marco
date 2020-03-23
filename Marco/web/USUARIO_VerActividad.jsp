@@ -1,3 +1,7 @@
+<%@page import="modelo.dao.EmpresaDAO"%>
+<%@page import="modelo.vo.EmpresaVO"%>
+<%@page import="modelo.vo.ActividadVO"%>
+<%@page import="modelo.dao.ActividadDAO"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,19 +50,19 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Inicio</a>
+                                    <a class="nav-link" href="index.jsp">Inicio</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="Nosotros.html">Nosotros</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="Actividades.html">Actividades</a>
+                                    <a class="nav-link" href="USUARIO_ListarActividades.jsp">Actividades</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="Galeria.html">Galer铆a</a>
+                                    <a class="nav-link" href="Galeria.html">Galer韆</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Cont谩ctenos</a>
+                                    <a class="nav-link" href="contact.html">Cont醕tenos</a>
                                 </li>
                             </ul>
                         </div>
@@ -72,6 +76,18 @@
         </header>
         
         <section class="banner_part2">
+            <%
+           String id = (String) request.getParameter("actividad");
+            if (id != null) {
+
+                ActividadDAO actiDAO = new ActividadDAO();
+                ActividadVO actiVO = actiDAO.ListarDatos(id);
+                if (actiVO.getId() != null) {
+                        
+                    
+                
+          %>
+          <input type="hidden" value="<%=id%>" id="actividad">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -80,13 +96,16 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img width="100%" height="440" class="d-block w-100" src="https://es.web.img3.acsta.net/pictures/16/03/03/14/09/379920.jpg" alt="First slide">
+            <img width="100%" height="440" class="d-block w-100" src="<%= actiVO.getImage1() %>" alt="First slide">
           </div>
           <div class="carousel-item">
-            <img width="100%" height="440" class="d-block w-100" src="https://img.discogs.com/qIzLO_9HaQNni0DdS-RMBAfgLsA=/600x246/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-220229-1478691882-3561.jpeg.jpg" alt="Second slide">
+            <img width="100%" height="440" class="d-block w-100" src="<%= actiVO.getImage2() %>" alt="Second slide">
           </div>
           <div class="carousel-item">
-              <img width="100%" height="440" class="d-block w-100" src="https://upload.wikimedia.org/wikipedia/en/6/63/213_-_The_Hard_Way.jpg" alt="Third slide">
+              <img width="100%" height="440" class="d-block w-100" src="<%= actiVO.getImage3() %>" alt="Third slide">
+          </div>
+          <div class="carousel-item">
+              <img width="100%" height="440" class="d-block w-100" src="<%= actiVO.getImage4() %>" alt="Third slide">
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -118,13 +137,13 @@
                         <div class="row">
                         <div class="col-md-8 ml-auto mr-auto">
                           <div class="brand">
-                            <h1>Teatro</h1>
-                            <h3>AtstraMaterial Design.</h3>
+                            <h1><%=  actiVO.getCategoria() %></h1>
+                            <h3> <%=  actiVO.getTitulo() %> </h3>
                           </div>
                         </div>
                         <div class="col-md-2S ml-auto mr-auto">
                             <br>
-                            <button type="button" class="btn btn-outline-primary" click="reservar()">Reservar</button>
+                            <button type="button" class="btn btn-outline-primary" onclick="reservar()">Reservar</button>
 
                         </div>
                       </div>
@@ -138,43 +157,43 @@
             <div class="col-12 row">
                     <label class="col-md-2" for="text-input">Fecha:</label>
                     <div class="col-md-4">
-                        <label class="h5 mb-0 font-weight-bold text-gray-800">10/20/11212</label>
+                        <label class="h5 mb-0 font-weight-bold text-gray-800"> <%= actiVO.getFecha() %> </label>
                     </div>
                     <label class="col-md-2" for="text-input">Precio:</label>
                     <div class="col-md-4">
-                        <label class="h5 mb-0 font-weight-bold text-gray-800">$215,000</label>
+                        <label class="h5 mb-0 font-weight-bold text-gray-800">$ <%= actiVO.getPrecio() %> </label>
                     </div>
             </div>
             <br>
             <div class="col-12 row">
                 <label class="col-md-2" for="text-input">Zona:</label>
                 <div class="col-md-4">
-                    <label class="h5 mb-0 font-weight-bold text-gray-800">Norte</label>
+                    <label class="h5 mb-0 font-weight-bold text-gray-800"> <%= actiVO.getZona()%> </label>
 
                 </div>
                 <label class="col-md-2" for="text-input">Direccion:</label>
 
                 <div class="col-md-4">
-                    <label class="h5 mb-0 font-weight-bold text-gray-800">cll 12 #12-12</label>
+                    <label class="h5 mb-0 font-weight-bold text-gray-800"> <%= actiVO.getDireccion()%> </label>
                 </div>
             </div>
             <br>
             <div class="col-12 row">
-                <label class="col-md-2" for="text-input">Duraci贸n estimada:</label>
+                <label class="col-md-2" for="text-input">Hora estimada:</label>
                 <div class="col-md-4">
-                    <label class="h5 mb-0 font-weight-bold text-gray-800">14:00</label>
+                    <label class="h5 mb-0 font-weight-bold text-gray-800"> <%= actiVO.getHora()%> </label>
                 </div>
-                <label class="col-md-2" for="text-input">Duraci贸n estimada:</label>
+                <label class="col-md-2" for="text-input">Duracion estimada:</label>
                 <div class="col-md-4">
-                    <label class="h5 mb-0 font-weight-bold text-gray-800">2 h</label>
+                    <label class="h5 mb-0 font-weight-bold text-gray-800"><%= actiVO.getDuracion() %> h</label>
                 </div>
             </div>
             <br>
             <div class="col-12 row">
-                <label class="col-md-2" for="text-input">Descripci贸n:</label>
+                <label class="col-md-2" for="text-input">Descripcion:</label>
                 <div class="col-md-8">
                     <label class="text-justify mb-0 font-weight-bold text-gray-800">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        <%= actiVO.getDescripcion() %>
                     </label>
                 </div>
             </div>
@@ -192,18 +211,21 @@
             </div>
             <hr>
             
-
+<%
+    EmpresaDAO empDAO = new EmpresaDAO();
+    EmpresaVO emp = empDAO.ListarDatos(actiVO.getIdEmpresa()) ;
+%>
             <div class="form-group row mx-auto">
-                <label class="col-md-9 col-form-label" for="text-input">REazon socal</label>
+                <label class="col-md-9 col-form-label" for="text-input">  <%= emp.getRazonSocial() %> </label>
                 
             </div>
             <div class="form-group row"  >
                 <div class="col-md-10 mx-auto" >
-                    <img src="" height="80" width="100%" alt="">
+                    <img src="<%= emp.getLogo()%>" height="100" width="100%" alt="">
                 </div>
             </div>
             <div class="form-group row"  >
-                <label class="col-md-9 col-form-label" for="text-input">calificaci贸n</label>
+                <label class="col-md-9 col-form-label" for="text-input">calificacio硁</label>
                 <div class="col-md-10 mx-auto" >
                     <img src="img/icon/estrella.png" width="20" alt="">
                     <img src="img/icon/estrella.png" width="20" alt="">
@@ -219,6 +241,12 @@
 
     <br><br>
 </div>
+    <%}else{%>
+    <a href="USUARIO_ListarActividades.jsp"> ver actividades </a>
+    <%}}else{
+request.getRequestDispatcher("USUARIO_ListarActividades.jsp").forward(request, response);
+}
+    %>
 </section>
     <script type="text/javascript" src="js/DOM/reserva.js"></script>
 
