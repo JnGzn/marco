@@ -11,7 +11,7 @@
 <%@page import="modelo.vo.ActividadVO"%>
 <%@page import="modelo.dao.ActividadDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% response.setHeader("Pragma", "no-cache");%>
+<% %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -75,7 +75,24 @@
                                 </li>
                             </ul>
                             </div>
-                            <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar SesiÃ³n</a> 
+                          <%    
+                              HttpSession sesion = request.getSession();
+            Object sesionn = sesion.getAttribute("id");
+            
+            if (sesionn == null) {
+               %>
+               
+               
+               <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar Sesión</a> 
+                
+               <%
+            }else {
+                %>
+                
+                <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_Perfil.jsp">ver perfil</a>
+                
+                <%
+            }%>
                             <!--                        <a class="btn_1 d-none d-lg-block border border-primary" data-toggle="modal"
                                 data-target="#exampleModalScrollable">Iniciar SesiÃ³n</a>-->
                         </nav>
@@ -90,8 +107,8 @@
             <%
 
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
-                HttpSession sesion = request.getSession();
-                Object sesionn = sesion.getAttribute("id");
+                sesion = request.getSession();
+               sesionn = sesion.getAttribute("id");
 
                 if (sesionn == null) {
             %>

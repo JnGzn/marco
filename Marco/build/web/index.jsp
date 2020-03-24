@@ -68,18 +68,18 @@
                         </div>
                         <%
                          
-            HttpSession sesion = request.getSession();
-            Object sesionn = sesion.getAttribute("id");
-            
-            if (sesionn == null) {
-               %>
-                <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar Sesión</a> 
-                <%
-            }else {
-                %>
-                <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_Perfil.jsp">ver perfil</a>
-                <%
-            }%>
+                HttpSession sesion = request.getSession();
+                Object sesionn = sesion.getAttribute("id");
+
+                if (sesionn == null) {
+                   %>
+                    <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar Sesión</a> 
+                    <%
+                }else {
+                    %>
+                    <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_Perfil.jsp">ver perfil</a>
+                    <%
+                }%>
 
 <!--                        <a class="btn_1 d-none d-lg-block border border-primary" data-toggle="modal"
                             data-target="#exampleModalScrollable">Iniciar Sesión</a>-->
