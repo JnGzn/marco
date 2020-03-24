@@ -49,11 +49,11 @@ public class CerrarSesion extends HttpServlet {
             System.err.println(e.toString());
         }
         sesion.invalidate();
-        request.getRequestDispatcher("index.jsp").forward(request, response);
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Cache-Control", "no-store");
         response.setDateHeader("Expires", 0);
         response.setHeader("Pragma", "no-cache");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

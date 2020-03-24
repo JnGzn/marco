@@ -4,11 +4,14 @@
     Author     : jngzn
 --%>
 
+
+
 <%@page import="modelo.dao.UsuarioDAO"%>
 <%@page import="modelo.vo.UsuarioVO"%>
 <%@page import="modelo.vo.ActividadVO"%>
 <%@page import="modelo.dao.ActividadDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% response.setHeader("Pragma", "no-cache");%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -187,7 +190,7 @@
                             <div class="form-group row">
                                 <label class="col-md-2 col-form-label" for="text-input">Calificar</label>
                                 <div class="col-md-4">
-                                    <input  class="form-control date" type="text" name="ctxCalificacion" value="" >
+                                    <input  class="form-control" type="text" name="ctxCalificacion" value="" >
                                 </div>
 
                             </div>
