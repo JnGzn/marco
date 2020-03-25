@@ -1,0 +1,87 @@
+body{
+  background: #ffcc00
+}
+
+/* line 353, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_elements.scss */
+.progress-table-wrap {
+  overflow-x: scroll;
+}
+
+.progress-table {
+  background: #f9f9ff;
+  padding: 15px 0px 30px 0px;
+  min-width: 800px;
+}
+
+.progress-table .titulo {
+  width: 16.66%;
+  padding-left: 30px;
+}
+/*.progress-table .description {
+  width: 16.66%;
+}*/
+
+/* line 365, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_elements.scss */
+.progress-table .country {
+  width: 16.66%;
+}
+
+/* line 368, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_elements.scss */
+.progress-table .visit {
+  width: 16.66%;
+}
+
+/* line 371, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_elements.scss */
+.progress-table .img {
+  width: 33.12%;
+  padding-right: 50px;
+}
+
+.progress-table .reserva {
+  width: 16.66%;
+}
+
+
+/* line 375, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_elements.scss */
+.progress-table .table-head {
+  display: flex;
+}
+
+/* line 377, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_elements.scss */
+.progress-table .table-head .titulo,
+.progress-table .table-head .description, 
+.progress-table .table-head .country,
+.progress-table .table-head .visit,
+.progress-table .table-head .img,
+.progress-table .table-head .reserva  {
+  color: #415094;
+  line-height: 40px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* line 387, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_elements.scss */
+.progress-table .table-row {
+  padding: 15px 0;
+  border-top: 1px solid #edf3fd;
+  display: flex;
+}
+
+/* line 391, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_elements.scss */
+.progress-table .table-row .serial,
+.progress-table .table-head .titulo,
+.progress-table .table-head .description,
+.progress-table .table-row .country,
+.progress-table .table-row .visit,
+.progress-table .table-row .img, 
+.progress-table .table-head .reserva{
+  display: flex;
+  align-items: center;
+}
+
+/* line 399, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_elements.scss */
+.progress-table .table-row .country img {
+  margin-right: 15px;
+}
+
+/* line 404, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_elements.scss */

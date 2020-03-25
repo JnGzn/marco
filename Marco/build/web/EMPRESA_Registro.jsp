@@ -11,9 +11,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Empresas</title>
     </head>
-    <body>
+    <body> 
         <h1>agregar EMPRESA</h1>
-        <form method="post" action="Empresas" enctype="multipart/form-data" >
+        <form method="post" action="Empresas" enctype="multipart/form-data" id="Empresa">
             <table>
                  <tr>
                     <td>Nit:</td>
@@ -48,7 +48,7 @@
             </table>
             <a href="EMPRESA_IniciarSesion.jsp">inicia sesion</a> 
         </form>
-
+        <p id="errorActiv"></p>
         <%if (request.getAttribute("exito") != null) {%>
         ${exito}
         <%} else {%>
@@ -58,5 +58,6 @@
  <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.validate.min.js"></script>
         <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
+        <script src="js/validaciones/empresa.js" type="text/javascript"></script>
     </body>
 </html>

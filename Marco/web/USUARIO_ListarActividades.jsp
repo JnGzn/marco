@@ -305,7 +305,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
              
             <% ActividadDAO actDAO = new ActividadDAO();
 
-                for (ActividadVO actVo : actDAO.ListarDatos()) {%>
+                for (ActividadVO actVo2 : actDAO.ListarDatos()) {%>
+                ds
+               <%
+                     ActividadVO actVo = actDAO.ListarDatos(actVo2.getId());
+            %>
 
             <tr>
                 <td>      <img src="<%=   actVo.getImage1()%>" width="70" height="50"> </td>

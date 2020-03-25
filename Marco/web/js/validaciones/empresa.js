@@ -1,6 +1,64 @@
 
 
 $(function () {
+    
+    $("#Empresa").validate({
+        rules: {
+            nit: {
+                required: true,
+                minlength: 3,
+                number: true
+            },
+            nombre: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            correo: {
+                required: true,
+                email: true
+            },
+            pass: {
+                required: true,
+                minlength: 8,
+                maxlength: 20,
+                number: true
+            }
+
+        },
+        messages: {
+
+        },
+        submitHandler: function (form) {
+            const data = $("#Empresa").serialize();
+
+
+
+            var formData = new FormData(document.getElementById("Empresa"));
+            $.ajax({
+                url: "Empresas",
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (result) {
+                    console.log(result)
+                    if (result == "true") {
+                        $("#errorActiv").text("registrado correctamente")
+                    } else if (result == "existe") {
+                        $("#errorActiv").text("nit ya existente")
+                    } else {
+                        $("#errorActiv").text("hubo un fallo *-*")
+                    }
+                }
+            });
+
+
+        }
+    })
+    
+    
 
     $("#formCrearReserva").validate({
         rules: {
@@ -60,7 +118,7 @@ $(function () {
         submitHandler: function (form) {
             const data = $("#formCrearReserva").serialize();
 
-
+console.log("aca vamos")
 
             var formData = new FormData(document.getElementById("formCrearReserva"));
             $.ajax({
@@ -76,7 +134,7 @@ $(function () {
                     } else if (result == "imagentrue") {
                         $("#errorActiv").text("se publico pero no cargaron las imagenes")
                     } else {
-                        $("#errorActiv").text("hubo un fallo *-*")
+                        $("#errorActiv").text("hubo un fallo *--*")
                     }
                 }
             });

@@ -86,7 +86,7 @@
             </div>
         </header>
         
-        <section class="banner_part2">
+        <section class="banner_part">
             <%
            String id = (String) request.getParameter("actividad");
             if (id != null) {
@@ -253,6 +253,7 @@
     <br><br>
 </div>
     <%}else{%>
+    
     <a href="USUARIO_ListarActividades.jsp"> ver actividades </a>
     <%}}else{
 request.getRequestDispatcher("USUARIO_ListarActividades.jsp").forward(request, response);

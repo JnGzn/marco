@@ -67,32 +67,49 @@ public class EmpresaControl extends HttpServlet {
         EmpresaDAO empDAO = new EmpresaDAO(empVO);
 
         switch (accion) {
-
             case 1:
-                String file = request.getParameter("nomLogo");
-                Part arc = request.getPart("imagen");
+            String ruta = "";
+                try {
+                    String file = request.getParameter("nomLogo");
+                    Part arc = request.getPart("imagen");
 
-                InputStream is = arc.getInputStream();
+                    InputStream is = arc.getInputStream();
 
-                String base = "/home/jngzn/Escritorio/8-12/Marco/web/";
-                String ruta= "imagenes/logo-" + nit + "-" + file;;
-                File f = new File(base+ruta);
-                FileOutputStream ous = new FileOutputStream(f);
-                int dato = is.read();
-                while (dato != -1) {
-                    ous.write(dato);
-                    dato = is.read();
+                    String base = "/home/jngzn/Escritorio/8-12/Marco/web/";
+                    ruta = "imagenes/logo-" + nit + "-" + file;
+//
+                    File f = new File(base + ruta);
+                    FileOutputStream ous = new FileOutputStream(f);
+                    int dato = is.read();
+                    while (dato != -1) {
+                        ous.write(dato);
+                        dato = is.read();
+                    }
+                    ous.close();
+                    is.close();
+                } catch (Exception e) {
+                    System.out.println("error: " + e.toString());
+                    response.getWriter().print("imagen");
                 }
-                ous.close();
-                is.close();
+
+                System.out.println("1");
+
                 if (empDAO.validaEmpresa(nit)) {
                     request.setAttribute("error", "EMPRESA ya existe");
+                    response.getWriter().print("existe");
+                    System.out.println("1");
+
                 } else if (empDAO.insertar(ruta)) {
                     request.setAttribute("error", "Registro exitoso");
+                    response.getWriter().print("true");
+                    System.out.println("1");
+
                 } else {
+                    response.getWriter().print("false");
+                    System.out.println("1");
                     request.setAttribute("error", "Registro errado");
                 }
-                request.getRequestDispatcher("EMPRESA_Registro.jsp").forward(request, response);
+                //  request.getRequestDispatcher("EMPRESA_Registro.jsp").forward(request, response);
                 break;
             case 2:
                 if (empDAO.iniciarSesion(correoEmpresa, pass) != null) {

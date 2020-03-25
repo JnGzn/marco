@@ -119,34 +119,16 @@ public class ActividadDAO extends Conexion {
         try {
             Connection conn = openConStatic();
             PreparedStatement pstm = conn.prepareStatement("SELECT "
-                    + "*"
+                    + "idActividad"
                     + " FROM ACTIVIDAD");
 
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                actVO = new ActividadVO(rs.getString(15), rs.getString(16), rs.getString(17), rs.getString(18));
+                actVO = new ActividadVO();
 
                 actVO.setId(rs.getString(1));
-                actVO.setTitulo(rs.getString(2));
-                actVO.setFecha(rs.getString(3));
-                actVO.setHora(rs.getString(4));
-                actVO.setDuracion(rs.getString(5));
-                actVO.setCupos(rs.getString(6));
-                actVO.setPrecio(rs.getString(7));
-
-                actVO.setEstado(rs.getString(9));
-                actVO.setDescripcion(rs.getString(10));
-                actVO.setDescuento(rs.getString(11));
-                actVO.setIdEmpresa(rs.getString(12));
-                actVO.setLugar(rs.getString(13));
-                actVO.setCategoria(rs.getString(14));
-                
-                actVO.setImage1(rs.getString(15));
-                actVO.setImage2(rs.getString(16));
-                actVO.setImage3(rs.getString(17));
-                actVO.setImage4(rs.getString(18));
-
+               
                 arrEmpVO.add(actVO);
             }
 
@@ -168,6 +150,7 @@ public class ActividadDAO extends Conexion {
 
         return null;
     }
+
 
     public boolean actualizarCupos(String id, int cant) {
         try {
@@ -247,7 +230,6 @@ public class ActividadDAO extends Conexion {
     }
 
     public static ActividadVO ListarDatos(String id) {
-
         ActividadVO actVO = new ActividadVO();
 
         try {
@@ -277,27 +259,27 @@ public class ActividadDAO extends Conexion {
                 actVO.setIdEmpresa(rs.getString(12));
                 actVO.setLugar(rs.getString(13));
                 actVO.setCategoria(rs.getString(14));
-                
+
                 actVO.setImage1(rs.getString(15));
                 actVO.setImage2(rs.getString(16));
                 actVO.setImage3(rs.getString(17));
                 actVO.setImage4(rs.getString(18));
             }
-            String query = 
-                    "SELECT  cat.tipoCategoria, lug.direccionLugar, lug.zonaLugar " +
-                    "FROM ACTIVIDAD as act " +
-                    "INNER JOIN CATEGORIA as cat on act.fk_categoria = cat.idCategoria " +
-                    "INNER JOIN LUGAR as lug on act.fk_lugar = lug.idLugar " +
-                    "WHERE idActividad=?";
+            String query
+                    = "SELECT  cat.tipoCategoria, lug.direccionLugar, lug.zonaLugar "
+                    + "FROM ACTIVIDAD as act "
+                    + "INNER JOIN CATEGORIA as cat on act.fk_categoria = cat.idCategoria "
+                    + "INNER JOIN LUGAR as lug on act.fk_lugar = lug.idLugar "
+                    + "WHERE idActividad=?";
             pstm = conn.prepareStatement(query);
             pstm.setString(1, id);
 
-             rs = pstm.executeQuery(); 
-             if (rs.next()) {
-             actVO.setCategoria(rs.getString(1));
-             actVO.setDireccion(rs.getString(2));
-             actVO.setZona(rs.getString(3));
-                
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                actVO.setCategoria(rs.getString(1));
+                actVO.setDireccion(rs.getString(2));
+                actVO.setZona(rs.getString(3));
+
             }
             if (conn != null) {
                 conn.close();
@@ -327,7 +309,7 @@ public class ActividadDAO extends Conexion {
             Connection conn = openConStatic();
             PreparedStatement pstm = conn.prepareStatement("SELECT "
                     + "idActividad"
-                    + " FROM ACTIVIDAD where fk_empresa = ? " );
+                    + " FROM ACTIVIDAD where fk_empresa = ? ");
             pstm.setString(1, id);
 
             ResultSet rs = pstm.executeQuery();
@@ -337,7 +319,6 @@ public class ActividadDAO extends Conexion {
 
                 actVO.setId(rs.getString(1));
 
-                
                 array.add(actVO);
             }
 
@@ -359,6 +340,7 @@ public class ActividadDAO extends Conexion {
 
         return null;
     }
+
     public static ArrayList<ActividadVO> ListarDatosID(String id) {
         ArrayList<ActividadVO> array = new ArrayList<>();
         ActividadVO actVO = new ActividadVO();
@@ -368,7 +350,7 @@ public class ActividadDAO extends Conexion {
             Connection conn = openConStatic();
             PreparedStatement pstm = conn.prepareStatement("SELECT "
                     + "*"
-                    + " FROM ACTIVIDAD where idActividad = ? " );
+                    + " FROM ACTIVIDAD where idActividad = ? ");
             pstm.setString(1, id);
 
             ResultSet rs = pstm.executeQuery();
@@ -395,7 +377,7 @@ public class ActividadDAO extends Conexion {
                 actVO.setImage2(rs.getString(16));
                 actVO.setImage3(rs.getString(17));
                 actVO.setImage4(rs.getString(18));
-                
+
                 array.add(actVO);
             }
 
