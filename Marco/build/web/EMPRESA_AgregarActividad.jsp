@@ -85,22 +85,22 @@
 
                             <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                                 <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.jsp">Inicio</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="Nosotros.html">Nosotros</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="USUARIO_ListarActividades.jsp">Actividades</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="Galeria.html">Galería</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contáctenos</a>
-                                </li>
-                            </ul>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="index.jsp">Inicio</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="Nosotros.html">Nosotros</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="USUARIO_ListarActividades.jsp">Actividades</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="Galeria.html">Galería</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="contact.html">Contáctenos</a>
+                                    </li>
+                                </ul>
                             </div>
                             <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar Sesión</a> 
 
@@ -191,7 +191,7 @@
                     </div>
                 </div>
 
-                <div class="card border-left-success shadow col-md-10">
+                <div class="card border-left-success shadow col-md-10" id="div1">
                     <div class="card-body col-md-10 mx-auto">
                         <div class="row">
 
@@ -202,50 +202,124 @@
                         </div>
 
                         <br><br>
-                        <div class="form-group row">
-                            <div class="col-md-2">
+                        <div class="form-group row" >
+                            <div class="col-md-3">
                                 <input class="btn" name="imagen1"  id="imagen1" type="file" />
                             </div>
-                            <div class="col-md-4">
-                                <img id="imgSalida1" width="100%" height="140" src="" />
+                            <div class="col-md-8">
+                                <img id="imgSalida1" width="100%" height="300" src="" />
 
                             </div>
 
-                            <div class="col-md-2">
-                                <input class="btn" name="imagen2"  id="imagen2" type="file" />
-                            </div>
-                            <div class="col-md-4">
-                                <img id="imgSalida2" width="100%" height="140" src="" />
-
-                            </div>
                         </div>
 
-
-                        <div class="form-group row">
-                            <div class="col-md-2 ">
-                                <input class="btn" name="imagen3"  id="imagen3" type="file" >
-                            </div>
-                            <div class="col-md-4">
-                                <img id="imgSalida3" width="100%" height="140" src="" />
-
-                            </div>
-
-                            <div class="col-md-2">
-                                <input class="btn" name="imagen4"  id="imagen4" type="file" />
-                            </div>
-                            <div class="col-md-4">
-                                <img id="imgSalida4" width="100%" height="140" src="" />
-
-                            </div>
-                        </div>
-
-
+                        <button class="btn btn-primary" onclick="carga()">Quiero agregar otra foto</button>
+                        <p>1/4</p>
                     </div>
                 </div>
 
+                <div class="card border-left-success shadow col-md-10" id="div2" hidden>
+                    <div class="card-body col-md-10 mx-auto">
+                        <div class="row">
 
 
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success  mb-1 h5">Bien, escoge otra</div>
+                            </div>
+                        </div>
 
+                        <br><br>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <input class="btn" name="imagen2"  id="imagen2" type="file" />
+                            </div>
+                            <div class="col-md-8">
+                                <img id="imgSalida2" width="100%" height="300" src="" />
+
+                            </div>
+
+                        </div>
+
+
+                        <button class="btn btn-primary" onclick="carga()">Quiero agregar otra foto</button>
+                        <p>2/4</p>
+                    </div>
+                </div>
+
+                <div class="card border-left-success shadow col-md-10" id="div3" hidden>
+                    <div class="card-body col-md-10 mx-auto">
+                        <div class="row">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success  mb-1 h5">Bien, escoge otra</div>
+                            </div>
+                        </div>
+
+                        <br><br>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <input class="btn" name="imagen3"  id="imagen3" type="file" />
+                            </div>
+                            <div class="col-md-8">
+                                <img id="imgSalida3" width="100%" height="300" src="" />
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="carga()">Quiero agregar otra foto</button>
+                        <p>3/4</p>
+                    </div>
+                </div>
+                <div class="card border-left-success shadow col-md-10" id="div4" hidden>
+                    <div class="card-body col-md-10 mx-auto">
+                        <div class="row">
+
+
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success  mb-1 h5">Bien, escoge otra</div>
+                            </div>
+                        </div>
+
+                        <br><br>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <input class="btn" name="imagen4"  id="imagen4" type="file" />
+                            </div>
+                            <div class="col-md-8">
+                                <img id="imgSalida4" width="100%" height="300" src="" />
+
+                            </div>
+
+                            <!--                            <div class="col-md-2">
+                                                            <input class="btn" name="imagen2"  id="imagen2" type="file" />
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <img id="imgSalida2" width="100%" height="140" src="" />
+                            
+                                                        </div>-->
+                        </div>
+
+
+                        <!--                        <div class="form-group row">
+                                                    <div class="col-md-2 ">
+                                                        <input class="btn" name="imagen3"  id="imagen3" type="file" >
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <img id="imgSalida3" width="100%" height="140" src="" />
+                        
+                                                    </div>
+                        
+                                                    <div class="col-md-2">
+                                                        <input class="btn" name="imagen4"  id="imagen4" type="file" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <img id="imgSalida4" width="100%" height="140" src="" />
+                        
+                                                    </div>
+                                                </div>-->
+
+
+                        <p>4/4</p>
+                    </div>
+                </div>
 
                 <div class="card border-left-success shadow col-md-10">
                     <div class="card-body col-md-10 mx-auto">
@@ -479,6 +553,7 @@
         <script type="text/javascript" src="js/jquery.validate.min.js"></script>
         <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
         <script src="js/validaciones/empresa.js" type="text/javascript"></script>
+        <script src="js/DOM/reserva.js" type="text/javascript"></script>
 
         <% }%>
     </body>

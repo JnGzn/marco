@@ -113,10 +113,10 @@
                             <tr>
                                 
                                 <td>
-                                    <img id="imgSalida2" width="70" height="50" src="<%= empVO.getLogo()%>" />
+                                    <img id="imgSalida2" width="70" height="50" src="" />
 
                                 </td>
-                                <td>fdsdfsdfdsfddddddddddddddddddddddddddddddddfd</td>
+                                <td>fds</td>
                                 <td>$4654</td>
                                 <td>4</td>
                                 <td><a href="">ver</a></td>
