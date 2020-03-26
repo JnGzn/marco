@@ -128,7 +128,7 @@ public class ActividadDAO extends Conexion {
                 actVO = new ActividadVO();
 
                 actVO.setId(rs.getString(1));
-               
+
                 arrEmpVO.add(actVO);
             }
 
@@ -150,7 +150,6 @@ public class ActividadDAO extends Conexion {
 
         return null;
     }
-
 
     public boolean actualizarCupos(String id, int cant) {
         try {
@@ -395,6 +394,55 @@ public class ActividadDAO extends Conexion {
 
         } catch (Exception e) {
             System.out.println("Error  " + e.toString());
+        }
+
+        return null;
+    }
+
+    public static ArrayList<ActividadVO> Filtar(String palabra) {
+        if (palabra != null) {
+            System.out.println("palabra " + palabra);
+        } else {
+
+            palabra = "a";
+        }
+        ArrayList<ActividadVO> array = new ArrayList<>();
+        ActividadVO actVO = new ActividadVO();
+
+        try {
+
+            Connection conn = openConStatic();
+            PreparedStatement pstm = conn.prepareStatement("SELECT "
+                    + "idActividad"
+                    + " FROM ACTIVIDAD "
+                    + "where UPPER(tituloActividad) LIKE UPPER('%" + palabra + "%') "
+                    + "or UPPER(descripcion) LIKE UPPER('%" + palabra + "%')");
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                
+                actVO = new ActividadVO();
+
+                actVO.setId(rs.getString(1));
+
+                array.add(actVO);
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            System.out.println("a "+array.size());
+            return array;
+
+        } catch (Exception e) {
+            System.out.println("ErrorPuto  " + e.toString());
         }
 
         return null;

@@ -76,34 +76,33 @@
                 <div class="row align-items-center">
                     <div class="col-lg-12">
                         <div class="search_form">
-                            <form action="#">
-                                <div class="form-row">
+                            <form>
+                                
+                                            <form method="POST">
                                     <div class="col-lg-9">
                                         <div class="search_form_iner">
-
-                                            <input  class="custom_select form-control col-12"  type="text" placeholder="Ingresa palabra clave">
+                                            <input  class="custom_select form-control col-12" name="busc" type="text" placeholder="Ingresa palabra clave">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <a href="#" class="search_btn">Buscar</a>
+                                        <button type="submit" class="search_btn" id="busqueda">Buscar</button>
                                     </div>
+                                            
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-
-        <section>
-
-            <div class="container my-auto" style="padding-top:40px; background: blue all;">
+            <hr>
+            <hr>
+            <div class="container" style="padding-top:40px; background: blue all;">
 
                 <div class="section">
                     <div class="row align-items-center">
                         <h3 class="mb-30">Resultados de la busqueda</h3>
-                        <div class="progress-table-wrap col-12">
+
+                        <div class="progress-table-wrap col-12" id="inicio">
                             <div class="progress-table col-12">
                                 <div class="table-head col-12">
                                     <div class=" col-3">Titulo</div>
@@ -125,7 +124,35 @@
 
                                 </div>
                                 <%}%>
-                             
+
+
+                            </div>
+                        </div>
+
+                                <div class="progress-table-wrap col-12" id="busqu" hidden>
+                                    <button class="btn btn-outline-info" id="limpiar">Limpiar filtro</button>
+                            <div class="progress-table col-12">
+                                <div class="table-head col-12">
+                                    <div class=" col-3">Titulossss</div>
+                                    <div class=" col-2">Zona</div>
+                                    <div class=" col-3">cupos</div>
+                                    <div class=" col-3">Imagen</div>
+                                    <div class=" col-2">Reservar</div>
+                                </div>
+                                <%  actDAO = new ActividadDAO();
+
+                                    for (ActividadVO actVo2 : actDAO.Filtar(request.getParameter("busc"))) {
+                                        ActividadVO actVo = actDAO.ListarDatos(actVo2.getId());%>
+                                <div class="table-row col-12">
+                                    <div class=" col-3">  <%=   actVo.getTitulo()%></div>
+                                    <div class=" col-2">   <%=   actVo.getZona()%></div>
+                                    <div class=" col-2">   <%=   actVo.getCupos()%></div>
+                                    <div class=" col-auto mx-auto" > <img src="<%=   actVo.getImage1()%>" width="70%" height="90"> </div>
+                                    <div class=" col-2"> <a href="USUARIO_VerActividad.jsp?actividad=<%=  actVo.getId()%>" >Ver mas</a></div>
+
+                                </div>
+                                <%}%>
+
 
                             </div>
                         </div>
@@ -172,6 +199,7 @@
             </div>
             <img src="img/overlay_2.png" alt="#" class="footer_overlay">
         </footer>
+
         <!--::footer_part end::-->
 
         <!-- jquery plugins here-->
@@ -184,7 +212,7 @@
         <!-- easing js -->
         <script src="js/jquery.magnific-popup.js"></script>
 
-
+        <script src="js/DOM/filtro.js"></script>
 
 
         <!-- particles js -->

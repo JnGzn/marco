@@ -49,22 +49,6 @@
 
 
 
-        <!-- Large modal -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -288,33 +272,7 @@
 
                             </div>
 
-                            <!--                            <div class="col-md-2">
-                                                            <input class="btn" name="imagen2"  id="imagen2" type="file" />
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <img id="imgSalida2" width="100%" height="140" src="" />
-                            
-                                                        </div>-->
                         </div>
-
-
-                        <!--                        <div class="form-group row">
-                                                    <div class="col-md-2 ">
-                                                        <input class="btn" name="imagen3"  id="imagen3" type="file" >
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <img id="imgSalida3" width="100%" height="140" src="" />
-                        
-                                                    </div>
-                        
-                                                    <div class="col-md-2">
-                                                        <input class="btn" name="imagen4"  id="imagen4" type="file" />
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <img id="imgSalida4" width="100%" height="140" src="" />
-                        
-                                                    </div>
-                                                </div>-->
 
 
                         <p>4/4</p>
@@ -552,6 +510,7 @@
         <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.validate.min.js"></script>
         <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
+        <script src="js/validaciones/empresa.js" type="text/javascript"></script>
         <script src="js/validaciones/empresa.js" type="text/javascript"></script>
         <script src="js/DOM/reserva.js" type="text/javascript"></script>
 

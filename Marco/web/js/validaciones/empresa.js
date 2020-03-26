@@ -1,7 +1,7 @@
 
 
 $(function () {
-    
+
     $("#Empresa").validate({
         rules: {
             nit: {
@@ -57,8 +57,8 @@ $(function () {
 
         }
     })
-    
-    
+
+
 
     $("#formCrearReserva").validate({
         rules: {
@@ -118,7 +118,7 @@ $(function () {
         submitHandler: function (form) {
             const data = $("#formCrearReserva").serialize();
 
-console.log("aca vamos")
+            console.log("aca vamos")
 
             var formData = new FormData(document.getElementById("formCrearReserva"));
             $.ajax({
@@ -169,7 +169,8 @@ console.log("aca vamos")
                 } else {
 
                     $("#errorCat").text("registro exitoso");
-
+                    alert("la página se recargará para guardar cambios")
+                    location.reload()
 
                 }
             })
@@ -209,7 +210,8 @@ console.log("aca vamos")
                 } else {
 
                     $("#errLugar").text("registro exitosos");
-
+                    alert("la página se recargará para guardar cambios")
+                    location.reload()
 
                 }
             })
