@@ -7,14 +7,15 @@
 
 
 
-    let hid = localStorage.getItem('hide')
+ let hid = localStorage.getItem('hide')
+
 $(function () { 
     
  
     if ( hid == "true") {
        console.log("inter")
         document.getElementById("inicio").setAttribute('hidden', true);
-        document.getElementById("busqu").removeAttribute('hidden'); 
+        document.getElementById("busqu").removeAttribute('hidden');
     }
   
    
@@ -28,6 +29,14 @@ $(function () {
        
         document.getElementById("busqu").setAttribute('hidden', true);
         document.getElementById("inicio").removeAttribute('hidden');
+        document.getElementById("filter").setAttribute('hidden', true)
         localStorage.setItem('hide',"false")
+        
+                
+    })
+    $("#vermas").click(() => {
+       document.getElementById("filter").removeAttribute('hidden');
+      localStorage.setItem('hide',"true")
+        
     })
 })

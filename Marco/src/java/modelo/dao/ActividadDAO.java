@@ -408,15 +408,41 @@ public class ActividadDAO extends Conexion {
         }
         ArrayList<ActividadVO> array = new ArrayList<>();
         ActividadVO actVO = new ActividadVO();
-
-        try {
-
-            Connection conn = openConStatic();
-            PreparedStatement pstm = conn.prepareStatement("SELECT "
+        String query = "SELECT "
                     + "idActividad"
                     + " FROM ACTIVIDAD "
                     + "where UPPER(tituloActividad) LIKE UPPER('%" + palabra + "%') "
-                    + "or UPPER(descripcion) LIKE UPPER('%" + palabra + "%')");
+                    + "or UPPER(descripcion) LIKE UPPER('%" + palabra + "%')";
+//        switch (criterio){
+//            case "0": 
+//                query = "SELECT "
+//                    + "idActividad"
+//                    + " FROM ACTIVIDAD "
+//                    + "where UPPER(tituloActividad) LIKE UPPER('%" + palabra + "%') "
+//                    + "or UPPER(descripcion) LIKE UPPER('%" + palabra + "%')";
+//                break;
+//                case "2": 
+//                    query = "SELECT * FROM `ACTIVIDAD` WHERE precioActividad "
+//                            + "BETWEEN "+palabra+" AND "+palabra2+"";
+//                    break;
+//                case "4":
+//                    query = "SELECT LUGAR.zonaLugar FROM `ACTIVIDAD` INNER JOIN "
+//                            + "LUGAR ON ACTIVIDAD.fk_lugar = LUGAR.idLugar "
+//                            + "WHERE uPPER(LUGAR.zonaLugar) = UPPER('"+palabra3+"')";
+//                    break;
+//                case "5":
+//                    query = "SELECT LUGAR.zonaLugar FROM `ACTIVIDAD` INNER JOIN "
+//                            + "LUGAR ON ACTIVIDAD.fk_lugar = LUGAR.idLugar "
+//                            + "WHERE uPPER(LUGAR.zonaLugar) = UPPER('"+palabra3+"')"
+//                            + "AND (WHERE precioActividad BETWEEN "+palabra+" AND "+palabra2+") ";
+//                    break;
+//        }    
+        
+        
+        try {
+
+            Connection conn = openConStatic();
+            PreparedStatement pstm = conn.prepareStatement(query);
 
             ResultSet rs = pstm.executeQuery();
 
@@ -442,7 +468,7 @@ public class ActividadDAO extends Conexion {
             return array;
 
         } catch (Exception e) {
-            System.out.println("ErrorPuto  " + e.toString());
+            System.out.println("Error " + e.toString());
         }
 
         return null;

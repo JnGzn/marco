@@ -4,10 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/jngzn/Escritorio/8-12/Marco/web/js/DOM/reserva.js</file>
-            <file>file:/home/jngzn/Escritorio/8-12/Marco/web/USUARIO_VerActividad.jsp</file>
             <file>file:/home/jngzn/Escritorio/8-12/Marco/web/Listar.jsp</file>
-            <file>file:/home/jngzn/Escritorio/8-12/Marco/web/css/listar.css</file>
+            <file>file:/home/jngzn/Escritorio/8-12/Marco/web/js/validaciones/empresa.js</file>
             <file>file:/home/jngzn/Escritorio/8-12/Marco/src/java/modelo/dao/ActividadDAO.java</file>
+            <file>file:/home/jngzn/Escritorio/8-12/Marco/web/js/DOM/filtro.js</file>
         </group>
     </open-files>
 </project-private>
