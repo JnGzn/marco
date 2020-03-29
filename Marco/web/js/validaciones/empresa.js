@@ -51,6 +51,7 @@ $(function () {
                     } else {
                         $("#errorActiv").text("hubo un fallo *-*")
                     }
+
                 }
             });
 
@@ -58,6 +59,52 @@ $(function () {
         }
     })
 
+    $("#EmpresaLogin").validate({
+        rules: {
+            correo: {
+                required: {depends: function () {
+                        $(this).val($.trim($(this).val()));
+                        return true;
+                    }},
+                minlength: 3,
+                email: true,
+                maxlength: 20
+            }
+        },
+        messages: {
+            correo: {
+                required: "este campo es obligatorio",
+                minlength: "minimo 3 caracteres",
+                email: "formato email invalido",
+                maxlength: "no pueden superrar 20 caracteres"
+            }
+        },
+        submitHandler: function (form) {
+            const data = $("#EmpresaLogin").serialize();
+            console.log(data)
+            $.post("Empresas", data, (res, est, que) => {
+                if (res == "false") {
+                    $("#pass").val("");
+                    $("#err").text("usuario o contraseña erroneo");
+                } else
+                {
+                    if (url != null) {
+                        $(location).attr('href', url)
+
+                    } else {
+                        if (res == "admin") {
+
+                            $(location).attr('href', "ADMIN_index.jsp")
+                        } else {
+                            $(location).attr('href', "admin.jsp")
+
+                        }
+                    }
+                }
+            })
+        }
+
+    })
 
 
     $("#formCrearReserva").validate({
@@ -65,12 +112,12 @@ $(function () {
             titulo: {
                 required: true,
                 minlength: 3,
-                maxlength: 20
+                maxlength: 50
             },
             descripcion: {
                 required: true,
                 minlength: 3,
-                maxlength: 150
+                maxlength: 500
             },
             fecha: {
                 required: true,
@@ -118,7 +165,7 @@ $(function () {
         submitHandler: function (form) {
             const data = $("#formCrearReserva").serialize();
 
-            console.log("aca vamos")
+             localStorage.removeItem('img');
 
             var formData = new FormData(document.getElementById("formCrearReserva"));
             $.ajax({
@@ -169,8 +216,8 @@ $(function () {
                 } else {
 
                     $("#errorCat").text("registro exitoso");
-                    alert("la página se recargará para guardar cambios")
-                    location.reload()
+                    alert("la página tendra que ser recargada para guardar cambios")
+                    
 
                 }
             })
@@ -210,11 +257,44 @@ $(function () {
                 } else {
 
                     $("#errLugar").text("registro exitosos");
-                    alert("la página se recargará para guardar cambios")
-                    location.reload()
+                    alert("la página tendra que ser recargada para guardar cambios")
+                   
 
                 }
             })
+        }
+    })
+
+    $("#EmpresaLogo").validate({
+
+        rules: {
+            nomLogo: {required : true}
+        },
+        messages:{
+            nomLogo: {
+                required: "por por favor seleccione una imagen"
+            }
+        },
+        submitHandler: function (form) {
+            $("#EmpresaLogo").serialize();
+            var formData = new FormData(document.getElementById("EmpresaLogo"));
+            $.ajax({
+                url: "Empresas",
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (result) {
+                    
+                    if (result == "true") {
+                        $("#errorCarga").text("registrado correctamente")
+                    } else {
+                        $("#errorCarga").text("no se pudo guardar")
+                    }
+
+                }
+            });
         }
     })
 });

@@ -46,7 +46,7 @@ public class EmpresaControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
+        System.out.println("accion------------ " + request.getParameter("accion") );
         int accion = Integer.parseInt(request.getParameter("accion"));
 
         HttpSession sesio = request.getSession();
@@ -55,6 +55,7 @@ public class EmpresaControl extends HttpServlet {
         String nit = request.getParameter("nit");
         String pass = request.getParameter("pass");
         try {
+            if(pass != null && !pass.equals(""))
             pass = Encripcion.sha256(pass);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(EmpresaControl.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,15 +68,61 @@ public class EmpresaControl extends HttpServlet {
         EmpresaDAO empDAO = new EmpresaDAO(empVO);
 
         switch (accion) {
-            case 1:
-            String ruta = "";
+            case 1: //crear
+
+                String ruta = null;
+
+                if (empDAO.validaEmpresa(nit)) {
+                    request.setAttribute("error", "EMPRESA ya existe");
+                    response.getWriter().print("existe");
+
+                } else if (empDAO.insertar(ruta)) {
+                    request.setAttribute("error", "Registro exitoso");
+                    response.getWriter().print("true");
+
+                } else {
+                    response.getWriter().print("false");
+                    request.setAttribute("error", "Registro errado");
+                }
+                //  request.getRequestDispatcher("EMPRESA_Registro.jsp").forward(request, response);
+                break;
+            case 2: //login
+                if (empDAO.iniciarSesion(correoEmpresa, pass) != null) {
+
+                    nit = empDAO.iniciarSesion(correoEmpresa, pass);
+                    sesio = request.getSession(true);
+
+                    /*  sesion = request.getSession(true);
+                    //sesion.invalidate();
+                    sesion.setAttribute("id", id);
+                    request.getRequestDispatcher("PerfilUsuario.jsp").forward(request, response);*/
+                    sesio.setAttribute("nit", nit);
+                    response.getWriter().print("true");
+                } else {
+                    response.getWriter().print("false");
+                }
+                break;
+            case 3: //editar
+                nit = (String) sesio.getAttribute("nit");
+
+                if (empDAO.Actualizar(nit)) {
+                    request.setAttribute("exito", "actualizado");
+                } else {
+                    request.setAttribute("error", "no se pudo actualizar");
+                }
+                request.getRequestDispatcher("EMPRESA_Perfil.jsp").forward(request, response);
+                break;
+                
+            case 4: //cargar logo
+                nit = (String) sesio.getAttribute("nit");
+                ruta = "";
                 try {
                     String file = request.getParameter("nomLogo");
                     Part arc = request.getPart("imagen");
 
                     InputStream is = arc.getInputStream();
 
-                    String base = "/home/jngzn/Escritorio/8-12/Marco/web/";
+                    String base = "C:/Users/Usuario/Desktop/marco/Marco/web/";
                     ruta = "imagenes/logo-" + nit + "-" + file;
 //
                     File f = new File(base + ruta);
@@ -87,56 +134,17 @@ public class EmpresaControl extends HttpServlet {
                     }
                     ous.close();
                     is.close();
+                  
+                    if (empDAO.cargarImagen(nit, ruta)) {
+                        
+                    response.getWriter().print("true");
+                    }else{
+                        response.getWriter().print("false");
+                    }
                 } catch (Exception e) {
                     System.out.println("error: " + e.toString());
-                    response.getWriter().print("imagen");
-                }
-
-                System.out.println("1");
-
-                if (empDAO.validaEmpresa(nit)) {
-                    request.setAttribute("error", "EMPRESA ya existe");
-                    response.getWriter().print("existe");
-                    System.out.println("1");
-
-                } else if (empDAO.insertar(ruta)) {
-                    request.setAttribute("error", "Registro exitoso");
-                    response.getWriter().print("true");
-                    System.out.println("1");
-
-                } else {
                     response.getWriter().print("false");
-                    System.out.println("1");
-                    request.setAttribute("error", "Registro errado");
                 }
-                //  request.getRequestDispatcher("EMPRESA_Registro.jsp").forward(request, response);
-                break;
-            case 2:
-                if (empDAO.iniciarSesion(correoEmpresa, pass) != null) {
-
-                    nit = empDAO.iniciarSesion(correoEmpresa, pass);
-                    sesio = request.getSession(true);
-
-                    /*  sesion = request.getSession(true);
-                    //sesion.invalidate();
-                    sesion.setAttribute("id", id);
-                    request.getRequestDispatcher("PerfilUsuario.jsp").forward(request, response);*/
-                    sesio.setAttribute("nit", nit);
-                    request.getRequestDispatcher("EMPRESA_Perfil.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("error", "Error usuario y o contrasena incorrecta");
-                    request.getRequestDispatcher("EMPRESA_IniciarSesion.jsp").forward(request, response);
-                }
-                break;
-            case 3:
-                nit = (String) sesio.getAttribute("nit");
-
-                if (empDAO.Actualizar(nit)) {
-                    request.setAttribute("exito", "actualizado");
-                } else {
-                    request.setAttribute("error", "no se pudo actualizar");
-                }
-                request.getRequestDispatcher("EMPRESA_Perfil.jsp").forward(request, response);
                 break;
 
         }

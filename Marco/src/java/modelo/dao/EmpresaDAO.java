@@ -6,7 +6,9 @@
 package modelo.dao;
 
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import modelo.vo.ActividadVO;
 import modelo.vo.EmpresaVO;
 import util.Conexion;
 import static util.Conexion.openConStatic;
@@ -43,9 +45,91 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
     }
 
+    public static ArrayList<String[]> consultaTOP(String opc, String nit) {
+        ArrayList<String[]> arr = new ArrayList<>();
+        String[] devolucion = new  String[2];
+        String query = "";
+        if (opc.equals("1")) {
+            query = "SELECT categoria.tipoCategoria,fORMAT(noVentas/(SELECT SUM(noVentas)"
+                    + " FROM actividad),2) * 100 AS PORCENTAJE"
+                    + "FROM `actividad`INNER JOIN categoria ON "
+                    + "categoria.idCategoria = actividad.fk_categoria "
+                    + "WHERE actividad.EMPRESA_nit = ?"
+                    + "ORDER BY noVentas DESC"
+                    + "LIMIT 5";
+        } else {
+            query = "SELECT SUM(noVentas*precioActividad) FROM `actividad` where fk_empresa = ?";
+        }
+        try {
+            Connection con = openConStatic();
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, nit);
+
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                
+                devolucion[1] = rs.getString(1);
+                devolucion[2] = rs.getString(2);
+                arr.add(devolucion);
+            }
+        } catch (Exception e) {
+        }
+        return arr;
+    }
+
+    public static String reportVerntas(String opc, String nit) {
+        String query = "";
+        if (opc.equals("1")) {
+            query = "SELECT COUNT(*) FROM `actividad`WHERE noVentas>0 AND fk_empresa = ?";
+        } else {
+            query = "SELECT SUM(noVentas*precioActividad) FROM `actividad` where fk_empresa = ?";
+        }
+        try {
+            Connection con = openConStatic();
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, nit);
+
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                if (opc.equals("2")) {
+                    DecimalFormat formateador = new DecimalFormat("###,###.##");
+                    return formateador.format(Integer.parseInt(rs.getString(1)));
+                }
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+        }
+        return "";
+    }
+
+    public boolean cargarImagen(String nit, String image) {
+        try {
+            System.out.println("fsdfdfsdf");
+            conn = openConexion();
+            pstm = conn.prepareStatement("UPDATE `empresa` SET logo = ? where nit = ?");
+            pstm.setString(1, image);
+            pstm.setString(2, nit);
+            pstm.executeUpdate();
+
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println("error: " + e.toString());
+        }
+        return false;
+    }
+
     public String iniciarSesion(String correo, String pass) {
         try {
-            
+
             idUsuario = null;
             Connection conn = openConexion();
             PreparedStatement pstm = conn.prepareStatement("SELECT nit FROM "
@@ -59,18 +143,23 @@ public class EmpresaDAO extends Conexion implements ICrud {
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
-        }finally{
+        } finally {
             try {
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(rs!=null) rs.close();
+                if (conn != null) {
+                    conn.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (Exception e) {
             }
         }
         return idUsuario;
     }
 
-   
     public boolean insertar(String logo) {
         try {
             pstm = conn.prepareStatement("INSERT into EMPRESA(nit,razonSocial,correoEmpresa,ROL_idRol,estado,pass,logo)"
@@ -87,22 +176,26 @@ public class EmpresaDAO extends Conexion implements ICrud {
             conn = cerrarConexion();
         } catch (SQLException e) {
             System.out.println("error! La empresa NO se Registro" + e.toString());
-        }finally{
+        } finally {
             try {
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(rs!=null) rs.close();
+                if (conn != null) {
+                    conn.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (Exception e) {
             }
         }
         return operacion;
     }
 
-    
     public boolean Actualizar(String nit) {
         try {
 
-           
             pstm = conn.prepareStatement("UPDATE EMPRESA SET correoEmpresa = ?, razonSocial = ? "
                     + "WHERE nit=?");
             pstm.setString(1, correoEmpresa);
@@ -113,11 +206,17 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
         } catch (SQLException | NumberFormatException e) {
             System.out.print("Error al actualizar " + e.toString());
-        }finally{
+        } finally {
             try {
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(rs!=null) rs.close();
+                if (conn != null) {
+                    conn.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (Exception e) {
             }
         }
@@ -146,11 +245,16 @@ public class EmpresaDAO extends Conexion implements ICrud {
                 opr = false;
             }
 
-           
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(rs!=null) rs.close();
-        
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+
         } catch (Exception e) {
             System.out.println("error!" + e.toString());
         }
@@ -177,11 +281,16 @@ public class EmpresaDAO extends Conexion implements ICrud {
                 //arrEmpVO.add(empresaVO);
             }
 
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(rs!=null) rs.close();
-            
-        
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+
             return empresaVO;
 
         } catch (Exception e) {
@@ -190,6 +299,7 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
         return null;
     }
+
     public static ArrayList<EmpresaVO> ListarDatos() {
 
         ArrayList<EmpresaVO> arrEmpVO = new ArrayList<>();
@@ -198,7 +308,6 @@ public class EmpresaDAO extends Conexion implements ICrud {
         try {
             Connection conn = openConStatic();
             PreparedStatement pstm = conn.prepareStatement("SELECT nit,razonSocial,correoEmpresa,logo FROM EMPRESA");
-           
 
             ResultSet rs = pstm.executeQuery();
 
@@ -210,12 +319,16 @@ public class EmpresaDAO extends Conexion implements ICrud {
                 arrEmpVO.add(empresaVO);
             }
 
-            
-            
-                if(conn!=null) conn.close();
-                if(pstm!=null) pstm.close();
-                if(rs!=null) rs.close();
-         
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+
             return arrEmpVO;
 
         } catch (Exception e) {
@@ -224,6 +337,7 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
         return null;
     }
+
     @Override
     public boolean actualizar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

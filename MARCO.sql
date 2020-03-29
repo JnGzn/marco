@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `ACTIVIDAD`
 --
-
+use marco;
 CREATE TABLE `ACTIVIDAD` (
   `idActividad` int(11) NOT NULL,
   `tituloActividad` varchar(50) NOT NULL,

@@ -164,7 +164,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="text-input">Titulo</label>
+                            <label class="col-md-3 col-form-label" for="text-input">Descripcion</label>
                             <div class="col-md-9">
                                 <textarea  class="form-control" rows="5" type="text" name="descripcion" placeholder="descripcion" id="descripcion"></textarea>
                             </div>
@@ -326,13 +326,12 @@
                                     <%}
                                         }%>
 
-                                    <option 
-                                        type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrolugar" 
-                                        data-whatever="@mdo">                              
-                                        agrega otro
-                                    </option>
-
+                                    
                                 </select>
+<button type="button" class="btn btn-link" data-toggle="modal" data-target="#registrolugar" 
+                                        data-whatever="@mdo">
+                                        agregar otro lugar
+                                    </button>
 
                             </div>
                             <label class="col-md-2 col-form-label" for="text-input">Categoria</label>
@@ -347,16 +346,13 @@
                                     <%}
                                         }%>
 
-                                    <option 
-                                        type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modalCategoria" data-whatever="@mdo"
-
-
-                                        >                              
-                                        agrega otro
-                                    </option>
+                       
 
                                 </select>
+                                    <button type="button" class="btn btn-link" data-toggle="modal"
+                                        data-target="#modalCategoria" data-whatever="@mdo">
+                                        agregar otra categoria
+                                    </button>
                                 <!-- 
 
                                     <input  class="form-control" type="text" id="titulo" name="titulo" placeholder="titulo...">
@@ -369,6 +365,10 @@
                             <label class="col-md-2 col-form-label" for="text-input">Precio</label>
                             <div class="col-md-4">
                                 <input  class="form-control" type="number" name="precio" placeholder="precio" id="precio">
+                            </div>
+                            <label class="col-md-2 col-form-label" for="text-input">Descuento</label>
+                            <div class="col-md-4">
+                                <input  class="form-control" type="number" name="descuento" placeholder="precio" id="precio">
                             </div>
 
                         </div>
@@ -503,17 +503,57 @@
 
 
 
-        <script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/popper.min.js"></script>
 
-        <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
-        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
-        <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
+
+        <!-- Button trigger modal -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...a
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+ 
+
+        
+        <script src="js/jquery.ajaxchimp.min.js"></script>
+        <script src="js/jquery-1.12.1.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="js/sb-admin-2.min.js"></script>
+        <script src="vendor/chart.js/Chart.min.js"></script>
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
+        
+        
+        <script src="js/jquery.validate.min.js" type="text/javascript"></script>
+         <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
         <script src="js/validaciones/empresa.js" type="text/javascript"></script>
         <script src="js/validaciones/empresa.js" type="text/javascript"></script>
         <script src="js/DOM/reserva.js" type="text/javascript"></script>
-
         <% }%>
     </body>
 </html>

@@ -1,5 +1,5 @@
 const act = sessionStorage.getItem("actividad")
-
+localStorage.removeItem('img');
 function reservar() {
     const actividad = document.getElementById("actividad").value
     sessionStorage.setItem('actividad', actividad);
@@ -26,8 +26,8 @@ function carga() {
     data++;
     div.setAttribute('hidden', true);
     div2.removeAttribute('hidden');
-    if (data <= 4) {
-console.log("as")
+    if (data < 4) {
+
         localStorage.setItem('img', data);
     } else {
 

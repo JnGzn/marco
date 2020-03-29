@@ -70,7 +70,7 @@ public class ActividadControl extends HttpServlet {
         switch (accion) {
             case "1":
                 String[] images = new String[5];
-                String base = "/home/jngzn/Escritorio/8-12/Marco/web/";
+                String base = "C:/Users/Usuario/Desktop/marco/Marco/web/";
                 try {
                     for (int i = 0; i < images.length; i++) {
                         images[i] = "";
@@ -95,9 +95,7 @@ public class ActividadControl extends HttpServlet {
                     }
                 } catch (Exception e) {
                     System.err.println(e.toString());
-                    response.getWriter().print("imagentrue");
                 }
-
                 if (actiDAO.AgregarActividad(images)) {
                     response.getWriter().print("true");
 
