@@ -47,16 +47,13 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
     public static ArrayList<String[]> consultaTOP(String opc, String nit) {
         ArrayList<String[]> arr = new ArrayList<>();
-        String[] devolucion = new  String[2];
+       
         String query = "";
         if (opc.equals("1")) {
-            query = "SELECT categoria.tipoCategoria,fORMAT(noVentas/(SELECT SUM(noVentas)"
-                    + " FROM actividad),2) * 100 AS PORCENTAJE"
-                    + "FROM `actividad`INNER JOIN categoria ON "
-                    + "categoria.idCategoria = actividad.fk_categoria "
-                    + "WHERE actividad.EMPRESA_nit = ?"
-                    + "ORDER BY noVentas DESC"
-                    + "LIMIT 5";
+            query = "SELECT categoria.tipoCategoria,fORMAT(noVentas/(SELECT SUM(noVentas) "
+                    + "FROM actividad),2) * 100 AS PORCENTAJE FROM `actividad` INNER JOIN "
+                    + "categoria ON categoria.idCategoria = actividad.fk_categoria WHERE "
+                    + "actividad.EMPRESA_nit = ? ORDER BY noVentas DESC LIMIT 5";
         } else {
             query = "SELECT SUM(noVentas*precioActividad) FROM `actividad` where fk_empresa = ?";
         }
@@ -67,13 +64,15 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                
-                devolucion[1] = rs.getString(1);
-                devolucion[2] = rs.getString(2);
+                 String[] devolucion = new  String[2];
+                devolucion[0] = rs.getString(1);
+                devolucion[1] = rs.getString(2);
                 arr.add(devolucion);
             }
         } catch (Exception e) {
+            System.out.println("err "+e.toString());
         }
+        
         return arr;
     }
 
@@ -162,8 +161,8 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
     public boolean insertar(String logo) {
         try {
-            pstm = conn.prepareStatement("INSERT into EMPRESA(nit,razonSocial,correoEmpresa,ROL_idRol,estado,pass,logo)"
-                    + " values(?,?,?,2,'activo',?,?)");
+            pstm = conn.prepareStatement("INSERT into EMPRESA(nit,razonSocial,correoEmpresa,ROL_idRol,estado,pass,logo, noVentas)"
+                    + " values(?,?,?,2,'activo',?,?,0)");
 
             pstm.setString(1, nit);
             pstm.setString(2, razonSocial);

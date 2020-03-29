@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="modelo.vo.UsuarioVO"%>
 <%@page import="modelo.dao.UsuarioDAO"%>
 <%@page import="modelo.vo.ActividadVO"%>
@@ -29,7 +30,6 @@
             HttpSession sesion = request.getSession();
             Object sesionn = sesion.getAttribute("nit");
             Object sesionadmin = sesion.getAttribute("id");
-
 
             boolean emp = false;
             boolean admnin = false;
@@ -107,14 +107,18 @@
 
                             <a class="collapse-item" href="buttons.html">Empresas</a>
                             <%}%>
+                            <%if (emp) { %>
                             <a class="collapse-item" href="cards.html">Actividades</a>
-                        
+                            <a class="collapse-item" href="cards.html">Categorias</a>
+                            <a class="collapse-item" href="cards.html">lugares</a>
+                            <%}%>
+
                         </div>
                     </div>
                 </li>
                 <%if (admnin) {    %>
                 <!-- Nav Item - Utilities Collapse Menu -->
-                <li class="nav-item">
+                <li class="nav-item"> 
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                         <i class="fas fa-fw fa-wrench"></i>
                         <span>Usuarios</span>
@@ -128,7 +132,7 @@
                         </div>
                     </div>
                 </li>
-<%}%>
+                <%}%>
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
@@ -352,7 +356,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">No. Ventas (Mensual)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><%= empDAO.reportVerntas("1", empVO.getNit()) %></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><%= empDAO.reportVerntas("1", empVO.getNit())%></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -392,7 +396,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ventas (Mensual)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$ <%= empDAO.reportVerntas("2", empVO.getNit()) %></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$ <%= empDAO.reportVerntas("2", empVO.getNit())%></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -462,27 +466,53 @@
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary">top 5 categorias</h6>
                                     </div>
+
                                     <div class="card-body">
-                                        <h4 class="small font-weight-bold"> Teatro <span class="float-right">20%</span></h4>
+                                        <%
+                                            ArrayList<String[]> categorias = EmpresaDAO.consultaTOP("1", empVO.getNit());
+                                            String[] categoria;
+                                            int size = categorias.size();
+                                            if (size > 0) {
+                                                categoria = categorias.get(0);%>
+
+
+                                        <h4 class="small font-weight-bold"> <%= categoria[0]%> <span class="float-right"><%= categoria[1]%>%</span></h4>
                                         <div class="progress mb-4">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: <%= categoria[1]%>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h4 class="small font-weight-bold">Musical<span class="float-right">40%</span></h4>
+                                        <% }
+
+                                            if (size > 1) {
+                                                categoria = categorias.get(1);%>
+                                        <h4 class="small font-weight-bold"><%= categoria[0]%><span class="float-right"><%= categoria[1]%>%</span></h4>
                                         <div class="progress mb-4">
-                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: <%= categoria[1]%>%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h4 class="small font-weight-bold"> Magia <span class="float-right">60%</span></h4>
+                                        <% }
+
+                                            if (size > 2) {
+                                                categoria = categorias.get(2);%>
+                                        <h4 class="small font-weight-bold"> <%= categoria[0]%> <span class="float-right"><%= categoria[1]%>%</span></h4>
                                         <div class="progress mb-4">
-                                            <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar" role="progressbar" style="width: <%= categoria[1]%>%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h4 class="small font-weight-bold"> Parques de Atracciones <span class="float-right">80%</span></h4>
+                                        <% }
+
+                                            if (size > 3) {
+                                                categoria = categorias.get(3);%>
+                                        <h4 class="small font-weight-bold"> <%= categoria[0]%> <span class="float-right"><%= categoria[1]%>%</span></h4>
                                         <div class="progress mb-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold"> Granja Infantil<span class="float-right">Completado!</span></h4>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: <%= categoria[1]%>%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>   <% }
+
+                                            if (size > 4) {
+                                                categoria = categorias.get(4);%>                                        <h4 class="small font-weight-bold"> <%= categoria[0]%><span class="float-right">Completado!</span></h4>
                                         <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: <%= categoria[1]%>%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
+                                        <%} else { %>
+                                                <p>No tienes mas categorias asciadas a una actividad</p>
+                                            <%}%>
                                     </div>
                                 </div>
                             </div>
