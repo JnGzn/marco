@@ -108,9 +108,9 @@
                             <a class="collapse-item" href="buttons.html">Empresas</a>
                             <%}%>
                             <%if (emp) { %>
-                            <a class="collapse-item" href="cards.html">Actividades</a>
-                            <a class="collapse-item" href="cards.html">Categorias</a>
-                            <a class="collapse-item" href="cards.html">lugares</a>
+                            <a class="collapse-item" href="EMPRESA_Actividades.jsp">Actividades</a>
+                            <a class="collapse-item" href="EMPRESA_complementos.jsp">Categorias y lugares</a>
+                          
                             <%}%>
 
                         </div>

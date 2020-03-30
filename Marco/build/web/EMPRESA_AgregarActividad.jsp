@@ -326,12 +326,12 @@
                                     <%}
                                         }%>
 
-                                    
+
                                 </select>
-<button type="button" class="btn btn-link" data-toggle="modal" data-target="#registrolugar" 
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#registrolugar" 
                                         data-whatever="@mdo">
-                                        agregar otro lugar
-                                    </button>
+                                    agregar otro lugar
+                                </button>
 
                             </div>
                             <label class="col-md-2 col-form-label" for="text-input">Categoria</label>
@@ -346,13 +346,13 @@
                                     <%}
                                         }%>
 
-                       
+
 
                                 </select>
-                                    <button type="button" class="btn btn-link" data-toggle="modal"
+                                <button type="button" class="btn btn-link" data-toggle="modal"
                                         data-target="#modalCategoria" data-whatever="@mdo">
-                                        agregar otra categoria
-                                    </button>
+                                    agregar otra categoria
+                                </button>
                                 <!-- 
 
                                     <input  class="form-control" type="text" id="titulo" name="titulo" placeholder="titulo...">
@@ -387,39 +387,11 @@
 
                     </div>
                 </div>
-
-
-
-
-
-
-
-                <!--
-                                    
-                                    
-                                    
-                                    
-                                </div>-->
-
                 <input type="hidden" id="name1" name="name1" value="">
                 <input type="hidden" id="name2" name="name2" value="">
                 <input type="hidden" id="name3" name="name3" value="">
                 <input type="hidden" id="name4" name="name4" value=""> 
-
                 <input type="hidden" id="estado" name="estado" value="activo">
-
-
-
-                <!--             <iframe name="ifarame"></iframe>-->
-
-
-
-
-
-
-
-
-
             </form>
 
         </div>
@@ -536,9 +508,9 @@
 
 
 
- 
 
-        
+
+
         <script src="js/jquery.ajaxchimp.min.js"></script>
         <script src="js/jquery-1.12.1.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -547,10 +519,10 @@
         <script src="vendor/chart.js/Chart.min.js"></script>
         <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script>
-        
-        
+
+
         <script src="js/jquery.validate.min.js" type="text/javascript"></script>
-         <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
+        <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
         <script src="js/validaciones/empresa.js" type="text/javascript"></script>
         <script src="js/validaciones/empresa.js" type="text/javascript"></script>
         <script src="js/DOM/reserva.js" type="text/javascript"></script>
