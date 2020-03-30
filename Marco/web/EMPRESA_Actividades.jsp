@@ -385,7 +385,7 @@
                                                     <div class=" col-2">  <%=   actVo.getCupos()%></div>
                                                     <div class=" col-3 mx-auto" > <img src="<%=   actVo.getImage1()%>" width="70%" height="90"> </div>
                                                     <div class=" col-2 mx-auto"> 
-                                                        <a href="EMPRESA_Actividades.jsp?actividad=<%=  actVo.getId()%>" >Editar</a>
+                                                        <a href="EMPRESA_EditarActividad.jsp?actividad=<%=  actVo.getId()%>" >Editar</a>
                                                         <hr>
                                                         <a href="USUARIO_VerActividad.jsp?actividad=<%=  actVo.getId()%>&vista=true" >Ver como usuario</a>
                                                     </div>
