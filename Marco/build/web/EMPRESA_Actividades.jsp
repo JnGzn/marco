@@ -357,7 +357,11 @@
                             <div class="card shadow mb-4">
 
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Mis actividades</h6>
+                                    <div class="row">
+                                        
+                                    <h4 class="m-0 font-weight-bold text-primary col-8">Mis actividades</h4>
+                                    <a href="EMPRESA_AgregarActividad.jsp" class="btn btn-outline-info info col-4">agregar una nueva</a>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="text-center">

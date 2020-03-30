@@ -78,9 +78,9 @@ public class ActividadControl extends HttpServlet {
                         Part arc = request.getPart("imagen" + (i + 1));
                         System.out.println("name" + (i + 1) + " " + file);
                         InputStream is = arc.getInputStream();
-                        
+
                         images[i] = "imagenes/" + idEmpresa + "_" + titulo + "_" + file;
-                        File f = new File(base+images[i]);
+                        File f = new File(base + images[i]);
                         FileOutputStream ous = new FileOutputStream(f);
                         int dato = is.read();
                         while (dato != -1) {
@@ -105,6 +105,44 @@ public class ActividadControl extends HttpServlet {
 //                request.getRequestDispatcher("EMPRESA_AgregarActividad.jsp").forward(request, response);
 
                 break;
+            case "2": //editar
+                images = new String[4];
+                base = "C:/Users/Usuario/Desktop/marco/Marco/web/";
+                try {
+                    for (int i = 0; i < images.length; i++) {
+                        images[i] = "";
+                        String file = request.getParameter("name" + (i + 1));
+                        Part arc = request.getPart("imagen" + (i + 1));
+                        System.out.println("name" + (i + 1) + " " + file);
+                        InputStream is = arc.getInputStream();
+
+                        images[i] = "imagenes/" + idEmpresa + "_" + titulo + "_" + file;
+                        File f = new File(base + images[i]);
+                        FileOutputStream ous = new FileOutputStream(f);
+                        int dato = is.read();
+                        while (dato != -1) {
+                            ous.write(dato);
+                            dato = is.read();
+                        }
+                        if (i == 3) {
+                            ous.close();
+                            is.close();
+                            break;
+                        }
+                    }
+                } catch (Exception e) {
+                    System.err.println(e.toString());
+                }
+                String idAct = request.getParameter("idActiv");
+                if (actiDAO.editarActividad(images, idAct)) {
+                    System.out.println("response4 "+ actiDAO.editarActividad(images, idAct));
+                    response.getWriter().print("true");
+
+                } else {
+                    response.getWriter().print("false");
+                }
+                break;
+                
             case "enviar":
                 int cantRes = Integer.parseInt(request.getParameter("ctxCupos"));
                 String nomComprador = request.getParameter("ctxNombres");

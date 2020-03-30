@@ -111,6 +111,55 @@ public class ActividadDAO extends Conexion {
         return operacion;
     }
 
+    public boolean editarActividad(String[] images, String id) {
+        try {
+            conn  = openConexion();
+            System.out.println("id "+id);
+            pstm = conn.prepareStatement("UPDATE ACTIVIDAD "
+                    + "SET tituloActividad = ?, fechaActividad = ?,horaActividad= ?, "
+                    + "duracionActividad = ?, cuposActividad = ?,precioActividad = ?, "
+                    + "fk_lugar =?,estadoActividad = ? ,fk_categoria =?,descripcion = ?, descuento = ?,"
+                    + "img1 = ?,img2 = ?,img3 = ?,img4 = ? where idActividad=?");
+
+            pstm.setString(1, titulo);
+            pstm.setString(2, fecha);
+            pstm.setString(3, hora);
+            pstm.setString(4, duracion);
+            pstm.setString(5, cupos);
+            pstm.setString(6, precio);
+
+            pstm.setString(7, lugar);
+            pstm.setString(8, estado);
+            pstm.setString(9, categoria);
+            pstm.setString(10, descripcion);
+            pstm.setString(11, descuento);
+            for (int i = 0; i < 4; i++) {
+                pstm.setString((i + 12), images[i]);
+            }
+            pstm.setString(16, id);
+            
+            pstm.executeUpdate();
+            operacion = true;
+
+        } catch (Exception e) {
+            System.err.println("ERROR al agreagar editar \n " + e.toString());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (ts != null) {
+                    ts.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return operacion;
+    }
+
     public static ArrayList<ActividadVO> ListarDatos() {
 
         ArrayList<ActividadVO> arrEmpVO = new ArrayList<>();
@@ -252,8 +301,8 @@ public class ActividadDAO extends Conexion {
                 actVO.setCupos(rs.getString(6));
                 actVO.setPrecio(rs.getString(7));
 
-                actVO.setEstado(rs.getString(9));
-                actVO.setDescripcion(rs.getString(10));
+                actVO.setDescripcion(rs.getString("descripcion"));
+                actVO.setEstado(rs.getString(10));
                 actVO.setDescuento(rs.getString(11));
                 actVO.setIdEmpresa(rs.getString(12));
                 actVO.setLugar(rs.getString(13));
@@ -263,6 +312,7 @@ public class ActividadDAO extends Conexion {
                 actVO.setImage2(rs.getString(16));
                 actVO.setImage3(rs.getString(17));
                 actVO.setImage4(rs.getString(18));
+                System.out.println("asdasdasdas "+actVO.getDescripcion());
             }
             String query
                     = "SELECT  cat.tipoCategoria, lug.direccionLugar, lug.zonaLugar "
@@ -409,10 +459,10 @@ public class ActividadDAO extends Conexion {
         ArrayList<ActividadVO> array = new ArrayList<>();
         ActividadVO actVO = new ActividadVO();
         String query = "SELECT "
-                    + "idActividad"
-                    + " FROM ACTIVIDAD "
-                    + "where UPPER(tituloActividad) LIKE UPPER('%" + palabra + "%') "
-                    + "or UPPER(descripcion) LIKE UPPER('%" + palabra + "%')";
+                + "idActividad"
+                + " FROM ACTIVIDAD "
+                + "where UPPER(tituloActividad) LIKE UPPER('%" + palabra + "%') "
+                + "or UPPER(descripcion) LIKE UPPER('%" + palabra + "%')";
 //        switch (criterio){
 //            case "0": 
 //                query = "SELECT "
@@ -437,8 +487,7 @@ public class ActividadDAO extends Conexion {
 //                            + "AND (WHERE precioActividad BETWEEN "+palabra+" AND "+palabra2+") ";
 //                    break;
 //        }    
-        
-        
+
         try {
 
             Connection conn = openConStatic();
@@ -447,7 +496,7 @@ public class ActividadDAO extends Conexion {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                
+
                 actVO = new ActividadVO();
 
                 actVO.setId(rs.getString(1));
@@ -464,7 +513,7 @@ public class ActividadDAO extends Conexion {
             if (rs != null) {
                 rs.close();
             }
-            System.out.println("a "+array.size());
+            System.out.println("a " + array.size());
             return array;
 
         } catch (Exception e) {
