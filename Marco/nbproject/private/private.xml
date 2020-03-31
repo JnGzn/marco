@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Usuario/Desktop/marco/Marco/src/java/modelo/dao/ActividadDAO.java</file>
+            <file>file:/C:/Users/Usuario/Desktop/marco/Marco/web/EMPRESA_complementos.jsp</file>
+            <file>file:/C:/Users/Usuario/Desktop/marco/Marco/web/admin.jsp</file>
+            <file>file:/C:/Users/Usuario/Desktop/marco/Marco/src/java/modelo/dao/EmpresaDAO.java</file>
+            <file>file:/C:/Users/Usuario/Desktop/marco/Marco/src/java/modelo/dao/UsuarioDAO.java</file>
             <file>file:/C:/Users/Usuario/Desktop/marco/Marco/web/EMPRESA_Actividades.jsp</file>
-            <file>file:/C:/Users/Usuario/Desktop/marco/Marco/src/java/controlador/ActividadControl.java</file>
         </group>
     </open-files>
 </project-private>
