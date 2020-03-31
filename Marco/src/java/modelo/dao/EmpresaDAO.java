@@ -49,17 +49,19 @@ public class EmpresaDAO extends Conexion implements ICrud {
         ArrayList<String[]> arr = new ArrayList<>();
        
         String query = "";
-        if (opc.equals("1")) {
-            query = "SELECT categoria.tipoCategoria,fORMAT(noVentas/(SELECT SUM(noVentas) "
-                    + "FROM actividad),2) * 100 AS PORCENTAJE FROM `actividad` INNER JOIN "
-                    + "categoria ON categoria.idCategoria = actividad.fk_categoria WHERE "
-                    + "actividad.EMPRESA_nit = ? ORDER BY noVentas DESC LIMIT 5";
-        } else {
-            query = "SELECT SUM(noVentas*precioActividad) FROM `actividad` where fk_empresa = ?";
-        }
+        
         try {
             Connection con = openConStatic();
-            PreparedStatement pstm = con.prepareStatement(query);
+            PreparedStatement pstm;
+            if (opc.equals("1")) {
+            query = "CALL proc_topCategorias(?)";
+             pstm = con.prepareCall(query);
+        } else {
+            query = "SELECT SUM(noVentas*precioActividad) FROM `actividad` where fk_empresa = ?";
+            pstm = con.prepareStatement(query);
+        }
+            
+            
             pstm.setString(1, nit);
 
             ResultSet rs = pstm.executeQuery();
@@ -79,7 +81,7 @@ public class EmpresaDAO extends Conexion implements ICrud {
     public static String reportVerntas(String opc, String nit) {
         String query = "";
         if (opc.equals("1")) {
-            query = "SELECT COUNT(*) FROM `actividad`WHERE noVentas>0 AND fk_empresa = ?";
+            query = "SELECT SUM(noVentas) FROM `actividad`WHERE fk_empresa = ?";
         } else {
             query = "SELECT SUM(noVentas*precioActividad) FROM `actividad` where fk_empresa = ?";
         }

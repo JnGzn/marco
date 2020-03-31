@@ -1,0 +1,6 @@
+CREATE PROCEDURE proc_topCategorias (IN nit INT)
+BEGIN
+
+		 SELECT categoria.tipoCategoria,format((SUM(noVentas)/(SELECT SUM(noVentas) FROM `actividad` where EMPRESA_nit = nit)*100),0) FROM `actividad` INNER JOIN 			categoria ON fk_categoria = categoria.idCategoria where fk_empresa = nit GROUP BY fk_categoria ORDER BY sum(noVentas) desc limit 5;
+         
+END
