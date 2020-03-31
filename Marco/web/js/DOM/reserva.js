@@ -21,8 +21,6 @@ function carga() {
     const div = document.getElementById("div" + data)
 
     const div2 = document.getElementById("div" + (data + 1))
-
-    alert(data)
     data++;
     div.setAttribute('hidden', true);
     div2.removeAttribute('hidden');

@@ -31,10 +31,10 @@ public class ActividadDAO extends Conexion {
     private String hora;
     private String duracion;
     private String cupos;
+    private String idEmpresa;
     private String precio;
 
     private String estado;
-    private String idEmpresa;
     private String lugar;
     private String categoria;
     private String descuento;
@@ -68,7 +68,7 @@ public class ActividadDAO extends Conexion {
                     + "(tituloActividad,fechaActividad,horaActividad,duracionActividad,"
                     + "cuposActividad,precioActividad,fk_empresa,EMPRESA_nit,"
                     + "fk_lugar,estadoActividad,fk_categoria,descripcion, descuento,"
-                    + "img1,img2,img3,img4,img5)"
+                    + "img1,img2,img3,img4,cupoInicial)"
                     + " value(?,?,?,?,?,?,?,?,?,?,?,?,?"
                     + ",?,?,?,?,?)");
 
@@ -85,6 +85,7 @@ public class ActividadDAO extends Conexion {
             pstm.setString(11, categoria);
             pstm.setString(12, descripcion);
             pstm.setString(13, descuento);
+            pstm.setString(18, cupos);
             for (int i = 0; i < images.length; i++) {
                 pstm.setString((i + 14), images[i]);
             }
@@ -200,11 +201,12 @@ public class ActividadDAO extends Conexion {
         return null;
     }
 
-    public boolean actualizarCupos(String id, int cant) {
+    public boolean actualizarCupos(String id, int cant,int cupos) {
         try {
-            pstm = conn.prepareStatement("UPDATE ACTIVIDAD SET cuposActividad=? where idActividad=?");
+            pstm = conn.prepareStatement("UPDATE ACTIVIDAD SET noVentas=?, cuposActividad=? where idActividad=?");
             pstm.setInt(1, cant);
-            pstm.setString(2, id);
+            pstm.setInt(2, cupos);
+            pstm.setString(3, id);
             pstm.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -246,13 +248,14 @@ public class ActividadDAO extends Conexion {
             pstm.setDouble(9, cant * 3);
             pstm.executeUpdate();
             pstm.close();
-            pstm = conn.prepareStatement("select cuposActividad from ACTIVIDAD where idActividad = ?");
+            pstm = conn.prepareStatement("select noVentas,cuposActividad from ACTIVIDAD where idActividad = ?");
 
             pstm.setString(1, idActiv);
             ts = pstm.executeQuery();
             if (ts.next()) {
-                cant = Integer.parseInt(ts.getString(1)) - cant;
-                if (this.actualizarCupos(idActiv, cant)) {
+                int cupos = Integer.parseInt(ts.getString(2)) - cant;
+                cant = Integer.parseInt(ts.getString(1)) + cant;
+                if (this.actualizarCupos(idActiv, cant,cupos)) {
                     return true;
                 }
 
@@ -312,7 +315,6 @@ public class ActividadDAO extends Conexion {
                 actVO.setImage2(rs.getString(16));
                 actVO.setImage3(rs.getString(17));
                 actVO.setImage4(rs.getString(18));
-                System.out.println("asdasdasdas "+actVO.getDescripcion());
             }
             String query
                     = "SELECT  cat.tipoCategoria, lug.direccionLugar, lug.zonaLugar "

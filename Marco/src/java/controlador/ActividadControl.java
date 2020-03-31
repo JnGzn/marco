@@ -69,7 +69,7 @@ public class ActividadControl extends HttpServlet {
         ActividadDAO actiDAO = new ActividadDAO(actiVO);
         switch (accion) {
             case "1":
-                String[] images = new String[5];
+                String[] images = new String[4];
                 String base = "C:/Users/Usuario/Desktop/marco/Marco/web/";
                 try {
                     for (int i = 0; i < images.length; i++) {

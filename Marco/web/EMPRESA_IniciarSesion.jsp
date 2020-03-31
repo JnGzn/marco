@@ -71,7 +71,7 @@
                             </div>
 
                             <div class="sign-up-form">
-                                <form action="Usuario" method="post" id="Empresa">
+                                <form action="Usuario" method="post" id="EmpresaRegistro">
                                     <div class="group">
                                         <label  class="label"> Nit </label> 
                                         <input type="number" class="input" data-type="number" placeholder="Ingrese su nit sin guiones " name="nit" id="namel"> 

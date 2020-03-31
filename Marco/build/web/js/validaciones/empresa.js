@@ -2,7 +2,7 @@
 
 $(function () {
 
-    $("#Empresa").validate({
+    $("#EmpresaRegistro").validate({
         rules: {
             nit: {
                 required: true,
@@ -22,7 +22,7 @@ $(function () {
                 required: true,
                 minlength: 8,
                 maxlength: 20,
-                number: true
+                
             }
 
         },
@@ -30,11 +30,10 @@ $(function () {
 
         },
         submitHandler: function (form) {
-            const data = $("#Empresa").serialize();
+            const data = $("#EmpresaRegistro").serialize();
 
 
-
-            var formData = new FormData(document.getElementById("Empresa"));
+            var formData = new FormData(document.getElementById("EmpresaRegistro"));
             $.ajax({
                 url: "Empresas",
                 type: 'POST',
@@ -46,10 +45,13 @@ $(function () {
                     console.log(result)
                     if (result == "true") {
                         $("#errorActiv").text("registrado correctamente")
+                        document.getElementById("EmpresaRegistro").reset()
                     } else if (result == "existe") {
                         $("#errorActiv").text("nit ya existente")
                     } else {
-                        $("#errorActiv").text("hubo un fallo *-*")
+                        $("#errorActiv").text("hubo un error")
+                        $("#pass").val("")
+                        
                     }
 
                 }

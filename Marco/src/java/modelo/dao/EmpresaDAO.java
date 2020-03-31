@@ -161,8 +161,8 @@ public class EmpresaDAO extends Conexion implements ICrud {
 
     public boolean insertar(String logo) {
         try {
-            pstm = conn.prepareStatement("INSERT into EMPRESA(nit,razonSocial,correoEmpresa,ROL_idRol,estado,pass,logo, noVentas)"
-                    + " values(?,?,?,2,'activo',?,?,0)");
+            pstm = conn.prepareStatement("INSERT into EMPRESA(nit,razonSocial,correoEmpresa,ROL_idRol,estado,pass,logo)"
+                    + " values(?,?,?,2,'activo',?,?)");
 
             pstm.setString(1, nit);
             pstm.setString(2, razonSocial);
