@@ -253,8 +253,7 @@ public class UsuarioDAO extends Conexion implements ICrud {
         try {
             idUsuario = null;
             Connection conn = openConexion();
-            PreparedStatement pstm = conn.prepareStatement("SELECT idUsuario FROM "
-                    + "USUARIO WHERE correoUsuario= ? AND contraseñaUsuario = ? AND estado='activo'");
+            PreparedStatement pstm = conn.prepareCall("call proc_loginUSU(?,?)");
             pstm.setString(1, correo);
             pstm.setString(2, pass);
             ResultSet rs = pstm.executeQuery();
