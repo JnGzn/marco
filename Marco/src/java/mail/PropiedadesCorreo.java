@@ -57,10 +57,12 @@ public class PropiedadesCorreo {
             // date > util
             msj.setSentDate(new Date());
             msj.setText(mensaje);
+              
+          
 
             //TODO DEBE LLEGAR AQUI 
             Transport.send(msj);
-
+            
 
     }
 

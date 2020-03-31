@@ -90,7 +90,11 @@ public class UsuariosControl extends HttpServlet {
 
                         response.getWriter().print("Registro exitoso");
                     }else {
-                    response.getWriter().print("false");
+             
+                        
+                        
+                        
+                        response.getWriter().print("false");
                     }
                 }
                 

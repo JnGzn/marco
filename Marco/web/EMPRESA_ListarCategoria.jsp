@@ -17,29 +17,6 @@
     </head>
     <body>
    <h1>CATEGORIA</h1>
-        <table border:3px>
-            <tr>
-                <th>id</th>
-                <th>nombre categoria</th>
-                <th>empresa</th>
-                
-            </tr>
-            <% CategoriaDAO catDAO = new CategoriaDAO();
-                ArrayList<CategoriaVO> arrEmpresaVO = catDAO.ListarDatos();
-                CategoriaVO catVo = null;
-                for (int i = 0; i < arrEmpresaVO.size(); i++) {
-
-                    catVo = arrEmpresaVO.get(i);
-
-            %>
-            
-            <tr>
-                <td>       <%= catVo.getIdCategoria()%></td>
-                <td>        <%= catVo.getNomCategoria()%></td>
-                <td>        <%= catVo.getIdEMCategoria()%></td>
-                
-            </tr>
-            <%}%>
-        </table>
+        
     </body>
 </html>

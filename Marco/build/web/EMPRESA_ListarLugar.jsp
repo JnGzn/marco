@@ -19,33 +19,6 @@
     <body>
       <h1>LUGAR</h1>
 
-        <table border:3px>
-            <tr>
-                <th>id</th>
-                <th>direccion</th>
-                <th>zona</th>
-                <th>aforo</th>
-                <th>empresa</th>
-                
-            </tr>
-            <% LugarDAO lugDAO = new LugarDAO();
-                ArrayList<LugarVO> arrEmpresaVO = lugDAO.ListarDatos();
-                LugarVO lugVo = null;
-                for (int i = 0; i < arrEmpresaVO.size(); i++) {
-
-                    lugVo = arrEmpresaVO.get(i);
-
-            %>
-            
-            <tr>
-                <td>       <%= lugVo.getIdLugar()%></td>
-                <td>        <%= lugVo.getDireccionLugar()%></td>
-                      <td>        <%= lugVo.getZonaLugar()%></td>
-                <td>        <%= lugVo.getAforoLugar()%></td>
-                      <td>        <%= lugVo.getIdEmp()%></td>
-                
-            </tr>
-            <%}%>
-        </table>
+        
     </body>
 </html>

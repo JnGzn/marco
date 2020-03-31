@@ -12,7 +12,7 @@ $(function () {
                     }},
                 minlength: 3,
                 email: true,
-                maxlength: 20
+                maxlength: 30
             }
         },
         messages: {
@@ -20,7 +20,7 @@ $(function () {
                 required: "este campo es obligatorio",
                 minlength: "minimo 3 caracteres",
                 email: "formato email invalido",
-                maxlength: "no pueden superrar 20 caracteres"
+                maxlength: "no pueden superrar 30 caracteres"
             }
         },
         submitHandler: function (form) {
@@ -74,7 +74,7 @@ $(function () {
                     }},
                 minlength: 3,
                 email: true,
-                maxlength: 20
+                maxlength: 30
             },
             correo: {
                 equalTo: "#confirmaCorreo"
@@ -92,18 +92,23 @@ $(function () {
             const data = $("#formSign").serialize();
 
             $.post("Usuario", data, (res, est, que) => {
+                console.log(res)
                 if (res == "false") {
                     $("#pass").val("");
-                    $("#error").text("error 525");
+                    $("#errorLogin").text("error 525");
                 } else if (res == "CORREO ya existe") {
+                    $("#error").text("correo ya existente");
                     $("#pass").val("");
-                } else {
+                } else if (res === "Registro exitoso") {
 
                     $("#error").text("registro exitoso");
+                    document.getElementById("formSign").reset()
+                    $.post("EnvioCorreo", data, (res, est, que) => {
 
-
+                    })
                 }
             })
+
         }
     })
 
@@ -130,7 +135,7 @@ $(function () {
             ctxDocumento: {
                 required: true,
                 minlength: 3,
-                maxlength: 20,
+                maxlength: 30,
                 number: true
             },
             ctxCorreo: {
@@ -140,7 +145,7 @@ $(function () {
                     }},
                 minlength: 3,
                 email: true,
-                maxlength: 20
+                maxlength: 30
             },
             ctxCalificacion: {
                 required: true,
@@ -156,7 +161,7 @@ $(function () {
         submitHandler: function (form) {
             const data = $("#formReserva").serialize();
 
-            console.log("weasd");
+
             $.post("Actividad", data, (res, est, que) => {
                 if (res == "false") {
 
@@ -164,7 +169,9 @@ $(function () {
 
                 } else {
                     $("#error").text("registro exitoso");
+                    $.post("EnvioCorreo", data, (res, est, que) => {
 
+                    })
                 }
             })
         }

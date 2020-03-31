@@ -9,3 +9,6 @@ CREATE PROCEDURE proc_loginUSU (in correo VARCHAR(45), pwd VARCHAR(110))
 BEGIN
 	SELECT idUsuario FROM usuario WHERE correoUsuario = correo ANd contraseñaUsuario = pwd;
 END
+
+/////////////
+CREATE PROCEDURE proc_reportVentasActividad (in inicio varchar(15),fin varchar(15),emp_nit varchar(15)) BEGIN SELECT idActividad,tituloActividad,(noVentas) FROM `actividad` INNER JOIN reserva ON idActividad = fk_actividad WHERE fk_empresa = emp_nit AND (reserva.fecha BETWEEN inicio AND fin) GROUP BY idActividad; END

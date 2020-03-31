@@ -17,29 +17,29 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Marco</title>
-  
-        
-        
-        
-    <link rel="icon" href="img/favicon.png">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- animate CSS -->
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/all.css">
-    <!-- flaticon CSS -->
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <!-- swiper CSS -->
-    <link rel="stylesheet" href="css/slick.css">
-    <!-- style CSS -->
-    <link rel="stylesheet" href="css/style.css">
+
+
+
+
+        <link rel="icon" href="img/favicon.png">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- animate CSS -->
+        <link rel="stylesheet" href="css/animate.css">
+        <!-- owl carousel CSS -->
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <!-- font awesome CSS -->
+        <link rel="stylesheet" href="css/all.css">
+        <!-- flaticon CSS -->
+        <link rel="stylesheet" href="css/flaticon.css">
+        <link rel="stylesheet" href="css/themify-icons.css">
+        <link rel="stylesheet" href="css/nice-select.css">
+        <!-- font awesome CSS -->
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <!-- swiper CSS -->
+        <link rel="stylesheet" href="css/slick.css">
+        <!-- style CSS -->
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <header class="main_menu home_menu upperHead">
@@ -58,41 +58,41 @@
 
                             <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                                 <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.jsp">Inicio</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="Nosotros.html">Nosotros</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="USUARIO_ListarActividades.jsp">Actividades</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="Galeria.html">Galería</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contáctenos</a>
-                                </li>
-                            </ul>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="index.jsp">Inicio</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="Nosotros.html">Nosotros</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="USUARIO_ListarActividades.jsp">Actividades</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="Galeria.html">Galería</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="contact.html">Contáctenos</a>
+                                    </li>
+                                </ul>
                             </div>
-                          <%    
-                              HttpSession sesion = request.getSession();
-            Object sesionn = sesion.getAttribute("id");
-            
-            if (sesionn == null) {
-               %>
-               
-               
-               <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar Sesión</a> 
-                
-               <%
-            }else {
-                %>
-                
-                <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_Perfil.jsp">ver perfil</a>
-                
-                <%
-            }%>
+                            <%
+                                HttpSession sesion = request.getSession();
+                                Object sesionn = sesion.getAttribute("id");
+
+                                if (sesionn == null) {
+                            %>
+
+
+                            <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_IniciarSesion.jsp">Iniciar Sesión</a> 
+
+                            <%
+                            } else {
+                            %>
+
+                            <a class="btn_1 d-none d-lg-block border border-primary" href="USUARIO_Perfil.jsp">ver perfil</a>
+
+                            <%
+                    }%>
                             <!--                        <a class="btn_1 d-none d-lg-block border border-primary" data-toggle="modal"
                                 data-target="#exampleModalScrollable">Iniciar SesiÃ³n</a>-->
                         </nav>
@@ -108,7 +108,7 @@
 
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 sesion = request.getSession();
-               sesionn = sesion.getAttribute("id");
+                sesionn = sesion.getAttribute("id");
 
                 if (sesionn == null) {
             %>
@@ -124,7 +124,7 @@
 
 
             %>
-            
+
             <%   String id = (String) request.getParameter("res");
                 if (id != null) {
 
@@ -152,12 +152,13 @@
                         <form action="Actividad" method="post" id="formReserva">
 
                             <input type="hidden" value="<%=id%>" name="acti">
-
+                            <input type="hidden" value="3" name="env">
 
                             <div class="form-group row">
                                 <label class="col-md-2 col-form-label" for="text-input">boletos</label>
                                 <div class="col-md-4">
                                     <input  class="form-control" type="text" name="ctxCupos" id="ctxCupos" value="1" >
+                                    <input type="hidden" value="<%= actiVO.getTitulo() %>" name="titulo">
                                 </div>
                                 <label class="col-md-2 col-form-label" for="text-input">Precio a pagar:</label>
                                 <div class="col-md-4">
@@ -219,7 +220,7 @@
                             <input class="btn btn-primary" type="submit" name="accion"value="enviar">
                             <p class="col-8 mx-auto text-danger" id="error"></p>
                         </form>
-                        
+
 
 
                     </div>
@@ -228,7 +229,7 @@
                 <!-- fin reserva-->
             </div>
             <%}
-            }%>
+                }%>
         </section>
         <script src="js/DOM/reserva.js"></script>
         <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>

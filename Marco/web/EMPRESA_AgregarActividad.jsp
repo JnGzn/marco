@@ -245,6 +245,7 @@
                                 <input  class="form-control" type="number" name="cupos" placeholder="cupos" id="cupos">
                             </div>
                         </div>
+                        <input type="hidden" value="4" name="env">
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label" for="text-input">Lugar</label>
                             <div class="col-md-4">

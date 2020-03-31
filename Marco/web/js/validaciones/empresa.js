@@ -12,7 +12,7 @@ $(function () {
             nombre: {
                 required: true,
                 minlength: 3,
-                maxlength: 20
+                maxlength: 30
             },
             correo: {
                 required: true,
@@ -22,7 +22,7 @@ $(function () {
                 required: true,
                 minlength: 8,
                 maxlength: 20,
-                
+
             }
 
         },
@@ -46,12 +46,15 @@ $(function () {
                     if (result == "true") {
                         $("#errorActiv").text("registrado correctamente")
                         document.getElementById("EmpresaRegistro").reset()
+                         $.post("EnvioCorreo", data, (res, est, que) => {
+
+                        })
                     } else if (result == "existe") {
                         $("#errorActiv").text("nit ya existente")
                     } else {
                         $("#errorActiv").text("hubo un error")
                         $("#pass").val("")
-                        
+
                     }
 
                 }
@@ -70,7 +73,7 @@ $(function () {
                     }},
                 minlength: 3,
                 email: true,
-                maxlength: 20
+                maxlength: 30
             }
         },
         messages: {
@@ -78,7 +81,7 @@ $(function () {
                 required: "este campo es obligatorio",
                 minlength: "minimo 3 caracteres",
                 email: "formato email invalido",
-                maxlength: "no pueden superrar 20 caracteres"
+                maxlength: "no pueden superrar 30 caracteres"
             }
         },
         submitHandler: function (form) {
@@ -90,18 +93,15 @@ $(function () {
                     $("#err").text("usuario o contraseña erroneo");
                 } else
                 {
-                    if (url != null) {
-                        $(location).attr('href', url)
 
+                    if (res == "admin") {
+
+                        $(location).attr('href', "ADMIN_index.jsp")
                     } else {
-                        if (res == "admin") {
+                        $(location).attr('href', "admin.jsp")
 
-                            $(location).attr('href', "ADMIN_index.jsp")
-                        } else {
-                            $(location).attr('href', "admin.jsp")
-
-                        }
                     }
+
                 }
             })
         }
@@ -167,7 +167,7 @@ $(function () {
         submitHandler: function (form) {
             const data = $("#formCrearReserva").serialize();
 
-             localStorage.removeItem('img');
+            localStorage.removeItem('img');
 
             var formData = new FormData(document.getElementById("formCrearReserva"));
             $.ajax({
@@ -180,6 +180,9 @@ $(function () {
                 success: function (result) {
                     if (result == "true") {
                         $("#errorActiv").text("registrado correctamente")
+                        $.post("EnvioCorreo", data, (res, est, que) => {
+
+                        })
                     } else if (result == "imagentrue") {
                         $("#errorActiv").text("se publico pero no cargaron las imagenes")
                     } else {
@@ -219,7 +222,7 @@ $(function () {
 
                     $("#errorCat").text("registro exitoso");
                     alert("la página tendra que ser recargada para guardar cambios")
-                    
+
 
                 }
             })
@@ -260,7 +263,7 @@ $(function () {
 
                     $("#errLugar").text("registro exitosos");
                     alert("la página tendra que ser recargada para guardar cambios")
-                   
+
 
                 }
             })
@@ -270,9 +273,9 @@ $(function () {
     $("#EmpresaLogo").validate({
 
         rules: {
-            nomLogo: {required : true}
+            nomLogo: {required: true}
         },
-        messages:{
+        messages: {
             nomLogo: {
                 required: "por por favor seleccione una imagen"
             }
@@ -288,7 +291,7 @@ $(function () {
                 cache: false,
                 processData: false,
                 success: function (result) {
-                    
+
                     if (result == "true") {
                         $("#errorCarga").text("registrado correctamente")
                     } else {

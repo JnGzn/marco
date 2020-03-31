@@ -351,16 +351,21 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        <div class="col-lg-10 mx-auto mb-4">
+                        <div class="col-lg-6">
 
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
 
                                 <div class="card-header py-3">
                                     <div class="row">
-                                        
-                                    <h4 class="m-0 font-weight-bold text-primary col-8">Mis actividades</h4>
-                                    <a href="EMPRESA_AgregarActividad.jsp" class="btn btn-outline-info info col-4">agregar una nueva</a>
+
+                                        <h4 class="m-0 font-weight-bold text-primary col-4">Mis categorias</h4>
+
+                                        <button type="button" class="btn btn-outline-info info col-4" data-toggle="modal"
+                                                data-target="#modalCategoria" data-whatever="@mdo">
+                                            agregar otra categoria
+                                        </button>
+
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -368,97 +373,231 @@
                                         <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
                                     </div>
 
-                                    <div class="progress-table-wrap col-12" id="inicio">
-                                        <div class="progress-table col-12">
-                                            <div class="table-head col-12">
-                                                <div class=" col-3">Titulo</div>
-                                                <div class=" col-2">Zona</div>
-                                                <div class=" col-3">cupos</div>
-                                                <div class=" col-3">Imagen</div>
-                                                <div class=" col-2"></div>
-                                            </div>
-                                            <%
-                                                ActividadDAO actDAO = new ActividadDAO();
-                                                for (ActividadVO actVo2 : actDAO.ListarDatosNit(nit)) {
-                                                    ActividadVO actVo = actDAO.ListarDatos(actVo2.getId());%>
-                                            <div class="table-row col-12">
-                                                <div class="table-row col-12">
-                                                    <hr>
-                                                    <div class=" col-3">  <%=   actVo.getTitulo()%></div>
-                                                    <div class=" col-2">   <%=   actVo.getZona()%></div>
-                                                    <div class=" col-2">  <%=   actVo.getCupos()%></div>
-                                                    <div class=" col-3 mx-auto" > <img src="<%=   actVo.getImage1()%>" width="70%" height="90"> </div>
-                                                    <div class=" col-2 mx-auto"> 
-                                                        <a href="EMPRESA_EditarActividad.jsp?actividad=<%=  actVo.getId()%>" >Editar</a>
-                                                        <hr>
-                                                        <a href="USUARIO_VerActividad.jsp?actividad=<%=  actVo.getId()%>&vista=true" >Ver como usuario</a>
-                                                    </div>
-                                                    <hr>                                                    
-                                                </div>
-                                            </div>
-                                            <%}%>
-                                        </div>
-                                    </div>
+                                    <table border="1" class="col-12"> 
+                                        <tr>
+                                            <th class="col-4 mx-auto">id</th>
+                                            <th class="col-4">nombre categoria</th>
+                                            <th class="col-4">empresa</th>
+
+                                        </tr>
+                                        <% CategoriaDAO catDAO = new CategoriaDAO();
+                                            ArrayList<CategoriaVO> arrEmpresaVO = catDAO.ListarDatos(empVO.getNit());
+                                            CategoriaVO catVo = null;
+                                            for (int i = 0; i < arrEmpresaVO.size(); i++) {
+
+                                                catVo = arrEmpresaVO.get(i);
+
+                                        %>
+
+                                        <tr>
+                                            <td>       <%= catVo.getIdCategoria()%></td>
+                                            <td>        <%= catVo.getNomCategoria()%></td>
+                                            <td>        <%= catVo.getIdEMCategoria()%></td>
+
+                                        </tr>
+                                        <%}%>
+                                    </table>
 
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="col-lg-6">
+
+                            <!-- Illustrations -->
+                            <div class="card shadow mb-4">
+
+                                <div class="card-header py-3">
+                                    <div class="row">
+
+                                        <h4 class="m-0 font-weight-bold text-primary col-4">Mis Lugares</h4>
+                                        <button type="button" class="btn btn-outline-info info col-4" data-toggle="modal" data-target="#registrolugar" 
+                                                data-whatever="@mdo">
+                                            agregar otro lugar
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
+                                    </div>
+
+                                    <table border="1" class="col-12">
+                                        <tr>
+                                            <th class="col-2">id</th>
+                                            <th class="col-2">direccion</th>
+                                            <th class="col-2">zona</th>
+                                            <th class="col-2">aforo</th>
+                                            <th class="col-2">empresa</th>
+
+                                        </tr>
+                                        <% LugarDAO lugDAO = new LugarDAO();
+                                            ArrayList<LugarVO> arrEmpresaVO1 = lugDAO.ListarDatos(empVO.getNit());
+                                            LugarVO lugVo = null;
+                                            for (int i = 0; i < arrEmpresaVO1.size(); i++) {
+
+                                                lugVo = arrEmpresaVO1.get(i);
+
+                                        %>
+
+                                        <tr>
+                                            <td>       <%= lugVo.getIdLugar()%></td>
+                                            <td>        <%= lugVo.getDireccionLugar()%></td>
+                                            <td>        <%= lugVo.getZonaLugar()%></td>
+                                            <td>        <%= lugVo.getAforoLugar()%></td>
+                                            <td>        <%= lugVo.getIdEmp()%></td>
+
+                                        </tr>
+                                        <%}%>
+                                    </table> 
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
+
+
                 </div>
-                <!-- /.container-fluid -->
+
             </div>
-            <!-- End of Main Content -->
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Marco 2020</span>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- End of Main Content -->
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Marco 2020</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+</div>
+<!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Listo para Salir?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Desea finalizar su sesion actual.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="CerrarSesion">Cerrar sesion</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--modal lugar-->
+
+<div class="modal fade" id="registrolugar" tabindex="-1" role="dialog" 
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Zona</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="Lugar" id="formLugar">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Direccion:</label>
+                        <input class="form-control" id="ctxDirecion" type="text" name="txtAddress">
                     </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-        </div>
-        <!-- End of Content Wrapper -->
-    </div>
-    <!-- End of Page Wrapper -->
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Listo para Salir?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">X</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Desea finalizar su sesion actual.
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="CerrarSesion">Cerrar sesion</a>
-                </div>
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Zona:</label>
+                        <input class="form-control" id="ctxZona" type="text"name="txtZone">
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Aforo</label>
+                        <input class="form-control" id="recipient-name" id="ctxAforo" type="number" name="txtQuantity">
+                    </div>
+                    <p class="text-danger col-auto mx-auto" id="errLugar"></p>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="hidden" value="1" name="opcion">
+                <input type="submit" class="btn btn-primary" value="Guardar">
+            </div>
+            </form>
         </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+</div>
+
+<!--modal categoria-->
+<div class="modal fade" id="modalCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">agregar otra categoria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="Categoria" method="post" id="formCategora">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">nombre categoria</label>
+                        <input type="text" name="nombres"class="form-control" id="ctxNombre">
+                    </div>
+                    <p id="errorCat" class="text-danger" ></p>
+            </div>
+            <div class="modal-footer">
+                <a  href="EMPRESA_AgregarActividad.jsp" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
+
+                <input type="hidden" name="accion" value="3">
+                <input class="btn btn-primary" type="submit" value="Guardar">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+<!-- Page level plugins -->
+<script src="vendor/chart.js/Chart.min.js"></script>
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+        <script src="js/calc/cargarImagen.js" type="text/javascript"></script>
+        <script src="js/validaciones/empresa.js" type="text/javascript"></script>
+        <script src="js/DOM/reserva.js" type="text/javascript"></script>
 </body>
 
 </html>

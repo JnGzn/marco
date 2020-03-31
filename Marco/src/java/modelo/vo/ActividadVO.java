@@ -32,6 +32,7 @@ public class ActividadVO {
     private String image2;
     private String image3;
     private String image4;
+    private String noVentas;
 
     
     public ActividadVO() {
@@ -68,6 +69,14 @@ public class ActividadVO {
         this.lugar = lugar;
         this.categoria = categoria;
         this.descuento = descuento;
+    }
+
+    public String getNoVentas() {
+        return noVentas;
+    }
+
+    public void setNoVentas(String noVentas) {
+        this.noVentas = noVentas;
     }
 
     public String getZona() {

@@ -18,8 +18,8 @@
         <link rel="stylesheet" href="css/nice-select.css">
         <link rel="stylesheet" href="css/magnific-popup.css">
         <link rel="stylesheet" href="css/all.css">
-        
-        
+
+
     </head>
 
     <body>
@@ -57,7 +57,7 @@
                                     <div class="group"> 
                                         <label  class="label">Contraseña</label> 
                                         <input id="pass"
-                                            type="password" class="input" data-type="password"  placeholder="Ingrese su contraseña" name="pass"> 
+                                               type="password" class="input" data-type="password"  placeholder="Ingrese su contraseña" name="pass"> 
                                     </div>
                                     <div class="group"> 
                                         <input id="check" type="checkbox" class="check" checked> 
@@ -87,7 +87,7 @@
                                             </div>
                                         </div> 
                                     </div>
-                                     <div class="group">
+                                    <div class="group">
                                         <label  class="label"> fecha nacimiento </label> 
                                         <input type="date" class="input" data-type="date" placeholder="Ingrese su correo" name="fechaNacimiento"> 
                                     </div>
@@ -106,20 +106,22 @@
                                     <input type="hidden" name="accion" value="1">
                                     <p class="col-8 mx-auto text-danger" id="error"></p>
                                     <div class="group"> <input type="submit" class="button" value="Registrarse"> </div>
+                                    <input type="hidden" value="1" name="env">
+
                                 </form>
-                                    <div class="foot"> <label for="tab-1">Ya eres Miembro?</label> </div>
-                                    <div class="hr"></div>
+                                <div class="foot"> <label for="tab-1">Ya eres Miembro?</label> </div>
+                                <div class="hr"></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-          
+
         </div>
         <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.validate.min.js"></script>
         <script src="js/validaciones/user.js" type="text/javascript"></script>
-        
+
     </body>
 </html>

@@ -91,7 +91,7 @@
                                     <input type="hidden" name="accion" value="1">
                                     <p class="col-8 mx-auto text-danger" id="error"></p>
                                     <div class="group"> <input type="submit" class="button" value="Registrarse"> </div>
-                                    
+                                    <input type="hidden" value="2" name="env">
                                 </form>
                                  <p id="errorActiv"></p>
                                     <div class="foot"> <label for="tab-1">Ya eres Miembro?</label> </div>

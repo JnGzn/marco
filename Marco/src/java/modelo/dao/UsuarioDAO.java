@@ -275,7 +275,7 @@ public class UsuarioDAO extends Conexion implements ICrud {
 
     public static boolean validaUsuario(String correo) {
 
-        CategoriaVO clientesVO = null;
+      
 
         try {
             Connection conn = openConStatic();
@@ -288,7 +288,7 @@ public class UsuarioDAO extends Conexion implements ICrud {
             } else {
                 opr = false;
             }
-            
+            System.out.println("encontrado: "+opr);
             
                 if(conn!=null) conn.close();
                 if(pstm!=null) pstm.close();
